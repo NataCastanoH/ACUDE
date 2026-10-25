@@ -88,7 +88,7 @@ En `config.json`, `"boton_principal": "decalogo"` muestra «Nuestro decálogo».
 
 ### Asistente del curso
 
-Pega el enlace público del Gem de Gemini o del cuaderno de NotebookLM en `config.json` → `asistente.url`.
+El asistente es un cuaderno público de NotebookLM cargado con las bitácoras. Crea el cuaderno con las bitácoras de la 3 a la 12 (y las que se sumen), compártelo con enlace público («Cualquier persona con el enlace») y pega ese enlace en `config.json` → `asistente.url`.
 Para la fase 2 (chat propio con una API de pago) cambia `asistente.modo` a `"chat"` y pon en `asistente.endpoint` la dirección de una función serverless.
 El contrato está documentado en `src/components/Asistente.astro`. La clave de la API va en esa función, nunca en este repositorio.
 

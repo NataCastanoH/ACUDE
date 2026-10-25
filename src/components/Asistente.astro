@@ -1,6 +1,6 @@
 ---
 // Asistente del curso.
-// modo "enlace": botón que abre el Gem de Gemini o el cuaderno de NotebookLM (config.asistente.url).
+// modo "enlace": botón que abre el cuaderno público de NotebookLM con las bitácoras (config.asistente.url).
 // modo "chat" (fase 2): interfaz propia que envía la pregunta a una función serverless (config.asistente.endpoint).
 //   Contrato: POST JSON { "pregunta": "...", "historial": [{ "rol": "usuario" | "asistente", "texto": "..." }] }
 //   Respuesta: JSON { "respuesta": "..." }. La API key vive en la función, nunca en este sitio.
@@ -22,7 +22,7 @@ const enlace = /^https?:\/\//.test(url) ? url : null;
 ) : enlace ? (
   <a class="boton boton--oscuro" href={enlace} target="_blank" rel="noopener">Pregúntale al ACUDE <span aria-hidden="true">↗</span><span class="sr">(abre en otra pestaña)</span></a>
 ) : (
-  <p class="pendiente">[Enlace del Gem o del cuaderno de NotebookLM por configurar]</p>
+  <p class="pendiente">[Enlace del cuaderno de NotebookLM por configurar]</p>
 )}
 
 <style>

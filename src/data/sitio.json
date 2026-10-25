@@ -34,7 +34,7 @@
   "asistente": {
     "etiqueta": "El asistente del curso",
     "titulo": "Pregúntale al ACUDE",
-    "texto": "Un asistente cargado con las bitácoras de las sesiones: pregúntale por un prompt, una herramienta o una técnica, gratis y desde el celular"
+    "texto": "Un cuaderno público de NotebookLM cargado con las bitácoras de las sesiones: pregúntale por un prompt, una herramienta o una técnica, gratis y desde el celular"
   },
   "podcast": {
     "etiqueta": "El podcast",

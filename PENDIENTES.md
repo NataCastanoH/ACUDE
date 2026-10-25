@@ -25,7 +25,7 @@ Todo lo que el sitio muestra hoy entre corchetes, o que necesita una decisión t
 - [ ] Decálogo: las diez reglas, en la sesión 15
 - [ ] Contador del reto comunitario (`config.json` → `reto_comunitario.contador`, o una hoja publicada)
 - [ ] Galería: crear el Google Form y la hoja con `plantillas/formulario-galeria.md` y pegar en `config.json` el CSV publicado y el enlace del formulario
-- [ ] Asistente: crear el Gem o el cuaderno de NotebookLM con las bitácoras y pegar el enlace público en `config.json` → `asistente.url`
+- [ ] Asistente: crear el cuaderno de NotebookLM con las bitácoras de la 3 a la 12, compartirlo con enlace público y pegarlo en `config.json` → `asistente.url`
 - [ ] Podcast: generar el audio en NotebookLM y subir el MP3 (ver README)
 - [ ] Enlace de Teams en `config.json` → `enlace_teams` si quieres que el botón diga «Entrar a la clase»
 

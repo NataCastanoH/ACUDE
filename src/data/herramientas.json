@@ -458,15 +458,15 @@
   {
     "nombre": "Claude (artefactos y Proyectos)",
     "categoria": "Crear con IA",
-    "descripcion": "Artefactos: le describes una app, un quiz o una página y la construye al lado del chat, lista para probar y compartir. Proyectos: guardan instrucciones y documentos de una materia para no repetirlos en cada conversación.",
+    "descripcion": "Artefactos: le describes una app, un quiz o una página y la construye al lado del chat, lista para probar y compartir. Proyectos: la opción para crear tu asistente propio; le das instrucciones fijas y los documentos de una materia, y responde con ellos en cada conversación.",
     "url": "https://claude.ai",
     "gratis": null,
     "celular": null
   },
   {
-    "nombre": "Gemini (Canvas y Gems)",
+    "nombre": "Gemini (Canvas)",
     "categoria": "Crear con IA",
-    "descripcion": "Canvas: escribe y muestra documentos o código al lado del chat, con vista previa de lo que construye. Gems: asistentes con instrucciones fijas para una tarea recurrente.",
+    "descripcion": "Escribe y muestra documentos o código al lado del chat, con vista previa de lo que construye.",
     "url": "https://gemini.google.com",
     "gratis": null,
     "celular": null

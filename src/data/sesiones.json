@@ -726,7 +726,7 @@
     "actividad": "",
     "herramientas": [
       "Claude (artefactos y Proyectos)",
-      "Gemini (Canvas y Gems)"
+      "Gemini (Canvas)"
     ],
     "presentacion": null,
     "bitacora": null,
@@ -754,7 +754,7 @@
     "resumen": "",
     "actividad": "",
     "herramientas": [
-      "Gemini (Canvas y Gems)",
+      "Gemini (Canvas)",
       "Claude (artefactos y Proyectos)",
       "NotebookLM",
       "Lovable",
