@@ -27,7 +27,7 @@
     "aprobado": true
   },
   {
-    "etiqueta": "Para corregir",
+    "etiqueta": "Para revisar",
     "texto": "Te envío la foto de un ejercicio de [materia] que resolví yo. Primero dime qué ves en la foto, para saber que la leíste bien. Después revisa mi procedimiento paso a paso. Si hay un error, dime en qué paso está y dame una pista. No me des la respuesta todavía. Cuando yo lo corrija, confírmame si quedó bien. Si algo de la foto no se lee, dímelo. No lo adivines.",
     "codigo": "AE",
     "sesion": 10,

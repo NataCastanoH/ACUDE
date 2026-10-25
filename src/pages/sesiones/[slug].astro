@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Galeria from '../../components/Galeria.astro';
 import { url } from '../../lib/url.js';
-import { sesiones, galeria, dosDigitos, fechaLarga, anclaHerramienta, rutaSesion } from '../../lib/datos.js';
+import { sesiones, galeria, dosDigitos, cuandoSesion, anclaHerramienta, rutaSesion } from '../../lib/datos.js';
 
 export function getStaticPaths() {
   return sesiones.map((s) => ({ params: { slug: `${dosDigitos(s.numero)}-${s.slug}` }, props: { s } }));
@@ -12,7 +12,7 @@ const { s } = Astro.props;
 const i = sesiones.indexOf(s);
 const anterior = sesiones[i - 1];
 const siguiente = sesiones[i + 1];
-const cuando = fechaLarga(s.fecha) ?? (s.semana ? `Semana del ${fechaLarga(s.semana)}` : null);
+const cuando = cuandoSesion(s);
 const materiales = [
   s.presentacion && { nombre: 'Presentación', href: url(s.presentacion) },
   s.bitacora && { nombre: 'Bitácora de herramientas y prompts', href: url(s.bitacora) },

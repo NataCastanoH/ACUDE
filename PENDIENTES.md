@@ -11,14 +11,12 @@ Todo lo que el sitio muestra hoy entre corchetes, o que necesita una decisión t
 ## Sesiones 13, 14 y 15 (hoy en `"estado": "borrador"`)
 
 - [ ] Objetivo, resumen, actividad y `tipo_reto` de cada una; después, cambiar `estado` a `"publicada"`
-- [ ] Confirmar las herramientas de cada sesión. Repartí las de «Crear con IA» así, a partir de las líneas de la maqueta: 13 = Claude (artefactos y Proyectos), Gemini (Canvas y Gems), Lovable, Base44; 14 = Gemini (Canvas y Gems), Claude (artefactos y Proyectos), Codex de OpenAI, Gemini CLI; 15 = ninguna
 - [ ] Prompts de cada sesión (la serie sigue en AS)
 - [ ] Filas de la caja de herramientas (`caja`) y volver a correr `npm run caja-herramientas`
 - [ ] Confirmar las líneas cortas de las fichas: «Sin saber programar», «Y la IA que programa sola», «Y todo el curso en una página» (salen de la maqueta)
 
 ## Fechas
 
-- [ ] `semana` (o `fecha`) de cada sesión, formato `AAAA-MM-DD`. Hoy todas están vacías y no se muestra nada
 
 ## La muestra
 
@@ -39,9 +37,8 @@ Todo lo que el sitio muestra hoy entre corchetes, o que necesita una decisión t
 
 - [ ] Descripciones de las seis herramientas nuevas de «Crear con IA» (Claude, Gemini, Lovable, Base44, Codex, Gemini CLI): son descripciones generales de cada producto, no salen de una bitácora
 - [ ] Filas de la caja de herramientas de las sesiones 1 a 12: cada truco sale de la bitácora o del resumen de la sesión, revisa que sea el que quieres destacar
-- [ ] Cambios de redacción neutra en textos migrados de Base44: sesión 6 («de quien estudia»), sesión 7 («decálogo de quien investiga con IA»), sesión 9 (título «sin dejar de ser quien escribe», objetivo y resumen), herramienta Meta AI («muchas personas»). Los prompts del muro y de las sesiones se citan tal cual están en las bitácoras
+- [ ] Cambios de redacción neutra en textos migrados de Base44: sesión 6 («de quien estudia»), sesión 7 («decálogo de quien investiga con IA»), sesión 9 (objetivo y resumen; el título se deja como en la presentación y la bitácora), herramienta Meta AI («muchas personas»). Los prompts del muro y de las sesiones se citan tal cual están en las bitácoras
 - [ ] `gratis` y `celular` de las 63 herramientas están en `null` (sin dato): llénalos si quieres que se muestren las etiquetas
-- [ ] `unidad` de las sesiones 1 a 4: no encontré el nombre de la Unidad 1 en las bitácoras
 
 ## Lo que ya se publica y conviene que sepas
 

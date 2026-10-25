@@ -12,7 +12,7 @@ Crea las preguntas **con estos títulos exactos** (el sitio reconoce las columna
 
 | # | Título de la pregunta | Tipo | Opciones | Obligatoria |
 |---|---|---|---|---|
-| 1 | `Tipo` | Opción múltiple | Simulacro, Calculadora, Asistente, Presentación, Infografía, Otro | Sí |
+| 1 | `Tipo` | Opción múltiple | Simulacro, Calculadora, Asistente, Presentación, Infografía, Demo de clase, Otro | Sí |
 | 2 | `Título` | Respuesta corta | | Sí |
 | 3 | `Materia o contexto` | Respuesta corta | (materia, trabajo o emprendimiento) | Sí |
 | 4 | `Autor` | Respuesta corta | Descripción: «Tu nombre como quieres que aparezca» | Sí |
@@ -62,6 +62,8 @@ Pega las piezas a mano en `src/data/galeria.json`, con los mismos campos:
   "aprobado": true
 }
 ```
+
+Tus demos de clase van por el mismo camino: tipo `Demo de clase` y autor `Natalia (docente)`, en el formulario o en `galeria.json`.
 
 Si las dos opciones tienen piezas, manda la hoja: cuando el CSV carga, reemplaza a las de `galeria.json`.
 Si el CSV falla (sin red), el sitio muestra la última copia guardada en el navegador o, si no hay, las de `galeria.json`.

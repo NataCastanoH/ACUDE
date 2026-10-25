@@ -92,6 +92,10 @@ Pega el enlace público del Gem de Gemini o del cuaderno de NotebookLM en `confi
 Para la fase 2 (chat propio con una API de pago) cambia `asistente.modo` a `"chat"` y pon en `asistente.endpoint` la dirección de una función serverless.
 El contrato está documentado en `src/components/Asistente.astro`. La clave de la API va en esa función, nunca en este repositorio.
 
+### Foto de la docente
+
+Va en `public/marca/docente.jpg`: una caricatura cuadrada, de 560 × 560 px o más. Para cambiarla basta con subir un archivo nuevo con ese mismo nombre (reemplaza al actual) y dejar en `sitio.json` → `sobre_la_docente.foto` la ruta `"marca/docente.jpg"`. Si la ruta apunta a un archivo que no existe, la publicación se detiene con el aviso. El texto alternativo va en `sobre_la_docente.foto_alt`.
+
 ### Podcast
 
 Sube el MP3 a `public/audio/podcast.mp3` y escribe `"archivo": "audio/podcast.mp3"` en `config.json` → `podcast`, o pega un enlace externo en `podcast.url`.
@@ -110,6 +114,7 @@ npm run build        # construye el sitio en dist/ (lo mismo que hace GitHub)
 ### Scripts
 
 - `npm run descargar-materiales`: baja los PDF de Base44 a `_respaldo/base44/`, los compara con las copias locales de `_entrada/documentos/` y deja en `public/materiales/` un archivo por material con nombre limpio. Cuando hay dos copias se publica la local. El manifiesto está en `scripts/materiales.json` y el resultado de la última ejecución en `scripts/reporte-materiales.md`.
+- `npm run bitacora-completa`: une las bitácoras de `public/materiales/` en `public/bitacora-completa.pdf`, en orden, con portada e índice por sesión. Córrelo al final del curso, cuando estén las bitácoras de la 13 a la 15, y haz commit del PDF: el bloque de descarga aparece solo en el cierre del inicio cuando el archivo existe. Para probarlo sin publicarlo: `node scripts/bitacora-completa.mjs --salida prueba.pdf`.
 - `npm run caja-herramientas`: genera `public/caja-herramientas.pdf` (una página A4) a partir del campo `caja` de cada sesión. Usa el Edge o Chrome instalado; si no lo encuentra, indica la ruta con la variable `CHROME_PATH`. Vuelve a correrlo y haz commit del PDF cada vez que cambies una fila.
 
 ## Publicar

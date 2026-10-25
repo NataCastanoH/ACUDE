@@ -13,7 +13,7 @@ import configJSON from '../data/config.json';
 import sitioJSON from '../data/sitio.json';
 
 export const TIPOS_RETO = ['Práctica con IA', 'Portafolio', 'Juego o torneo', 'Seguimiento personal'];
-export const TIPOS_PIEZA = ['Simulacro', 'Calculadora', 'Asistente', 'Presentación', 'Infografía', 'Otro'];
+export const TIPOS_PIEZA = ['Simulacro', 'Calculadora', 'Asistente', 'Presentación', 'Infografía', 'Demo de clase', 'Otro'];
 export const GRUPOS = ['Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado 10', 'Sábado 12'];
 const ESTADOS = ['publicada', 'borrador'];
 
@@ -70,6 +70,9 @@ function validar() {
   for (const [i, p] of promptsJSON.entries())
     if (p.sesion != null && !numeros.has(p.sesion)) problemas.push(`prompts.json, posición ${i + 1}: la sesión ${p.sesion} no existe`);
 
+  const foto = sitioJSON.sobre_la_docente.foto;
+  if (foto && !existsSync(join(raizPublic, foto))) problemas.push(`sitio.json: no existe la foto de la docente public/${foto}`);
+
   if (!['decalogo', 'clase'].includes(configJSON.boton_principal))
     problemas.push('config.json: "boton_principal" debe ser "decalogo" o "clase"');
 
@@ -98,10 +101,12 @@ export const usadaEn = (nombre) => todasLasSesiones.filter((s) => s.herramientas
 
 export const herramientaPorNombre = (nombre) => herramientas.find((h) => h.nombre === nombre);
 
-export function fechaLarga(iso) {
+export function fechaLarga(iso, { conDia = true } = {}) {
   if (!iso) return null;
   const [a, m, d] = iso.split('-').map(Number);
-  return new Intl.DateTimeFormat('es-CO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(
-    new Date(Date.UTC(a, m - 1, d))
-  );
+  const opciones = { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC', ...(conDia ? { weekday: 'long' } : {}) };
+  return new Intl.DateTimeFormat('es-CO', opciones).format(new Date(Date.UTC(a, m - 1, d)));
 }
+
+// Fecha de la sesión si existe; si no, la semana (cada sesión se dicta en seis grupos en días distintos)
+export const cuandoSesion = (s) => fechaLarga(s.fecha) ?? (s.semana ? `Semana del ${fechaLarga(s.semana, { conDia: false })}` : null);

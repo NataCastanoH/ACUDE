@@ -6,6 +6,7 @@ const ICONOS = {
   Asistente: '<rect x="4" y="8" width="16" height="12" rx="3"/><circle cx="9" cy="14" r="1.2"/><circle cx="15" cy="14" r="1.2"/><line x1="12" y1="4" x2="12" y2="8"/><circle cx="12" cy="3" r="1"/>',
   Presentación: '<rect x="3" y="4" width="18" height="12" rx="2"/><line x1="12" y1="16" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><path d="M7 12l3-3 3 2 4-4"/>',
   Infografía: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8"/><path d="M8 12h5"/><rect x="8" y="15" width="8" height="3" rx="1"/>',
+  'Demo de clase': '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M10 8.5v5l4-2.5z"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
   Otro: '<path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/>',
 };
 
@@ -15,6 +16,7 @@ const ACCION = {
   Asistente: 'Probar el asistente',
   Presentación: 'Ver la presentación',
   Infografía: 'Ver la infografía',
+  'Demo de clase': 'Ver la demo',
   Otro: 'Abrir la pieza',
 };
 

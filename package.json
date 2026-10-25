@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "descargar-materiales": "node scripts/descargar-materiales.mjs",
-    "caja-herramientas": "node scripts/caja-herramientas.mjs"
+    "caja-herramientas": "node scripts/caja-herramientas.mjs",
+    "bitacora-completa": "node scripts/bitacora-completa.mjs"
   },
   "engines": {
     "node": ">=22.23.4"
@@ -16,5 +17,8 @@
   "dependencies": {
     "@fontsource-variable/bricolage-grotesque": "5.3.0",
     "astro": "7.4.2"
+  },
+  "devDependencies": {
+    "pdf-lib": "1.17.1"
   }
 }

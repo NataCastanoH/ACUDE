@@ -2,12 +2,11 @@
 import Base from '../layouts/Base.astro';
 import Titulo from '../components/Titulo.astro';
 import { url } from '../lib/url.js';
-import { todasLasSesiones, TIPOS_RETO, dosDigitos, rutaSesion, fechaLarga } from '../lib/datos.js';
+import { todasLasSesiones, TIPOS_RETO, dosDigitos, rutaSesion, cuandoSesion as cuando } from '../lib/datos.js';
 
 const normalizar = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 const herramientasUsadas = [...new Set(todasLasSesiones.filter((s) => s.estado === 'publicada').flatMap((s) => s.herramientas))]
   .sort((a, b) => a.localeCompare(b, 'es'));
-const cuando = (s) => fechaLarga(s.fecha) ?? (s.semana ? `Semana del ${fechaLarga(s.semana)}` : null);
 ---
 <Base titulo="Recorrido del curso" actual="recorrido" descripcion="Las 15 sesiones del curso Herramientas de IA para la vida universitaria: objetivo, materiales, prompts y retos.">
   <section class="seccion contenedor">

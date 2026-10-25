@@ -10,6 +10,8 @@ import { url } from '../lib/url.js';
 import { sitio, config, todasLasSesiones, prompts, voces, decalogo, dosDigitos, rutaSesion } from '../lib/datos.js';
 
 const caja = existsSync(join(process.cwd(), 'public', 'caja-herramientas.pdf')) ? url('caja-herramientas.pdf') : null;
+// Se genera al final del curso con npm run bitacora-completa; hasta entonces el bloque no aparece
+const bitacora = existsSync(join(process.cwd(), 'public', 'bitacora-completa.pdf')) ? url('bitacora-completa.pdf') : null;
 const podcastArchivo = config.podcast.archivo ? url(config.podcast.archivo) : null;
 const podcastEnlace = /^https?:\/\//.test(config.podcast.url) ? config.podcast.url : null;
 const contador = config.reto_comunitario.contador ?? '[N]';
@@ -96,9 +98,11 @@ const fuentePrompt = (p) => [p.codigo && `Plantilla ${p.codigo}`, p.sesion && `S
 
   <!-- 6. Las voces -->
   <section id="voces" class="seccion voces" aria-labelledby="t-voces">
-    <div class="contenedor cabeza-seccion">
-      <p class="etiqueta">{sitio.voces.etiqueta}</p>
-      <Titulo id="t-voces" texto={sitio.voces.titulo} />
+    <div class="contenedor">
+      <div class="cabeza-seccion">
+        <p class="etiqueta">{sitio.voces.etiqueta}</p>
+        <Titulo id="t-voces" texto={sitio.voces.titulo} />
+      </div>
     </div>
     <div class="voces__marco">
       <div class="voces__pista">
@@ -173,6 +177,14 @@ const fuentePrompt = (p) => [p.codigo && `Plantilla ${p.codigo}`, p.sesion && `S
           ? <a class="boton boton--primario boton--chico" href={caja} download>Descargar la caja (PDF)</a>
           : <p class="texto-2">[PDF por generar con npm run caja-herramientas]</p>}
       </div>
+      {bitacora && (
+        <div class="tarjeta">
+          <p class="etiqueta">La bitácora completa</p>
+          <h3 class="cierre__titulo">Todos los prompts del curso en un solo PDF</h3>
+          <p class="texto-2">Las bitácoras de cada sesión, en orden y con índice</p>
+          <a class="boton boton--primario boton--chico" href={bitacora} download>Descargar la bitácora (PDF)</a>
+        </div>
+      )}
       <div class="tarjeta">
         <p class="etiqueta">Ficha</p>
         <p class="cierre__ficha">{sitio.ficha.map((l, i) => <>{i > 0 && <br />}{l}</>)}</p>
