@@ -1,0 +1,506 @@
+[
+  {
+    "nombre": "ChatGPT",
+    "categoria": "Asistentes conversacionales",
+    "descripcion": "El todólogo: el asistente conversacional más versátil y conocido; buen punto de partida general.",
+    "url": "https://chatgpt.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Claude",
+    "categoria": "Asistentes conversacionales",
+    "descripcion": "El compañero cuidadoso: bueno leyendo documentos largos; explica con calma y paso a paso.",
+    "url": "https://claude.ai",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Gemini",
+    "categoria": "Asistentes conversacionales",
+    "descripcion": "El conectado a Google: útil si ya usas Gmail, Drive o Docs.",
+    "url": "https://gemini.google.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Microsoft Copilot",
+    "categoria": "Asistentes conversacionales",
+    "descripcion": "El que viene incluido: integrado en Word, Excel, PowerPoint, Edge y Windows; no exige cuenta nueva en muchos casos.",
+    "url": "https://copilot.microsoft.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Meta AI",
+    "categoria": "Asistentes conversacionales",
+    "descripcion": "Asistente integrado en WhatsApp e Instagram, apps que muchas personas ya usan a diario.",
+    "url": "https://www.meta.ai",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "DeepSeek",
+    "categoria": "Asistentes conversacionales",
+    "descripcion": "Alternativa ligera: buen razonamiento a bajo costo, útil para comparar respuestas.",
+    "url": "https://chat.deepseek.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Poe",
+    "categoria": "Asistentes conversacionales",
+    "descripcion": "Multi-modelo: permite probar varios modelos de IA desde un solo lugar.",
+    "url": "https://poe.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "HuggingChat",
+    "categoria": "Asistentes conversacionales",
+    "descripcion": "Acceso gratuito a modelos de código abierto (open source).",
+    "url": "https://huggingface.co/chat",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Luzia",
+    "categoria": "Asistentes conversacionales",
+    "descripcion": "Asistente por WhatsApp, gratis y sin instalar nada más.",
+    "url": "https://www.luzia.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "NotebookLM",
+    "categoria": "Comprensión y traducción",
+    "descripcion": "Cuaderno conversacional: carga una lectura propia, hazle preguntas y genera un resumen en audio. Solo responde con base en lo que le subes.",
+    "url": "https://notebooklm.google",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "DeepL",
+    "categoria": "Comprensión y traducción",
+    "descripcion": "Traducción con matiz: cuando la calidad de la traducción importa más que el volumen del texto.",
+    "url": "https://www.deepl.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Traductor de Google",
+    "categoria": "Comprensión y traducción",
+    "descripcion": "Traduce con la cámara: fotocopias, libros físicos o diapositivas proyectadas, sin escribir nada.",
+    "url": "https://translate.google.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Otter.ai",
+    "categoria": "Comprensión y traducción",
+    "descripcion": "Transcripción de clases y reuniones en tiempo real.",
+    "url": "https://otter.ai",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Google Sheets",
+    "categoria": "Datos y hojas de cálculo",
+    "descripcion": "Donde vive tu tabla: pega las fórmulas que te dio la IA. Gratis con cuenta de Google.",
+    "url": "https://sheets.google.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Excel (cuenta institucional)",
+    "categoria": "Datos y hojas de cálculo",
+    "descripcion": "Con la cuenta del TdeA de Microsoft 365. El botón Analizar datos responde preguntas en lenguaje natural.",
+    "url": "https://www.microsoft365.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "QuillBot",
+    "categoria": "Escritura y citación",
+    "descripcion": "Parafraseo y resumen de textos para pulir tu propia escritura.",
+    "url": "https://quillbot.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "LanguageTool",
+    "categoria": "Escritura y citación",
+    "descripcion": "Corrector de ortografía, gramática y estilo.",
+    "url": "https://languagetool.org/es",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "DeepL Write",
+    "categoria": "Escritura y citación",
+    "descripcion": "Asistente para mejorar la claridad y el estilo de un texto propio.",
+    "url": "https://www.deepl.com/es/write",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "APA Style (citar IA)",
+    "categoria": "Escritura y citación",
+    "descripcion": "Formatos actualizados (2025) de la norma APA para citar IA generativa correctamente.",
+    "url": "https://apastyle.apa.org/blog/cite-generative-ai-references",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "RAE",
+    "categoria": "Escritura y citación",
+    "descripcion": "Diccionario y consultas de la Real Academia Española.",
+    "url": "https://www.rae.es",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Word en línea (Editor)",
+    "categoria": "Escritura y citación",
+    "descripcion": "Editor de Microsoft para revisar ortografía y redacción.",
+    "url": "https://www.office.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Perplexity",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "El investigador: busca en internet y muestra sus fuentes citadas al lado de cada afirmación.",
+    "url": "https://www.perplexity.ai",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Consensus",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "Busca exclusivamente en literatura académica y resume el consenso (o la falta de él) entre estudios.",
+    "url": "https://consensus.app",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Elicit",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "Asistente de revisión de literatura: encuentra papers, extrae hallazgos y los compara entre sí — útil para trabajos de grado.",
+    "url": "https://elicit.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "SciSpace",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "Explora y entiende papers científicos con explicaciones a medida.",
+    "url": "https://scispace.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Google Scholar",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "La fuente primaria: árbitro final para confirmar que un paper citado por la IA existe de verdad.",
+    "url": "https://scholar.google.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Zotero",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "Gestor de referencias: guarda y cita fuentes reales sin errores de formato.",
+    "url": "https://www.zotero.org",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "SciELO",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "Biblioteca científica en línea con revistas académicas de Iberoamérica.",
+    "url": "https://www.scielo.org",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Dialnet",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "Portal de artículos, tesis y libros en español para buscar fuentes académicas.",
+    "url": "https://dialnet.unirioja.es",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Redalyc",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "Revistas científicas de acceso abierto de América Latina.",
+    "url": "https://www.redalyc.org",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "ResearchRabbit",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "Herramienta para descubrir artículos relacionados a partir de los que ya tienes.",
+    "url": "https://www.researchrabbitapp.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Semantic Scholar",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "Buscador académico que ayuda a encontrar y entender artículos científicos.",
+    "url": "https://www.semanticscholar.org",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Colombiacheck",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "Verificación de datos y afirmaciones sobre Colombia.",
+    "url": "https://colombiacheck.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "doi.org",
+    "categoria": "Investigación y fuentes",
+    "descripcion": "Resuelve un DOI para confirmar que un artículo existe y llegar a la fuente original.",
+    "url": "https://doi.org",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Anki",
+    "categoria": "Organización del estudio",
+    "descripcion": "El estándar de oro: repetición espaciada automática. Más potente, más árido de configurar.",
+    "url": "https://apps.ankiweb.net",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Quizlet",
+    "categoria": "Organización del estudio",
+    "descripcion": "La entrada amable a las flashcards: importa un mazo por texto plano y repasa con modos de juego.",
+    "url": "https://quizlet.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Brainscape",
+    "categoria": "Organización del estudio",
+    "descripcion": "Flashcards con curva de confianza; alternativa a Anki con interfaz más amable y mazos públicos.",
+    "url": "https://www.brainscape.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "RemNote",
+    "categoria": "Organización del estudio",
+    "descripcion": "Apuntes y tarjetas en el mismo sitio, con repetición espaciada integrada.",
+    "url": "https://www.remnote.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Google Calendar",
+    "categoria": "Organización del estudio",
+    "descripcion": "El plan que te avisa: recibe tu plan de estudio como eventos con recordatorio en el celular.",
+    "url": "https://calendar.google.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Microsoft To Do",
+    "categoria": "Organización del estudio",
+    "descripcion": "Lista simple: convierte el plan en tareas diarias sincronizadas.",
+    "url": "https://to-do.office.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Pomofocus",
+    "categoria": "Organización del estudio",
+    "descripcion": "Temporizador Pomodoro en el navegador: bloques de enfoque y descanso sin instalar nada.",
+    "url": "https://pomofocus.io",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Forest",
+    "categoria": "Organización del estudio",
+    "descripcion": "Anti-celular: bloquea el teléfono durante el bloque de estudio.",
+    "url": "https://www.forestapp.cc",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Notion",
+    "categoria": "Organización del estudio",
+    "descripcion": "Tablero de avance: temas, fechas y estado del plan de estudio en un solo tablero.",
+    "url": "https://www.notion.so",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Google Forms",
+    "categoria": "Participación en clase",
+    "descripcion": "Formularios y encuestas rápidas para trabajo de campo y autoevaluaciones.",
+    "url": "https://forms.google.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Mentimeter",
+    "categoria": "Participación en clase",
+    "descripcion": "Nubes de palabras y votaciones en vivo durante la clase.",
+    "url": "https://www.mentimeter.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Wordwall",
+    "categoria": "Participación en clase",
+    "descripcion": "Juegos de repaso: crea actividades interactivas para repasar los casos del semáforo en casa.",
+    "url": "https://wordwall.net",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Canva",
+    "categoria": "Presentación y diseño",
+    "descripcion": "Diseño asistido: composición de diapositivas y material visual académico.",
+    "url": "https://www.canva.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Gamma",
+    "categoria": "Presentación y diseño",
+    "descripcion": "Presentaciones generadas con IA desde un prompt, listas para editar.",
+    "url": "https://gamma.app",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Mermaid Live",
+    "categoria": "Presentación y diseño",
+    "descripcion": "Pega el código Mermaid que te dio la IA y dibuja el mapa mental, flujo o línea de tiempo. Descarga PNG o SVG.",
+    "url": "https://mermaid.live",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "draw.io",
+    "categoria": "Presentación y diseño",
+    "descripcion": "Importa código Mermaid y lo convierte en figuras editables. Gratis y sin cuenta.",
+    "url": "https://app.diagrams.net",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Excalidraw",
+    "categoria": "Presentación y diseño",
+    "descripcion": "Convierte el código Mermaid en un dibujo con estilo hecho a mano.",
+    "url": "https://excalidraw.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Napkin AI",
+    "categoria": "Presentación y diseño",
+    "descripcion": "Convierte un párrafo en un diagrama o mapa con íconos para una diapositiva o infografía.",
+    "url": "https://napkin.ai",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Yoodli",
+    "categoria": "Presentación y diseño",
+    "descripcion": "Coach de oratoria: mide ritmo, muletillas y pausas de tu ensayo. Plan gratis limitado.",
+    "url": "https://yoodli.ai",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Google Lens",
+    "categoria": "Visión y multimodal",
+    "descripcion": "La cámara que busca: copia, traduce y busca texto desde una foto.",
+    "url": "https://lens.google",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Photomath",
+    "categoria": "Visión y multimodal",
+    "descripcion": "Lee un ejercicio de matemáticas con la cámara y muestra los pasos, para comprobar tu procedimiento.",
+    "url": "https://photomath.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "GeoGebra y Desmos",
+    "categoria": "Visión y multimodal",
+    "descripcion": "El árbitro de los números: grafican funciones y comprueban resultados.",
+    "url": "https://www.geogebra.org",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Adobe Scan",
+    "categoria": "Visión y multimodal",
+    "descripcion": "Escanea varias páginas en un solo PDF con texto reconocible.",
+    "url": "https://www.adobe.com/acrobat/mobile/scanner-app.html",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Claude (artefactos y Proyectos)",
+    "categoria": "Crear con IA",
+    "descripcion": "Artefactos: le describes una app, un quiz o una página y la construye al lado del chat, lista para probar y compartir. Proyectos: guardan instrucciones y documentos de una materia para no repetirlos en cada conversación.",
+    "url": "https://claude.ai",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Gemini (Canvas y Gems)",
+    "categoria": "Crear con IA",
+    "descripcion": "Canvas: escribe y muestra documentos o código al lado del chat, con vista previa de lo que construye. Gems: asistentes con instrucciones fijas para una tarea recurrente.",
+    "url": "https://gemini.google.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Lovable",
+    "categoria": "Crear con IA",
+    "descripcion": "Construye una aplicación web a partir de una descripción en palabras y la publica con un enlace.",
+    "url": "https://lovable.dev",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Base44",
+    "categoria": "Crear con IA",
+    "descripcion": "Crea aplicaciones con base de datos describiéndolas en palabras. Con ella se hizo la primera versión de este sitio.",
+    "url": "https://base44.com",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Codex de OpenAI",
+    "categoria": "Crear con IA",
+    "descripcion": "Agente de programación de OpenAI: recibe una tarea en palabras, escribe el código y lo prueba.",
+    "url": "https://openai.com/codex",
+    "gratis": null,
+    "celular": null
+  },
+  {
+    "nombre": "Gemini CLI",
+    "categoria": "Crear con IA",
+    "descripcion": "Agente de Google que trabaja en la terminal del computador: lee, escribe y corrige código a partir de instrucciones en palabras.",
+    "url": "https://github.com/google-gemini/gemini-cli",
+    "gratis": null,
+    "celular": null
+  }
+]

@@ -1,0 +1,7 @@
+[
+  { "texto": "[Frase de alguien del curso sobre lo que cambió en su forma de estudiar]", "autor": "[Nombre]", "grupo": "[Grupo]", "fuera_del_curso": false, "aprobado": true },
+  { "texto": "[Frase de alguien del curso sobre el truco que más usa]", "autor": "[Nombre]", "grupo": "[Grupo]", "fuera_del_curso": false, "aprobado": true },
+  { "texto": "[Frase de alguien a quien le enseñaron un truco en el reto comunitario]", "autor": "[Nombre]", "grupo": "", "fuera_del_curso": true, "aprobado": true },
+  { "texto": "[Frase de alguien del curso sobre su primera app]", "autor": "[Nombre]", "grupo": "[Grupo]", "fuera_del_curso": false, "aprobado": true },
+  { "texto": "[Frase de alguien del curso sobre lo que ya no le da miedo]", "autor": "[Nombre]", "grupo": "[Grupo]", "fuera_del_curso": false, "aprobado": true }
+]

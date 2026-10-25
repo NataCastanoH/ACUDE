@@ -1,0 +1,19 @@
+{
+  "boton_principal": "decalogo",
+  "enlace_teams": "",
+  "formulario_galeria": "",
+  "galeria_csv": "",
+  "asistente": {
+    "modo": "enlace",
+    "url": "",
+    "endpoint": ""
+  },
+  "podcast": {
+    "archivo": "",
+    "url": ""
+  },
+  "reto_comunitario": {
+    "contador": null,
+    "csv": ""
+  }
+}

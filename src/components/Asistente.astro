@@ -1,0 +1,73 @@
+---
+// Asistente del curso.
+// modo "enlace": botón que abre el Gem de Gemini o el cuaderno de NotebookLM (config.asistente.url).
+// modo "chat" (fase 2): interfaz propia que envía la pregunta a una función serverless (config.asistente.endpoint).
+//   Contrato: POST JSON { "pregunta": "...", "historial": [{ "rol": "usuario" | "asistente", "texto": "..." }] }
+//   Respuesta: JSON { "respuesta": "..." }. La API key vive en la función, nunca en este sitio.
+import { config } from '../lib/datos.js';
+
+const { modo, url, endpoint } = config.asistente;
+const chat = modo === 'chat' && /^https?:\/\//.test(endpoint);
+const enlace = /^https?:\/\//.test(url) ? url : null;
+---
+{chat ? (
+  <div class="chat" data-endpoint={endpoint}>
+    <ol class="chat__registro" aria-live="polite"></ol>
+    <form class="chat__form">
+      <label class="sr" for="chat-pregunta">Tu pregunta</label>
+      <input id="chat-pregunta" class="campo" name="pregunta" autocomplete="off" placeholder="Pregunta por un prompt, una herramienta o una sesión" required />
+      <button class="boton boton--oscuro" type="submit">Preguntar</button>
+    </form>
+  </div>
+) : enlace ? (
+  <a class="boton boton--oscuro" href={enlace} target="_blank" rel="noopener">Pregúntale al ACUDE <span aria-hidden="true">↗</span><span class="sr">(abre en otra pestaña)</span></a>
+) : (
+  <p class="pendiente">[Enlace del Gem o del cuaderno de NotebookLM por configurar]</p>
+)}
+
+<style>
+  .pendiente { font-weight: 700; }
+  .chat { display: flex; flex-direction: column; gap: 16px; }
+  .chat__registro { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; max-height: 360px; overflow-y: auto; }
+  .chat__registro :global(li) { padding: 14px 18px; border-radius: 20px; background: var(--sobre-acento); color: var(--texto); white-space: pre-wrap; }
+  .chat__registro :global(li.usuario) { align-self: flex-end; background: var(--superficie); }
+  .chat__form { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chat__form .campo { flex: 1 1 240px; }
+</style>
+
+<script>
+  const chat = document.querySelector('.chat[data-endpoint]');
+  if (chat) {
+    const registro = chat.querySelector('.chat__registro');
+    const form = chat.querySelector('form');
+    const historial = [];
+    const agregar = (rol, texto) => {
+      const li = document.createElement('li');
+      li.className = rol;
+      li.textContent = texto;
+      registro.append(li);
+      registro.scrollTop = registro.scrollHeight;
+      return li;
+    };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const pregunta = form.pregunta.value.trim();
+      if (!pregunta) return;
+      form.reset();
+      agregar('usuario', pregunta);
+      const espera = agregar('asistente', 'Pensando…');
+      try {
+        const res = await fetch(chat.dataset.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pregunta, historial }),
+        });
+        const { respuesta } = await res.json();
+        espera.textContent = respuesta;
+        historial.push({ rol: 'usuario', texto: pregunta }, { rol: 'asistente', texto: respuesta });
+      } catch {
+        espera.textContent = 'No pude responder ahora. Intenta de nuevo en un momento.';
+      }
+    });
+  }
+</script>

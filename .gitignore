@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+# Insumos locales: no se publican
+_entrada/
+_respaldo/
+*.zip
+ACUDE_logo_A/
+Brief_Claude_Code_sitio_ACUDE.md
+maqueta_sitio.html

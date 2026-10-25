@@ -1,0 +1,7 @@
+---
+import { partirTitulo } from '../lib/titulo.js';
+const { texto, destacado, nivel = 2, tamano = nivel, class: clase = '', id } = Astro.props;
+const Etiqueta = `h${nivel}`;
+const [antes, clave, despues] = partirTitulo(texto, destacado);
+---
+<Etiqueta id={id} class:list={['titulo', `titulo--${tamano}`, clase]}>{antes}{clave && <span class="destacado">{clave}</span>}{despues}</Etiqueta>

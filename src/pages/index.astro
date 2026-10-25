@@ -1,0 +1,315 @@
+---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import Base from '../layouts/Base.astro';
+import Titulo from '../components/Titulo.astro';
+import Cinta from '../components/Cinta.astro';
+import Galeria from '../components/Galeria.astro';
+import Asistente from '../components/Asistente.astro';
+import { url } from '../lib/url.js';
+import { sitio, config, todasLasSesiones, prompts, voces, decalogo, dosDigitos, rutaSesion } from '../lib/datos.js';
+
+const caja = existsSync(join(process.cwd(), 'public', 'caja-herramientas.pdf')) ? url('caja-herramientas.pdf') : null;
+const podcastArchivo = config.podcast.archivo ? url(config.podcast.archivo) : null;
+const podcastEnlace = /^https?:\/\//.test(config.podcast.url) ? config.podcast.url : null;
+const contador = config.reto_comunitario.contador ?? '[N]';
+const voz = (v) => [v.autor, v.fuera_del_curso ? 'fuera del curso' : v.grupo].filter(Boolean).join(' · ');
+const fuentePrompt = (p) => [p.codigo && `Plantilla ${p.codigo}`, p.sesion && `Sesión ${dosDigitos(p.sesion)}`].filter(Boolean).join(' · ');
+---
+<Base actual="inicio">
+  <!-- 1. Hero -->
+  <section class="hero">
+    <p class="hero__fondo" aria-hidden="true">ACUDE</p>
+    <div class="contenedor hero__contenido">
+      <p class="etiqueta">{sitio.hero.etiqueta}</p>
+      <Titulo nivel={1} texto={sitio.hero.titulo} destacado={sitio.hero.destacado} class="hero__titulo" />
+      <p class="hero__bajada">{sitio.hero.bajada}</p>
+      <div class="botones">
+        <a class="boton boton--primario" href="#galeria">Ver la galería</a>
+        <a class="boton boton--secundario" href="#recorrido">Cómo llegamos aquí</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Cinta con las 15 sesiones -->
+  <Cinta items={todasLasSesiones.map((s) => s.titulo_corto)} inclinada />
+
+  <!-- 3. El recorrido -->
+  <section id="recorrido" class="seccion contenedor" aria-labelledby="t-recorrido">
+    <div class="cabeza-seccion cabeza-seccion--doble">
+      <div>
+        <p class="etiqueta">{sitio.recorrido.etiqueta}</p>
+        <Titulo id="t-recorrido" texto={sitio.recorrido.titulo} />
+      </div>
+      <p class="intro" style="max-width: 380px">{sitio.recorrido.texto}</p>
+    </div>
+    <ol class="fichas">
+      {todasLasSesiones.map((s) => {
+        const Etiqueta = s.estado === 'publicada' ? 'a' : 'div';
+        return (
+          <li>
+            <Etiqueta class:list={['ficha', { 'ficha--lima': s.numero >= 13 }]} {...(s.estado === 'publicada' ? { href: url(rutaSesion(s)) } : {})}>
+              <span class="numero ficha__numero">{dosDigitos(s.numero)}</span>
+              <span class="ficha__titulo">{s.titulo_corto}</span>
+              <span class="ficha__linea">{s.linea}</span>
+              {s.estado === 'borrador' && <span class="ficha__estado">Próximamente</span>}
+            </Etiqueta>
+          </li>
+        );
+      })}
+    </ol>
+    <p class="mas"><a class="boton boton--secundario" href={url('recorrido/')}>Ver el recorrido completo <span aria-hidden="true">→</span></a></p>
+  </section>
+
+  <!-- 4. La galería -->
+  <section id="galeria" class="seccion contenedor" aria-labelledby="t-galeria">
+    <div class="cabeza-seccion">
+      <p class="etiqueta">{sitio.galeria.etiqueta}</p>
+      <Titulo id="t-galeria" texto={sitio.galeria.titulo} />
+      <p class="intro">{sitio.galeria.texto}</p>
+    </div>
+    <Galeria />
+  </section>
+
+  <!-- 5. El muro de prompts -->
+  <section id="prompts" class="seccion contenedor" aria-labelledby="t-prompts">
+    <div class="cabeza-seccion">
+      <p class="etiqueta">{sitio.prompts.etiqueta}</p>
+      <Titulo id="t-prompts" texto={sitio.prompts.titulo} />
+      <p class="intro">{sitio.prompts.texto}</p>
+    </div>
+    <ul class="rejilla muro">
+      {prompts.map((p) => (
+        <li class:list={['tarjeta', p.etiqueta === 'El tuyo' ? '' : 'tarjeta--borde', 'muro__item']}>
+          <p class="etiqueta muro__etiqueta">{p.etiqueta}</p>
+          <blockquote class:list={['muro__texto', { 'texto-2': p.etiqueta === 'El tuyo' }]}>“{p.texto}”</blockquote>
+          {(fuentePrompt(p) || p.autor) && (
+            <p class="muro__fuente">
+              {p.sesion ? <a href={url(rutaSesion(todasLasSesiones.find((s) => s.numero === p.sesion)) + '#prompts')}>{fuentePrompt(p)}</a> : fuentePrompt(p)}
+              {p.autor && [p.autor, p.grupo].filter(Boolean).join(' · ')}
+            </p>
+          )}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- 6. Las voces -->
+  <section id="voces" class="seccion voces" aria-labelledby="t-voces">
+    <div class="contenedor cabeza-seccion">
+      <p class="etiqueta">{sitio.voces.etiqueta}</p>
+      <Titulo id="t-voces" texto={sitio.voces.titulo} />
+    </div>
+    <div class="voces__marco">
+      <div class="voces__pista">
+        {[false, true].map((copia) => (
+          <ul class="voces__grupo" aria-hidden={copia ? 'true' : undefined}>
+            {voces.map((v) => (
+              <li class:list={['voz', { 'voz--fuera': v.fuera_del_curso }]}>
+                <p class="voz__texto">“{v.texto}”</p>
+                <p class="voz__autor">{voz(v)}</p>
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Nuestro decálogo -->
+  <section id="decalogo" class="seccion contenedor" aria-labelledby="t-decalogo">
+    <div class="decalogo">
+      <div class="decalogo__cabeza">
+        <p class="etiqueta">{sitio.decalogo.etiqueta}</p>
+        <Titulo id="t-decalogo" texto={sitio.decalogo.titulo} destacado={false} class="decalogo__titulo" />
+        <p class="decalogo__texto">{sitio.decalogo.texto}</p>
+      </div>
+      <ol class="decalogo__lista">
+        {decalogo.map((r) => (
+          <li><span class="decalogo__n">{dosDigitos(r.numero)}</span>{r.texto}</li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Asistente y podcast -->
+  <section id="asistente" class="seccion contenedor" aria-labelledby="t-asistente">
+    <div class="duo">
+      <div class="tarjeta tarjeta--lima duo__asistente">
+        <p class="etiqueta">{sitio.asistente.etiqueta}</p>
+        <Titulo id="t-asistente" texto={sitio.asistente.titulo} destacado={false} tamano={3} />
+        <p class="texto-2">{sitio.asistente.texto}</p>
+        <Asistente />
+      </div>
+      <div class="tarjeta">
+        <p class="etiqueta">{sitio.podcast.etiqueta}</p>
+        <Titulo texto={sitio.podcast.titulo} nivel={3} tamano={3} destacado={false} />
+        {podcastArchivo ? (
+          <audio class="podcast" controls preload="none" src={podcastArchivo}>
+            <a href={podcastArchivo}>Descargar el audio</a>
+          </audio>
+        ) : podcastEnlace ? (
+          <a class="boton boton--primario" href={podcastEnlace} target="_blank" rel="noopener">Escuchar <span aria-hidden="true">↗</span><span class="sr">(abre en otra pestaña)</span></a>
+        ) : (
+          <p class="texto-2">[Audio del podcast generado en NotebookLM por publicar]</p>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Cierre -->
+  <section class="seccion contenedor" aria-label="Cierre">
+    <div class="cierre">
+      <div class="tarjeta cierre__reto">
+        <p class="etiqueta">{sitio.reto.etiqueta}</p>
+        <p class="numero cierre__numero" data-csv={config.reto_comunitario.csv || undefined}>{contador}</p>
+        <p class="texto-2">{sitio.reto.texto}</p>
+      </div>
+      <div class="tarjeta">
+        <p class="etiqueta">{sitio.caja.etiqueta}</p>
+        <h3 class="cierre__titulo">{sitio.caja.titulo}</h3>
+        <p class="texto-2">{sitio.caja.texto}</p>
+        {caja
+          ? <a class="boton boton--primario boton--chico" href={caja} download>Descargar la caja (PDF)</a>
+          : <p class="texto-2">[PDF por generar con npm run caja-herramientas]</p>}
+      </div>
+      <div class="tarjeta">
+        <p class="etiqueta">Ficha</p>
+        <p class="cierre__ficha">{sitio.ficha.map((l, i) => <>{i > 0 && <br />}{l}</>)}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Sobre el curso y la docente -->
+  <section id="sobre" class="seccion contenedor" aria-labelledby="t-curso">
+    <div class="sobre">
+      <div class="sobre__curso">
+        <p class="etiqueta">{sitio.sobre_el_curso.etiqueta}</p>
+        <Titulo id="t-curso" texto={sitio.sobre_el_curso.titulo} />
+        {sitio.sobre_el_curso.parrafos.map((p) => <p class="sobre__parrafo">{p}</p>)}
+      </div>
+      <div class="sobre__docente">
+        {sitio.sobre_la_docente.foto
+          ? <img class="sobre__foto" src={url(sitio.sobre_la_docente.foto)} alt={`Retrato de ${sitio.sobre_la_docente.nombre}`} width="480" height="480" loading="lazy" decoding="async" />
+          : <div class="sobre__foto sobre__foto--vacia"><span>[Foto de la docente, 480 × 480 px]</span></div>}
+        <div class="sobre__docente-texto">
+          <p class="etiqueta">{sitio.sobre_la_docente.etiqueta}</p>
+          <h3 class="titulo titulo--3">{sitio.sobre_la_docente.nombre}</h3>
+          <p class="texto-2">{sitio.sobre_la_docente.texto}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Cinta final -->
+  <div class="cinta-final">
+    <Cinta items={sitio.cinta_final} mayusculas />
+  </div>
+</Base>
+
+<script>
+  import { contarAprobadas } from '../lib/csv.js';
+  const numero = document.querySelector('.cierre__numero[data-csv]');
+  if (numero) {
+    fetch(numero.dataset.csv, { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.text() : Promise.reject()))
+      .then((t) => { numero.textContent = String(contarAprobadas(t)); })
+      .catch(() => {});
+  }
+</script>
+
+<style>
+  .hero { position: relative; overflow: hidden; padding: clamp(72px, 12vw, 120px) 0 80px; }
+  .hero__fondo {
+    position: absolute; left: -2vw; top: 40px; margin: 0;
+    font-size: clamp(160px, 28vw, 420px); font-weight: 800; line-height: 0.8; letter-spacing: -0.06em;
+    color: transparent; -webkit-text-stroke: 2px var(--contorno); white-space: nowrap; pointer-events: none; user-select: none;
+  }
+  .hero__contenido { position: relative; display: flex; flex-direction: column; gap: 32px; }
+  .hero__contenido :global(.hero__titulo) { font-size: clamp(60px, 11vw, 168px); letter-spacing: -0.05em; max-width: 1100px; }
+  .hero__bajada { font-size: clamp(20px, 2.4vw, 30px); line-height: 1.3; color: var(--texto-2); max-width: 720px; text-wrap: pretty; }
+
+  .fichas { list-style: none; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); }
+  .fichas li { display: flex; }
+  .ficha {
+    display: flex; flex-direction: column; gap: 10px; width: 100%; padding: 24px;
+    background: var(--superficie); border-radius: 22px; color: var(--texto); text-decoration: none; min-width: 0;
+    transition: transform .25s ease;
+  }
+  a.ficha:hover { transform: translateY(-4px); color: var(--texto); }
+  .ficha__numero { font-size: clamp(52px, 6vw, 64px); }
+  @media (max-width: 480px) { .ficha { padding: 18px; } }
+  .ficha__titulo { font-size: 18px; font-weight: 700; line-height: 1.15; }
+  .ficha__linea { font-size: 14px; color: var(--texto-2); }
+  .ficha--lima { background: var(--acento); color: var(--sobre-acento); }
+  .ficha--lima .ficha__numero { color: var(--sobre-acento); }
+  .ficha--lima .ficha__linea { color: var(--verde-apagado); }
+  .ficha__estado { margin-top: auto; font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--verde-apagado); }
+  .mas { margin-top: 32px; }
+
+  .muro { list-style: none; padding: 0; }
+  .muro__item { display: flex; flex-direction: column; gap: 16px; }
+  .muro__etiqueta { font-size: 13px; letter-spacing: 0.12em; }
+  .muro__texto { margin: 0; font-size: 19px; line-height: 1.45; }
+  .muro__fuente { margin-top: auto; font-size: 14px; color: var(--texto-2); }
+  .muro__fuente a { color: var(--texto-2); }
+
+  .voces__marco { overflow: hidden; }
+  .voces__pista { display: flex; width: max-content; animation: desplazar 90s linear infinite reverse; }
+  .voces__marco:hover .voces__pista, .voces__marco:focus-within .voces__pista { animation-play-state: paused; }
+  .voces__grupo { list-style: none; margin: 0; display: flex; gap: 20px; padding: 0 10px; }
+  .voz { width: min(360px, 80vw); flex-shrink: 0; padding: 28px; background: var(--superficie); border-radius: 24px; }
+  .voz__texto { margin-bottom: 14px; font-size: 20px; line-height: 1.4; }
+  .voz__autor { font-size: 14px; color: var(--texto-2); }
+  .voz--fuera { background: var(--acento); color: var(--sobre-acento); }
+  .voz--fuera .voz__autor { color: var(--verde-apagado); }
+  @media (prefers-reduced-motion: reduce) {
+    .voces__marco { overflow-x: auto; padding-inline: var(--margen); }
+    .voces__grupo[aria-hidden='true'] { display: none; }
+  }
+
+  .decalogo {
+    display: flex; flex-wrap: wrap; gap: 48px; padding: clamp(28px, 5vw, 72px);
+    background: var(--acento); color: var(--sobre-acento); border-radius: 36px;
+  }
+  .decalogo .etiqueta { color: var(--sobre-acento); }
+  .decalogo__cabeza { flex: 1 1 340px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .decalogo__cabeza :global(.decalogo__titulo) { font-size: clamp(44px, 7vw, 104px); line-height: 0.88; letter-spacing: -0.05em; }
+  .decalogo__texto { font-size: 20px; line-height: 1.4; color: var(--verde-apagado); max-width: 480px; }
+  .decalogo__lista { flex: 1 1 380px; list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .decalogo__lista li {
+    display: flex; align-items: center; gap: 16px; padding: 14px 22px;
+    background: var(--sobre-acento); color: var(--texto); border-radius: 999px; font-size: 18px; font-weight: 600;
+  }
+  .decalogo__n { min-width: 34px; font-size: 22px; font-weight: 800; color: var(--acento); }
+
+  .duo { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+  .duo > .tarjeta { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .duo__asistente .etiqueta { color: var(--sobre-acento); }
+  .duo__asistente .texto-2 { max-width: 520px; }
+  .podcast { width: 100%; }
+
+  .cierre { display: flex; flex-wrap: wrap; gap: 20px; }
+  .cierre > .tarjeta { flex: 1 1 300px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .cierre__reto { background: transparent; border: 3px solid var(--acento); }
+  .cierre__numero { font-size: clamp(56px, 7vw, 96px); color: var(--texto); }
+  .cierre__titulo { font-size: 28px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; text-wrap: balance; }
+  .cierre__ficha { font-size: 17px; line-height: 1.6; }
+
+  .sobre { display: grid; gap: 64px; }
+  .sobre__curso { display: flex; flex-direction: column; gap: 20px; max-width: 900px; }
+  .sobre__parrafo { font-size: clamp(18px, 2vw, 21px); line-height: 1.55; color: var(--texto-2); }
+  .sobre__docente {
+    display: grid; gap: 32px; align-items: center; padding-block: 48px;
+    border-block: 1px solid var(--linea); grid-template-columns: 1fr;
+  }
+  @media (min-width: 760px) { .sobre__docente { grid-template-columns: 280px 1fr; } }
+  .sobre__foto { width: 100%; max-width: 280px; aspect-ratio: 1; border-radius: var(--radio); object-fit: cover; }
+  .sobre__foto--vacia {
+    display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center;
+    background: var(--superficie); border: 2px dashed var(--linea); color: var(--texto-2); font-size: 15px;
+  }
+  .sobre__docente-texto { display: flex; flex-direction: column; gap: 14px; max-width: 720px; }
+
+  .cinta-final { margin-top: var(--aire); }
+</style>

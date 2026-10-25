@@ -1,0 +1,56 @@
+[
+  {
+    "etiqueta": "Para entender",
+    "texto": "No entendí bien qué es la habilitación. Explícamela como si nunca la hubiera escuchado, con un ejemplo concreto.",
+    "codigo": "J4",
+    "sesion": 5,
+    "autor": "",
+    "grupo": "",
+    "aprobado": true
+  },
+  {
+    "etiqueta": "Para verificar",
+    "texto": "Antes de responder, ten en cuenta esto: prefiero un “no lo sé” a una respuesta inventada. Si no estás seguro de un dato, una fecha, un nombre o una cita, márcalo con [VERIFICAR]. No inventes referencias bibliográficas ni enlaces. Mi pregunta es: [tu pregunta]",
+    "codigo": "R",
+    "sesion": 7,
+    "autor": "",
+    "grupo": "",
+    "aprobado": true
+  },
+  {
+    "etiqueta": "Para construir",
+    "texto": "[Prompt real de la sesión 13 o 14, cuando se dicte]",
+    "codigo": "",
+    "sesion": null,
+    "autor": "",
+    "grupo": "",
+    "aprobado": true
+  },
+  {
+    "etiqueta": "Para corregir",
+    "texto": "Te envío la foto de un ejercicio de [materia] que resolví yo. Primero dime qué ves en la foto, para saber que la leíste bien. Después revisa mi procedimiento paso a paso. Si hay un error, dime en qué paso está y dame una pista. No me des la respuesta todavía. Cuando yo lo corrija, confírmame si quedó bien. Si algo de la foto no se lee, dímelo. No lo adivines.",
+    "codigo": "AE",
+    "sesion": 10,
+    "autor": "",
+    "grupo": "",
+    "aprobado": true
+  },
+  {
+    "etiqueta": "Para el asistente",
+    "texto": "Instrucciones para este cuaderno. Soy estudiante del Tecnológico de Antioquia. Cuando me expliques algo: usa ejemplos concretos y termina con una pregunta para comprobar que entendí. Cuando me resumas algo: organiza por secciones y no omitas ninguna. Si algo que te pregunto no está en las fuentes que te di, avísame en lugar de inventarlo.",
+    "codigo": "J7",
+    "sesion": 5,
+    "autor": "",
+    "grupo": "",
+    "aprobado": true
+  },
+  {
+    "etiqueta": "El tuyo",
+    "texto": "[El prompt que más te sirvió en el curso]",
+    "codigo": "",
+    "sesion": null,
+    "autor": "[Nombre]",
+    "grupo": "[Grupo]",
+    "aprobado": true
+  }
+]

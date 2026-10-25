@@ -1,0 +1,11 @@
+---
+// Cinta lima en movimiento; se detiene con prefers-reduced-motion
+const { items, inclinada = false, mayusculas = false } = Astro.props;
+const texto = items.join(' · ') + ' ·';
+---
+<div class:list={['cinta', { 'cinta--inclinada': inclinada, 'cinta--mayus': mayusculas }]}>
+  <div class="cinta__pista">
+    <p class="cinta__texto">{texto}</p>
+    <p class="cinta__texto" aria-hidden="true">{texto}</p>
+  </div>
+</div>

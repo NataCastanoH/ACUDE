@@ -1,0 +1,802 @@
+[
+  {
+    "numero": 1,
+    "slug": "que-es-la-ia",
+    "titulo_corto": "¿Qué es (y qué no es) la IA?",
+    "linea": "Humano o IA, el primer chat",
+    "titulo": "¿Qué es (y qué no es) la Inteligencia Artificial?",
+    "tipo_reto": "Práctica con IA",
+    "fecha": null,
+    "semana": null,
+    "unidad": null,
+    "objetivo": "Primer contacto con un chatbot de IA: perder el miedo y probar, sin comparar herramientas todavía.",
+    "resumen": "Bienvenida al programa ACUDE (15 sesiones, 2 horas semanales, sin notas ni exámenes) y acuerdos de convivencia. Actividad \"¿Humano o IA?\" con textos e imágenes. Se explica la IA generativa como un autocompletar entrenado con muchísimo texto, que predice la siguiente palabra y no \"sabe\" la respuesta. Se desmontan tres mitos: la IA siempre dice la verdad, piensa y siente como una persona, y usar IA para estudiar es hacer trampa. Se presentan sus límites (alucinaciones, desactualización y sesgos) y la honestidad académica.",
+    "actividad": "Encuesta de saberes previos en Microsoft Forms y práctica guiada: escribir tu primer prompt con una pregunta real de tu vida académica a un chatbot gratuito (por ejemplo, \"Explícame como si tuviera 15 años qué es [tema]\").",
+    "herramientas": [
+      "ChatGPT",
+      "Claude",
+      "Gemini",
+      "Microsoft Copilot"
+    ],
+    "presentacion": "materiales/S01-presentacion.pdf",
+    "bitacora": null,
+    "video": null,
+    "galeria": [],
+    "prompts": [],
+    "caja": {
+      "herramienta": "ChatGPT, Claude, Gemini o Copilot",
+      "para_que": "Escribir tu primer prompt con una pregunta real de tu vida académica",
+      "truco": "Explícame como si tuviera 15 años qué es [tema]"
+    },
+    "estado": "publicada"
+  },
+  {
+    "numero": 2,
+    "slug": "cinco-asistentes-gratis",
+    "titulo_corto": "Cinco asistentes gratis",
+    "linea": "ChatGPT, Claude, Gemini, Copilot, Perplexity",
+    "titulo": "Conociendo y configurando a tus asistentes de IA",
+    "tipo_reto": "Práctica con IA",
+    "fecha": null,
+    "semana": null,
+    "unidad": null,
+    "objetivo": "Panorama comparado de asistentes y configuración de instrucciones personalizadas que la IA recuerda en cada conversación nueva.",
+    "resumen": "Panorama de cinco asistentes gratuitos y la fortaleza de cada uno: ChatGPT (el todólogo), Claude (documentos largos), Gemini (conectado a Google), Copilot (incluido en Office) y Perplexity (búsqueda con fuentes). Se revisan las cuentas responsables: correo que revises, contraseñas distintas, sin datos sensibles y edad mínima. Concepto central: configurar tu asistente una sola vez, como una ficha de inscripción, con la \"plantilla mágica\" (carrera, nivel, rol de tutor y objetivo). Catálogo de referencia: Meta AI, DeepSeek, Poe y HuggingChat.",
+    "actividad": "Reto \"Cara a cara de IAs\": hacer la misma pregunta a tu asistente configurado y a otro distinto, pegar ambas respuestas en el chat del grupo y comparar tono y nivel de detalle. Reto de la semana: resolver una pregunta académica real con tu asistente configurado y guardar el resultado en la carpeta de tu sección del portafolio grupal.",
+    "herramientas": [
+      "ChatGPT",
+      "Claude",
+      "Gemini",
+      "Microsoft Copilot",
+      "Perplexity",
+      "Meta AI",
+      "DeepSeek",
+      "Poe",
+      "HuggingChat"
+    ],
+    "presentacion": "materiales/S02-presentacion.pdf",
+    "bitacora": null,
+    "video": null,
+    "galeria": [],
+    "prompts": [],
+    "caja": {
+      "herramienta": "Tu asistente configurado",
+      "para_que": "Configurar tu asistente una sola vez, como una ficha de inscripción",
+      "truco": "La plantilla mágica: carrera, nivel, rol de tutor y objetivo"
+    },
+    "estado": "publicada"
+  },
+  {
+    "numero": 3,
+    "slug": "el-pastel-de-prompts",
+    "titulo_corto": "El pastel de prompts",
+    "linea": "Rol, contexto, tarea, formato, tono",
+    "titulo": "El arte del prompting I: anatomía de una buena instrucción",
+    "tipo_reto": "Portafolio",
+    "fecha": null,
+    "semana": null,
+    "unidad": null,
+    "objetivo": "Dominar la fórmula Rol + Contexto + Tarea + Formato + Tono para escribir instrucciones que la IA entienda a la primera.",
+    "resumen": "Un prompt es una instrucción, no magia. Se aprende la fórmula de cinco piezas: Rol, Contexto, Tarea, Formato y Tono, con la analogía de pedir en un restaurante. Tres ejemplos de \"antes y después\" (fotosíntesis, depuración de código en Python y resumen de un texto de administración), los cinco errores que debilitan un prompt y tres plantillas para llevar: traductor de conceptos difíciles, profesor experto y \"compruebo lo que sé\".",
+    "actividad": "Dos dinámicas: \"Clínica de Prompts\" (se reescribe en vivo un prompt real del grupo con la fórmula) y \"Batalla de Prompts\" (dos personas escriben su propio prompt para la misma necesidad, comparan resultados y eligen el más útil). Reto de la semana: escribir un prompt \"antes\", reescribirlo con la fórmula, guardar ambas respuestas y subir el antes y después al portafolio en Drive.",
+    "herramientas": [
+      "ChatGPT",
+      "Claude",
+      "Gemini",
+      "Microsoft Copilot",
+      "Perplexity"
+    ],
+    "presentacion": "materiales/S03-presentacion.pdf",
+    "bitacora": "materiales/S03-bitacora.pdf",
+    "video": null,
+    "galeria": [],
+    "prompts": [
+      {
+        "codigo": "A",
+        "etiqueta": "Traducir lo difícil",
+        "texto": "Explícame [TEMA] con una metáfora de [algo que me interese] y hazme una pregunta al final."
+      },
+      {
+        "codigo": "B",
+        "etiqueta": "Que me enseñe, no que responda",
+        "texto": "Actúa como tutor de [MATERIA]. Enséñame [TEMA] paso a paso y pregúntame antes de seguir al siguiente."
+      },
+      {
+        "codigo": "C",
+        "etiqueta": "Saber si ya me lo sé",
+        "texto": "Hazme [N] preguntas de [TEMA], de fácil a difícil, y dime al final qué me falta repasar."
+      },
+      {
+        "codigo": "D",
+        "etiqueta": "Corregir código sin que me lo resuelvan",
+        "texto": "Actúa como tutor de [LENGUAJE]. Este es mi código y este el error [pegar]. Dime qué está mal, no resuelvas el resto."
+      },
+      {
+        "codigo": "E",
+        "etiqueta": "Resumir para estudiar",
+        "texto": "Resume esto en máximo [N] viñetas con el vocabulario de la materia y agrega una pregunta para debatir: [pegar texto]."
+      },
+      {
+        "codigo": "F",
+        "etiqueta": "Mejorar mi propio prompt",
+        "texto": "Este es mi prompt: [pegar]. Dime qué le falta y reescríbelo con Rol+Contexto+Tarea+Formato+Tono."
+      }
+    ],
+    "caja": {
+      "herramienta": "Cualquier asistente",
+      "para_que": "Escribir instrucciones que la IA entienda a la primera",
+      "truco": "Rol + Contexto + Tarea + Formato + Tono"
+    },
+    "estado": "publicada"
+  },
+  {
+    "numero": 4,
+    "slug": "prompts-avanzados",
+    "titulo_corto": "Prompts avanzados",
+    "linea": "Ejemplos, paso a paso, iterar",
+    "titulo": "El arte del prompting II: técnicas avanzadas",
+    "tipo_reto": "Juego o torneo",
+    "fecha": null,
+    "semana": null,
+    "unidad": null,
+    "objetivo": "Aplicar tres técnicas de prompting avanzado: few-shot (enseñar con ejemplos), razonamiento paso a paso e iteración.",
+    "resumen": "Tres técnicas avanzadas: few-shot (enseñarle a la IA con uno o dos ejemplos del formato que quieres), paso a paso (pedir el razonamiento antes del resultado) e iteración (ajustar la respuesta sin empezar de cero, incluyendo decirle qué NO quieres). Incluye conversación de tres turnos, encuesta relámpago para reconocer una respuesta iterada, plantillas G, H, I y J, y herramientas para guardar plantillas: Proyectos de ChatGPT y Claude, Gems de Gemini, NotebookLM y Perplexity. El Recetario de Prompts del grupo crece cada semana en Drive.",
+    "actividad": "Actividad \"De antes a después\" en equipos: reciben un prompt \"antes\" por chat privado, iteran 12 a 15 minutos con su propia IA aplicando few-shot, paso a paso o iteración, y comparten el resultado en un minuto. Reto autónomo: elegir un prompt usado en otra sesión o materia, iterarlo y subir la comparativa antes y después al portafolio digital.",
+    "herramientas": [
+      "ChatGPT",
+      "Claude",
+      "Gemini",
+      "NotebookLM",
+      "Perplexity"
+    ],
+    "presentacion": "materiales/S04-presentacion.pdf",
+    "bitacora": "materiales/S04-bitacora.pdf",
+    "video": null,
+    "galeria": [],
+    "prompts": [
+      {
+        "codigo": "G",
+        "etiqueta": "Few-shot",
+        "texto": "Te voy a dar [número] ejemplos del formato que quiero. Sigue exactamente ese patrón.\n\nEjemplo 1: [...]\nEjemplo 2: [...]\n\nAhora hazlo con esto: [tu tarea real]."
+      },
+      {
+        "codigo": "H",
+        "etiqueta": "Paso a paso",
+        "texto": "Resuelve / explica [tema], mostrando cada paso de tu razonamiento antes de dar la respuesta final.\n\nNo te saltes pasos aunque te parezcan obvios."
+      },
+      {
+        "codigo": "I",
+        "etiqueta": "Iterar",
+        "texto": "Eso no me sirvió del todo. Ajusta así: [más corto / más simple / otro ejemplo / otro tono]."
+      },
+      {
+        "codigo": "J",
+        "etiqueta": "Anticipar límites",
+        "texto": "[tarea]. No hagas esto: [lo que no quieres]. Sí quiero: [lo que sí quieres]."
+      }
+    ],
+    "caja": {
+      "herramienta": "Proyectos de ChatGPT y Claude, Gems de Gemini",
+      "para_que": "Guardar tus plantillas y mejorar una respuesta que no sirvió",
+      "truco": "Ajusta la misma conversación. No la borres ni empieces de cero"
+    },
+    "estado": "publicada"
+  },
+  {
+    "numero": 5,
+    "slug": "resumir-explicar-traducir",
+    "titulo_corto": "Resumir, explicar, traducir",
+    "linea": "NotebookLM y la regla del 20 %",
+    "titulo": "IA para comprender: resumir, explicar y traducir",
+    "tipo_reto": "Portafolio",
+    "fecha": null,
+    "semana": null,
+    "unidad": "IA aplicada al estudio",
+    "objetivo": "Usar la IA para comprender lecturas: resumir con criterio, explicar en niveles y leer en otro idioma sin perder los términos técnicos.",
+    "resumen": "Inicio de la unidad \"IA aplicada al estudio\". Bloque 1: resumir con criterio, con tres tipos de resumen (el mapa antes de leer, las tres capas mientras estudias y la ficha la víspera del parcial) y la regla del 20 %: dedicar el 20 % del tiempo ahorrado a verificar contra el original. Bloque 2: la escalera de la explicación, del nivel más simple al formato de examen, y el prompt para explicárselo tú a la IA. Bloque 3: NotebookLM para conversar con tus propias lecturas, con citas al párrafo exacto. Bloque 4: traducir sin perder los términos técnicos, con glosario.",
+    "actividad": "Taller \"Teléfono roto académico\" en parejas: explicar un párrafo, resumir esa respuesta en un chat nuevo, volver a explicarla con lenguaje técnico y comparar con el original para encontrar qué se perdió y qué se inventó. Reto de la semana: pasar por el flujo de la clase la lectura que venías evitando y contar en tres líneas cómo te fue.",
+    "herramientas": [
+      "NotebookLM",
+      "DeepL",
+      "Traductor de Google",
+      "ChatGPT",
+      "Claude",
+      "Gemini"
+    ],
+    "presentacion": "materiales/S05-presentacion.pdf",
+    "bitacora": "materiales/S05-bitacora.pdf",
+    "video": null,
+    "galeria": [],
+    "prompts": [
+      {
+        "codigo": "J1",
+        "etiqueta": "Contraejemplo: el resumen genérico",
+        "texto": "hazme un resumen de este texto"
+      },
+      {
+        "codigo": "J2",
+        "etiqueta": "El mapa del territorio",
+        "texto": "Te voy a pasar el reglamento estudiantil de mi universidad. Antes de resumirlo, dame el mapa: qué temas trae, en qué orden conviene leerlos, cuáles son los más difíciles de entender y cuáles puedo dejar de último si tengo poco tiempo. Una línea por tema."
+      },
+      {
+        "codigo": "J3",
+        "etiqueta": "El resumen en tres capas",
+        "texto": "Ahora toma el capítulo de evaluación y pérdida de materias. Resúmelo en tres capas:\n(1) una sola frase con la idea central;\n(2) cinco puntos con las ideas principales;\n(3) un párrafo por cada sección.\nMarca con [OJO] los tres datos que más me convendría tener claros.\nNo agregues nada que no esté en el texto."
+      },
+      {
+        "codigo": "J4",
+        "etiqueta": "La escalera, peldaño 1",
+        "texto": "No entendí bien qué es la habilitación. Explícamela como si nunca la hubiera escuchado, con un ejemplo concreto."
+      },
+      {
+        "codigo": "J5",
+        "etiqueta": "La escalera, peldaño 3",
+        "texto": "Ahora explícamelo otra vez, pero con los términos exactos que usa el reglamento."
+      },
+      {
+        "codigo": "J6",
+        "etiqueta": "Feynman inverso: que la IA te califique",
+        "texto": "Te voy a explicar con mis propias palabras qué pasa cuando pierdo una materia.\nCompáralo con el reglamento y dime: qué entendí bien, qué entendí mal, qué se me quedó por fuera y qué estoy confundiendo.\nSé estricto, no me digas que está bien solo por quedar bien."
+      },
+      {
+        "codigo": "J7",
+        "etiqueta": "Instrucciones base del cuaderno de NotebookLM",
+        "texto": "Instrucciones para este cuaderno.\nSoy estudiante del Tecnológico de Antioquia.\nCuando me expliques algo: usa ejemplos concretos y termina con una pregunta para comprobar que entendí.\nCuando me resumas algo: organiza por secciones y no omitas ninguna.\nSi algo que te pregunto no está en las fuentes que te di, avísame en lugar de inventarlo."
+      },
+      {
+        "codigo": "J8",
+        "etiqueta": "Traducción con glosario",
+        "texto": "Traduce este texto al español manteniendo los términos técnicos. Deja el término original entre paréntesis la primera vez que aparezca. Al final, hazme un glosario de los diez términos técnicos más importantes, cada uno con su definición en una línea."
+      },
+      {
+        "codigo": "J9",
+        "etiqueta": "Preguntas antes de leer (para usar en casa)",
+        "texto": "Con base en el título y los subtítulos de esta lectura, hazme cinco preguntas que el texto debería responder. No me des las respuestas."
+      },
+      {
+        "codigo": "J10",
+        "etiqueta": "La ficha de una página (para usar en casa)",
+        "texto": "Conviértelo en una ficha de una sola página: definiciones clave, tres ideas fuerza, un ejemplo y tres preguntas de repaso. Que quepa en una hoja."
+      }
+    ],
+    "caja": {
+      "herramienta": "NotebookLM",
+      "para_que": "Conversar con tus propias lecturas, con citas al párrafo exacto",
+      "truco": "Regla del 20 %: del tiempo que el resumen ahorró, el 20 % se devuelve a verificar contra el original"
+    },
+    "estado": "publicada"
+  },
+  {
+    "numero": 6,
+    "slug": "organizar-el-estudio",
+    "titulo_corto": "Organizar el estudio",
+    "linea": "Planes, flashcards, repaso espaciado",
+    "titulo": "IA para organizar el estudio: planes, horarios y flashcards",
+    "tipo_reto": "Seguimiento personal",
+    "fecha": null,
+    "semana": null,
+    "unidad": "IA aplicada al estudio",
+    "objetivo": "Pasar de entender a recordar: la IA hace el trabajo manual del estudio (repartir el temario, fabricar preguntas, armar tarjetas); el esfuerzo de recordar sigue siendo de quien estudia.",
+    "resumen": "Entender no es recordar. Se presenta la curva del olvido, la comparación entre repetición masiva (28 % a la semana) y espaciada (95 %) y la evidencia sobre técnicas de estudio: autoevaluarte y distribuir el estudio funcionan mejor que releer o subrayar. Paso a paso: vaciar la mochila de pendientes (Plantilla K), tres formas de repartir el tiempo (científico, exacto y 80/20) y plan con fecha y hora (Plantilla L). Para repasar, pedirle a la IA que te pregunte a ti (Plantilla N) y crear tarjetas útiles de una sola idea (Plantilla O) para importar a Quizlet o Anki.",
+    "actividad": "Tu turno: correr las plantillas K y L con tus materias y fechas reales, generar un mazo de flashcards y elegir tus tres mejores tarjetas. Al portafolio: plan fechado, mazo de mínimo quince tarjetas y captura de Quizlet o Anki. Reto de la semana: registrar siete días qué estudiaste, cuántos minutos con concentración real y cuántos se perdieron, y sumar al séptimo día.",
+    "herramientas": [
+      "ChatGPT",
+      "Claude",
+      "Gemini",
+      "NotebookLM",
+      "Quizlet",
+      "Anki",
+      "Google Calendar",
+      "Pomofocus",
+      "RemNote",
+      "Brainscape",
+      "Forest",
+      "Microsoft To Do",
+      "Notion"
+    ],
+    "presentacion": "materiales/S06-presentacion.pdf",
+    "bitacora": "materiales/S06-bitacora.pdf",
+    "video": null,
+    "galeria": [],
+    "prompts": [
+      {
+        "codigo": "K",
+        "etiqueta": "Diagnóstico de carga",
+        "texto": "Soy estudiante de [CARRERA], voy en [SEMESTRE]. Estas son mis materias y lo que tengo pendiente:\n- [MATERIA 1]: [parcial / entrega / exposición] el [fecha], vale [%] de la nota\n- [MATERIA 2]: ...\n- [MATERIA 3]: ...\n\nDispongo de [X] horas libres entre semana y [Y] horas el fin de semana.\n\nOrdéname estos pendientes por prioridad real, teniendo en cuenta la fecha, el peso en la nota y qué tan difícil me resulta cada tema (te lo digo yo: [fácil/medio/difícil]).\nNo me armes todavía el horario. Solo dime en qué orden debería atacarlos y por qué."
+      },
+      {
+        "codigo": "L",
+        "etiqueta": "Plan semanal 80/20",
+        "texto": "Con la lista de prioridades anterior, arma mi plan de estudio del [fecha inicio] al [fecha fin]. Reglas:\n- Solo puedo estudiar [días y franjas horarias reales].\n- Bloques de [25 / 50] minutos con descansos de [5 / 10].\n- Usa el modelo 80/20: 80% del tiempo para temas nuevos, 20% final solo para repaso.\n- Cada bloque debe decir: fecha, hora, materia, tema exacto y qué debo lograr en ese bloque.\n- Incluye al menos un repaso corto de cada tema en un día posterior al que lo estudié.\n- Déjame un bloque comodín por semana por si algo se cae.\n\nDame el resultado en tabla."
+      },
+      {
+        "codigo": "M",
+        "etiqueta": "Esquema jerárquico del material",
+        "texto": "Te voy a pasar el material de [MATERIA / TEMA]. Analízalo completo y dame el esquema de temas y subtemas, del más fundamental al más complejo. Para cada tema: una línea de qué trata, sus subtemas y qué tan difícil es de entender (bajo / medio / alto).\nQuiero usar esto como la base de mi plan de estudio. No te saltes ninguna sección."
+      },
+      {
+        "codigo": "N",
+        "etiqueta": "Active recall con IA",
+        "texto": "Acabo de estudiar [TEMA] de [MATERIA]. Hazme [8] preguntas abiertas, de fácil a difícil, como si fuera un parcial real. No me des las respuestas todavía.\nVoy a responder una por una. Después de cada respuesta dime si está bien, mal o incompleta, qué me faltó, qué dije mal y qué concepto estoy confundiendo.\nAl final dime qué debo repasar."
+      },
+      {
+        "codigo": "O",
+        "etiqueta": "Mazo exportable",
+        "texto": "Con base en [el material que te pasé / el tema X de la materia Y], crea [20] flashcards.\nReglas:\n- Una sola idea por tarjeta. La respuesta no puede pasar de dos líneas.\n- Mezcla tarjetas de concepto, de dato duro y de aplicación.\n- Ordénalas de fácil a difícil.\n- Entrégamelas en texto plano, una tarjeta por línea, con este formato exacto:\n\npregunta;respuesta\n\nSin numeración, sin viñetas, sin encabezados, sin explicaciones adicionales."
+      },
+      {
+        "codigo": "P",
+        "etiqueta": "Ajuste de emergencia",
+        "texto": "Se me rompió el plan. Quedan [2] días y me faltan [4] temas de [MATERIA]: [lista].\nEl parcial es el [fecha] y evalúa sobre todo [lo que sé que más pesa].\nDime qué estudio y en qué orden con el tiempo que queda, qué puedo dejar por fuera asumiendo el riesgo, y cómo hago el repaso de las últimas dos horas.\nSé realista, no me armes un plan imposible."
+      },
+      {
+        "codigo": "Extra",
+        "etiqueta": "Configuración de tutor por materia",
+        "texto": "Soy estudiante de [CARRERA], voy en [SEMESTRE] y esta materia es [MATERIA].\nMi nivel es [principiante / intermedio / avanzado]. Mi meta es [aprobar el parcial del X / dominar el tema].\n\nCuando te pida explicar: usa palabras sencillas, un ejemplo real y termina con una pregunta para comprobar si entendí.\nCuando te pida repasar: hazme preguntas abiertas de fácil a difícil, incluye alguna trampa, corrígeme con franqueza y dime qué concepto estoy confundiendo.\nCuando te pase documentos: básate solo en ellos. Si algo que pregunto no está ahí, dímelo."
+      }
+    ],
+    "caja": {
+      "herramienta": "Quizlet o Anki",
+      "para_que": "Plan fechado y flashcards de una sola idea",
+      "truco": "Pídele a la IA que te pregunte a ti"
+    },
+    "estado": "publicada"
+  },
+  {
+    "numero": 7,
+    "slug": "investigar-con-fuentes",
+    "titulo_corto": "Investigar con fuentes",
+    "linea": "Cacería de alucinaciones",
+    "titulo": "IA para investigar: búsqueda con fuentes y cacería de alucinaciones",
+    "tipo_reto": "Juego o torneo",
+    "fecha": null,
+    "semana": null,
+    "unidad": "IA aplicada al estudio",
+    "objetivo": "Distinguir un asistente que \"inventa con seguridad\" de uno que busca y cita, y construir un protocolo personal de verificación.",
+    "resumen": "Idea de la sesión: la IA no busca, predice; por eso toda afirmación importante necesita una fuente que exista y que diga lo que la IA dice que dice. Se estudian los cinco tipos de alucinación (dato inventado, cita fantasma, atribución cruzada, fuente real con afirmación falsa y detalle de relleno) y el protocolo 4A de verificación: Aparece, Afirma, Actual y Autoridad. Regla del 20 %, versión investigación: abre al menos una de cada cinco fuentes que dé la IA, y siempre las que sostienen la idea principal. Plantillas Q a V: buscar con fuentes, darle permiso de decir \"no sé\", auditor de afirmaciones, de tu idea a palabras de búsqueda, pregunta de sí o no para Consensus y chequeo contra tus fuentes.",
+    "actividad": "Rompehielos \"Dos verdades y una alucinación\"; verificación en vivo abriendo una fuente y buscando el dato; juego \"Cacería de alucinaciones\" por equipos (+1 por detectar un error, +1 extra por pegar el enlace que lo prueba, −1 por acusar de falso algo verdadero; veredictos: verdadero, falso o no verificable); mini reto asincrónico \"El libro fantasma\" (comparar qué asistente inventa la trama de una novela inexistente). Evidencia: ficha de verificación diligenciada (afirmación, veredicto y fuente con enlace), captura del libro fantasma y decálogo de quien investiga con IA.",
+    "herramientas": [
+      "Perplexity",
+      "Consensus",
+      "Elicit",
+      "Google Scholar",
+      "ChatGPT",
+      "Claude",
+      "Gemini",
+      "SciELO",
+      "Dialnet",
+      "Redalyc",
+      "Semantic Scholar",
+      "Zotero",
+      "ResearchRabbit",
+      "Colombiacheck",
+      "doi.org",
+      "NotebookLM"
+    ],
+    "presentacion": "materiales/S07-presentacion.pdf",
+    "bitacora": "materiales/S07-bitacora.pdf",
+    "video": null,
+    "galeria": [],
+    "prompts": [
+      {
+        "codigo": "Q",
+        "etiqueta": "Busca con fuentes",
+        "texto": "Busca información actualizada sobre: [tu tema].\nQuiero que:\n1. Me des una respuesta corta (máximo 150 palabras).\n2. Cada afirmación lleve su fuente con enlace.\n3. Priorices fuentes académicas, de entidades oficiales o medios reconocidos.\n4. Me digas la fecha de cada fuente.\n5. Si no encuentras evidencia sólida para algo, me lo digas en vez de completar."
+      },
+      {
+        "codigo": "R",
+        "etiqueta": "Dale permiso de decir “no sé”",
+        "texto": "Antes de responder, ten en cuenta esto:\nprefiero un “no lo sé” a una respuesta inventada.\nSi no estás seguro de un dato, una fecha, un nombre o una cita, márcalo con [VERIFICAR].\nNo inventes referencias bibliográficas ni enlaces.\n\nMi pregunta es: [tu pregunta]"
+      },
+      {
+        "codigo": "S",
+        "etiqueta": "Auditor de afirmaciones",
+        "texto": "Te voy a pegar un texto. No lo corrijas.\nHaz una tabla con cada afirmación que se pueda verificar (datos, fechas, nombres, cifras, citas).\nColumnas: afirmación | tipo de dato | dónde podría verificarla | riesgo (alto, medio, bajo).\nOrdena de mayor a menor riesgo.\n\nTexto: [pega aquí]"
+      },
+      {
+        "codigo": "T",
+        "etiqueta": "De tu idea a palabras de búsqueda",
+        "texto": "Estudio [tu carrera] y tengo que investigar sobre: [tu tema, en tus palabras].\nAyúdame a buscar, no a responder. Dame:\n1. Una pregunta de investigación clara.\n2. Cinco palabras clave en español y cinco en inglés.\n3. Dos búsquedas listas para Google Scholar, usando comillas y AND / OR.\nNo me recomiendes artículos ni autores. Solo las palabras para buscar."
+      },
+      {
+        "codigo": "U",
+        "etiqueta": "Pregunta de sí o no para Consensus",
+        "texto": "¿[hábito o intervención] afecta / mejora [resultado] en [quiénes]?\n\nEjemplos:\n¿Dormir menos de 6 horas afecta el rendimiento en exámenes en universitarios?\n¿Estudiar con música mejora la concentración?\n¿Trabajar mientras se estudia afecta el rendimiento académico?"
+      },
+      {
+        "codigo": "V",
+        "etiqueta": "Chequeo contra tus fuentes",
+        "texto": "Responde solo con la información de los documentos que te cargué.\nDespués de cada afirmación, indica de qué documento sale.\nSi algo no aparece en los documentos, responde:\n“Eso no aparece en tus fuentes”, y no lo completes con información externa.\n\nMi pregunta es: [tu pregunta]"
+      },
+      {
+        "codigo": "Extra",
+        "etiqueta": "El libro fantasma",
+        "texto": "Hazme un resumen de la novela “Los relojes de Envigado”, de Mariana Quintero Ruiz (2017). Incluye los personajes principales."
+      }
+    ],
+    "caja": {
+      "herramienta": "Perplexity y Google Scholar",
+      "para_que": "Buscar con fuentes y cazar alucinaciones",
+      "truco": "Protocolo 4A: Aparece, Afirma, Actual y Autoridad"
+    },
+    "estado": "publicada"
+  },
+  {
+    "numero": 8,
+    "slug": "usar-ia-es-trampa",
+    "titulo_corto": "¿Usar IA es trampa?",
+    "linea": "Integridad y cómo citar",
+    "titulo": "¿Usar IA es hacer trampa? Integridad académica y pensamiento crítico",
+    "tipo_reto": "Portafolio",
+    "fecha": null,
+    "semana": null,
+    "unidad": "IA aplicada al estudio",
+    "objetivo": "Distinguir apoyo legítimo de fraude, citar y declarar el uso de IA, y usar la IA como tutor y no como hacedor.",
+    "resumen": "Cierre de la Unidad 2 (comprender, organizar, investigar y decidir). Se distingue el apoyo legítimo del fraude, se aprende a citar y declarar el uso de IA y a usarla como tutor y no como hacedor. Criterios: semáforo de integridad (verde, amarillo, rojo), prueba del espejo (¿me dejan?, ¿lo contaría?, ¿lo puedo defender?), escala de 5 niveles de uso de IA (de sin IA a IA para explorar, donde la tarea pone la regla) y \"primero tú, después la IA\", basada en el estudio del MIT Media Lab (2025) sobre deuda cognitiva. Plantillas W a Z: tutor no hacedor, mi declaración de uso, abogado del diablo y prueba de autoría (para usar solo antes de entregar).",
+    "actividad": "Debate con cambio de camiseta sobre la moción \"La IA debería prohibirse en la universidad\", más confesión en silencio, votación con emojis y firma del código de honor del grupo (cinco compromisos elegidos entre diez). Reto de la semana: aplicar la prueba del espejo a un trabajo propio en curso, escribir la declaración de uso con la Plantilla X y subirla al portafolio.",
+    "herramientas": [
+      "ChatGPT",
+      "Gemini",
+      "Claude",
+      "NotebookLM",
+      "Zotero",
+      "QuillBot",
+      "Wordwall"
+    ],
+    "presentacion": "materiales/S08-presentacion.pdf",
+    "bitacora": "materiales/S08-bitacora.pdf",
+    "video": null,
+    "galeria": [],
+    "prompts": [
+      {
+        "codigo": "W",
+        "etiqueta": "Tutor, no hacedor",
+        "texto": "Quiero aprender [tema o ejercicio], no que me des la respuesta.\nActúa como mi tutor:\n1. Hazme una sola pregunta a la vez.\n2. Si me equivoco, dame una pista, no la solución.\n3. Confirma solo cuando yo llegue a la respuesta.\n4. Si te pido la respuesta directa, recuérdame que primero lo intente.\nMi nivel es [básico / intermedio] y estudio [tu carrera]."
+      },
+      {
+        "codigo": "X",
+        "etiqueta": "Mi declaración de uso",
+        "texto": "Te voy a contar cómo usé la IA en mi trabajo sobre [tema]:\n[describe con honestidad qué herramienta usaste, para qué y qué hiciste tú]\n\nRedacta una declaración de uso de IA de máximo 80 palabras, en primera persona, que diga:\nqué herramienta usé, para qué, qué revisé o cambié yo,\ny que la responsabilidad del contenido es mía.\nNo exageres ni minimices lo que hice."
+      },
+      {
+        "codigo": "Y",
+        "etiqueta": "Abogado del diablo",
+        "texto": "Esta es mi postura sobre [tema]: [tu postura en una frase].\nDame los 3 argumentos más fuertes en contra, sin caricaturizarlos.\nDespués hazme una pregunta difícil para que yo defienda mi postura.\nNo me digas cuál es la respuesta correcta."
+      },
+      {
+        "codigo": "Z",
+        "etiqueta": "Prueba de autoría",
+        "texto": "Te voy a pegar un trabajo que hice. No lo corrijas.\nHazme 5 preguntas, una a la vez, como un profesor en una sustentación, para comprobar si entiendo lo que escribí.\nAl final dime qué partes defendí bien y cuáles debo repasar.\n\n[pega tu trabajo]"
+      }
+    ],
+    "caja": {
+      "herramienta": "El modo estudio de tu asistente",
+      "para_que": "Usar la IA como tutor y declarar su uso",
+      "truco": "Prueba del espejo: ¿me dejan?, ¿lo contaría?, ¿lo puedo defender?"
+    },
+    "estado": "publicada"
+  },
+  {
+    "numero": 9,
+    "slug": "escribir-mejor",
+    "titulo_corto": "Escribir mejor",
+    "linea": "La IA como editora, no autora",
+    "titulo": "IA para escribir mejor (sin dejar de ser quien escribe)",
+    "tipo_reto": "Portafolio",
+    "fecha": null,
+    "semana": null,
+    "unidad": "Crear y comunicar con IA",
+    "objetivo": "Usar la IA como editora de un texto propio: destrabar ideas, recibir comentarios sobre el borrador y verificar el parafraseo, manteniendo la redacción, la voz y la firma en manos de quien escribe.",
+    "resumen": "Apertura de la Unidad 3. La IA puede pulir tu texto; la idea, la voz y la firma son tuyas. Escribir tiene cuatro fases (idear, ordenar, redactar y revisar): la IA acompaña tres y redactar es de quien escribe. Ideas clave: los cuatro lentes de una editora (claridad, coherencia, ortografía y estilo), las tres C del parafraseo (comprendo, cambio y cito) y un mensaje con dos registros según el destinatario. Se analizan tres casos de parafraseo: el maquillaje (plagio), los sinónimos (parcheo) y la comprobación (el uso buscado). Plantillas AA (lluvia de ideas y esquema), AB (editora, no autora), AC (compruebo mi parafraseo, para casa) y AD (un mensaje, dos registros). Casos de uso: correo a tu docente, ensayo o reseña, informe de laboratorio, marco teórico, hoja de vida y mensaje al grupo de trabajo.",
+    "actividad": "Reto de la semana (asincrónico): elegir un párrafo escrito por ti (un correo, un trabajo o un informe), pasarlo por el Prompt AB y decidir qué sugerencias aceptar. Subir al portafolio el original, la versión mejorada y dos líneas sobre qué aportó la IA, junto con la declaración de uso aprendida en la Sesión 8.",
+    "herramientas": [
+      "ChatGPT",
+      "Claude",
+      "Gemini",
+      "DeepL Write",
+      "LanguageTool",
+      "QuillBot"
+    ],
+    "presentacion": "materiales/S09-presentacion.pdf",
+    "bitacora": "materiales/S09-bitacora.pdf",
+    "video": null,
+    "galeria": [],
+    "prompts": [
+      {
+        "codigo": "AA",
+        "etiqueta": "Lluvia de ideas y esquema",
+        "texto": "Actúa como guía de escritura universitaria.\nVoy a escribir [tipo de texto] sobre [tema] para [materia].\nLo que yo pienso del tema es: [tu idea en una o dos frases].\n1. Hazme 3 preguntas para entender mejor mi idea.\n2. Después de mis respuestas, propón 5 ideas que podría desarrollar.\n3. Con las que yo elija, arma un esquema de 5 puntos.\nNo redactes el texto. Lo voy a escribir yo."
+      },
+      {
+        "codigo": "AB",
+        "etiqueta": "Comenta, no reescribas",
+        "texto": "Actúa como especialista en edición de textos académicos en español.\nEste párrafo lo escribí yo: [pega tu texto].\nNo lo reescribas. Devuélveme una tabla con 4 filas: claridad, coherencia, ortografía y estilo.\nEn cada fila dime qué encontraste, dónde está y una sugerencia para que yo lo corrija.\nAl final dime qué es lo mejor de mi texto y cuál es el cambio más importante.\nRespeta mi forma de escribir."
+      },
+      {
+        "codigo": "AC",
+        "etiqueta": "Compruebo mi parafraseo",
+        "texto": "Texto original: [pega el fragmento y su fuente].\nMi parafraseo: [pega lo que escribiste con tus palabras].\nCompara los dos y dime:\n1. ¿Mi versión conserva la idea del original?\n2. ¿Hay frases demasiado parecidas? Señálalas.\n3. ¿Agregué algo que el original no dice?\nNo reescribas mi parafraseo. Solo dime qué ajustar.\nRecuérdame cómo citar la fuente en APA."
+      },
+      {
+        "codigo": "AD",
+        "etiqueta": "Un mensaje, dos registros",
+        "texto": "Necesito escribir sobre esta situación: [qué pasó y qué necesitas].\nMis datos: [nombre, programa, materia y grupo].\nEscribe dos versiones:\n1. Un correo formal para mi docente, con asunto claro, saludo, quién soy, qué necesito, agradecimiento y firma. Máximo 120 palabras.\n2. Un mensaje informal para un amigo sobre lo mismo.\nDespués explícame en 3 puntos qué cambió entre los dos.\nNo inventes excusas ni datos que yo no te di."
+      }
+    ],
+    "caja": {
+      "herramienta": "LanguageTool y DeepL Write",
+      "para_que": "Recibir comentarios sobre tu borrador sin que te lo reescriban",
+      "truco": "Las tres C del parafraseo: comprendo, cambio y cito"
+    },
+    "estado": "publicada"
+  },
+  {
+    "numero": 10,
+    "slug": "la-ia-que-ve",
+    "titulo_corto": "La IA que ve",
+    "linea": "Fotos, gráficos, diagramas",
+    "titulo": "IA multimodal: aprender con imágenes, fotos y diagramas",
+    "tipo_reto": "Práctica con IA",
+    "fecha": null,
+    "semana": null,
+    "unidad": "Crear y comunicar con IA",
+    "objetivo": "Tomar una foto que la IA pueda leer, pedirle que revise un ejercicio paso a paso, leer una gráfica comprobando sus cifras contra la imagen y pasar apuntes a mano a texto digital, sabiendo qué fotos no se suben.",
+    "resumen": "Hoy no le escribes a la IA: le muestras. La foto pone el contexto y tú pones la pregunta. Con el método VER (verifica qué vio, explícame, revisa contra tu imagen) trabajamos los prompts AE (Tutor con foto), AF (Lee antes de opinar), AG (De la libreta al digital) y AH (Explícame este diagrama). Regla de oro: si tú no lo puedes leer en la foto, la IA tampoco; y comprueba siempre tres datos contra la imagen original.",
+    "actividad": "Reto de la semana: elige una materia real, tómale una imagen (ejercicio, gráfica, diagrama o apuntes), trabájala con uno de los prompts AE a AH y comprueba al menos tres datos contra la imagen. Sube a tu portafolio la imagen, el prompt y la explicación obtenida.",
+    "herramientas": [
+      "ChatGPT",
+      "Claude",
+      "Gemini",
+      "Microsoft Copilot",
+      "Google Lens",
+      "Photomath",
+      "GeoGebra y Desmos",
+      "Adobe Scan",
+      "NotebookLM"
+    ],
+    "presentacion": "materiales/S10-presentacion.pdf",
+    "bitacora": "materiales/S10-bitacora.pdf",
+    "video": null,
+    "galeria": [],
+    "prompts": [
+      {
+        "codigo": "AE",
+        "etiqueta": "Tutor con foto",
+        "texto": "Te envío la foto de un ejercicio de [materia] que resolví yo.\nPrimero dime qué ves en la foto, para saber que la leíste bien.\nDespués revisa mi procedimiento paso a paso.\nSi hay un error, dime en qué paso está y dame una pista. No me des la respuesta todavía.\nCuando yo lo corrija, confírmame si quedó bien.\nSi algo de la foto no se lee, dímelo. No lo adivines."
+      },
+      {
+        "codigo": "AF",
+        "etiqueta": "Lee antes de opinar",
+        "texto": "Te envío la foto de una gráfica sobre [tema].\n1. Antes de interpretar, dime qué ves: título, ejes, unidades y los valores que alcanzas a leer.\n2. Explícame en 3 frases qué muestra.\n3. Dime si algo en la forma de la gráfica puede engañar: ejes cortados, escalas o colores.\n4. Si un número no se lee bien, dilo. No lo inventes.\nYo voy a comparar tus cifras con la imagen."
+      },
+      {
+        "codigo": "AG",
+        "etiqueta": "De la libreta al digital",
+        "texto": "Te envío la foto de mis apuntes de [materia], escritos a mano.\nTranscríbelos tal cual, sin corregir ni completar nada.\nConserva los títulos, las viñetas y el orden.\nSi una palabra no se entiende, escribe [ilegible]. No la adivines.\nSi hay un dibujo o un esquema, descríbelo en una línea entre paréntesis.\nAl final hazme una lista de las partes donde dudaste."
+      },
+      {
+        "codigo": "AH",
+        "etiqueta": "Explícame este diagrama",
+        "texto": "Te envío la foto de un diagrama sobre [tema].\n1. Describe qué ves: las partes y cómo se conectan.\n2. Explícamelo como a alguien que ve el tema por primera vez.\n3. Hazme 3 preguntas para comprobar que lo entendí, una por una.\nSi una etiqueta no se lee, dímelo. No la adivines."
+      }
+    ],
+    "caja": {
+      "herramienta": "Google Lens y la cámara de tu asistente",
+      "para_que": "Aprender con fotos, gráficas y diagramas",
+      "truco": "Si tú no lo puedes leer en la foto, la IA tampoco"
+    },
+    "estado": "publicada"
+  },
+  {
+    "numero": 11,
+    "slug": "crear-para-exponer",
+    "titulo_corto": "Crear para exponer",
+    "linea": "Presentaciones e infografías",
+    "titulo": "Crear para exponer: presentaciones, mapas e infografías con IA",
+    "tipo_reto": "Portafolio",
+    "fecha": null,
+    "semana": null,
+    "unidad": "Crear y comunicar con IA",
+    "objetivo": "Convertir un tema de tu materia en un guion con estructura y tiempos, pasarlo a una presentación, un mapa o una infografía con IA sabiendo qué automatizar y qué revisar, y ensayar la exposición con la IA como entrenadora.",
+    "resumen": "La IA arma, tú expones. Cinco pasos: borrador, guion (Prompt AI), pieza visual (AJ diapositivas, AK mapa en código Mermaid, AL infografía), memoria con tus propias diapositivas y ensayo con el Entrenador de exposición (AM). Regla de hoy: todo dato en pantalla tiene fuente; si no, se borra.",
+    "actividad": "Reto comunitario: convierte un tema de tu materia en una presentación, un mapa o una infografía con los prompts AI a AL y un generador. Revisa cada cifra e imagen, expónselo en tres minutos a alguien fuera del curso y pídele que te haga una pregunta. Sube la pieza, el prompt y la pregunta con tu respuesta.",
+    "herramientas": [
+      "ChatGPT",
+      "Claude",
+      "Gemini",
+      "Gamma",
+      "NotebookLM",
+      "Canva",
+      "Mermaid Live",
+      "draw.io",
+      "Excalidraw",
+      "Napkin AI",
+      "Yoodli"
+    ],
+    "presentacion": "materiales/S11-presentacion.pdf",
+    "bitacora": "materiales/S11-bitacora.pdf",
+    "video": null,
+    "galeria": [],
+    "prompts": [
+      {
+        "codigo": "AI",
+        "etiqueta": "Del tema al guion",
+        "texto": "Voy a exponer sobre [tema] en la materia [materia], durante [minutos] minutos, ante [público].\nLo que ya sé del tema: [pega aquí tus apuntes o tu resumen].\nUsa la estructura [A lineal / B problema y solución / C cronológica / D lista de ideas].\nDame el guion en 5 o 6 partes. Para cada parte: el tiempo, la idea central en una frase y un ejemplo o un dato que la respalde.\nSi pones una cifra, márcala como [cifra por verificar] y dime dónde comprobarla.\nIncluye una pregunta para hacerle al público al inicio y otra al final.\nAl terminar, dime qué parte del guion crees que me va a costar más explicar y por qué."
+      },
+      {
+        "codigo": "AJ",
+        "etiqueta": "De guion a diapositivas",
+        "texto": "Este es el guion de mi exposición: [pega el guion].\nConviértelo en un esquema de máximo [8] diapositivas, una idea por diapositiva.\nPara cada diapositiva: un título corto, el texto que se vería en pantalla (máximo 20 palabras) y una imagen o un ícono sugerido.\nLo que yo voy a decir no va en la diapositiva: ponlo aparte como nota del orador.\nNo agregues datos que no estén en mi guion.\nEntrégalo como una lista numerada, lista para pegar en un generador de presentaciones."
+      },
+      {
+        "codigo": "AK",
+        "etiqueta": "De la idea al mapa",
+        "texto": "Convierte este contenido en un diagrama en código Mermaid: [pega el guion o tus apuntes].\nTipo: [mindmap para un mapa mental / flowchart TD para un proceso / timeline para fechas].\nRaíz o inicio: [tema]. Entre 3 y 5 ramas principales y máximo 3 subramas por rama.\nMáximo 4 palabras por nodo. Sin paréntesis, comillas ni símbolos dentro de los textos, para que el código no se rompa.\nEntrégame solo el código, en un bloque, sin explicaciones.\nSi al pegarlo en mermaid.live sale un error, te lo copio y tú lo corriges."
+      },
+      {
+        "codigo": "AL",
+        "etiqueta": "Una página que lo dice todo",
+        "texto": "Quiero una infografía de una página sobre [tema] para [repasar / entregar / explicar].\nEste es el contenido: [pega el guion o tus apuntes].\nOrganízalo así: un título que diga la idea principal, entre 3 y 5 bloques con un subtítulo de máximo 5 palabras y una explicación de máximo 15 palabras, y un ícono sugerido por bloque.\nSi hay cifras, ponlas como el elemento más grande de su bloque y dime la fuente.\nIndica el orden de lectura: qué va arriba, qué va al centro y qué cierra.\nNo inventes datos. Si falta uno, deja el espacio marcado como [dato]."
+      },
+      {
+        "codigo": "AM",
+        "etiqueta": "Entrenador de exposición",
+        "texto": "Actúa como docente de [materia] que va a evaluar mi exposición de [minutos] minutos sobre [tema].\nEste es mi guion: [pega el guion].\n1. Dime si los tiempos son realistas y qué parte sobra o falta.\n2. Hazme las 3 preguntas más difíciles que me harías al final, una por una. Espera mi respuesta a cada una antes de seguir.\n3. Evalúa cada respuesta: ¿tiene argumento, desarrollo y evidencia? Si no, dime qué le faltó.\n4. Termina con lo que mejor hice y las dos cosas que debo ensayar más.\nNo reescribas mi guion. Yo lo corrijo."
+      }
+    ],
+    "caja": {
+      "herramienta": "Gamma, Canva y Mermaid Live",
+      "para_que": "Presentaciones, mapas e infografías",
+      "truco": "Todo dato en pantalla tiene fuente. Si no, se borra"
+    },
+    "estado": "publicada"
+  },
+  {
+    "numero": 12,
+    "slug": "datos-sin-miedo",
+    "titulo_corto": "Datos sin miedo",
+    "linea": "Fórmulas en español, clase transcrita",
+    "titulo": "Datos sin miedo: tablas, fórmulas, gráficas y transcripción",
+    "tipo_reto": "Práctica con IA",
+    "fecha": null,
+    "semana": null,
+    "unidad": "Crear y comunicar con IA",
+    "objetivo": "Leer una tabla con IA, pedir fórmulas de Excel o Sheets en palabras, graficar con IA y comprobar una cifra a mano con la calculadora.",
+    "resumen": "La IA hace las cuentas, tú haces las preguntas. Trabajamos los prompts AN (Léeme esta tabla), AO (La fórmula en palabras), AP (De la tabla a la gráfica), AQ (Arma mi tabla) y AR (De la grabación a los apuntes). Entra el truco exprés de transcripción y el primer momento de código del curso: tú no programas, pides, miras y corriges.",
+    "actividad": "Reto comunitario: toma una tabla real tuya, córrele el Prompt AN y pide con el AO la fórmula que necesitas. Comprueba una cifra a mano y enséñale a alguien fuera del curso a pedir una fórmula en palabras. Sube la tabla (sin nombres de otras personas), el prompt, la cifra verificada y una línea sobre a quién le enseñaste.",
+    "herramientas": [
+      "ChatGPT",
+      "Gemini",
+      "Claude",
+      "Google Sheets",
+      "Excel (cuenta institucional)",
+      "NotebookLM",
+      "Google Forms"
+    ],
+    "presentacion": "materiales/S12-presentacion.pdf",
+    "bitacora": "materiales/S12-bitacora.pdf",
+    "video": null,
+    "galeria": [],
+    "prompts": [
+      {
+        "codigo": "AN",
+        "etiqueta": "Léeme esta tabla",
+        "texto": "Esta es una tabla de [notas / gastos / una encuesta / mi trabajo] de la materia [materia]. Los encabezados están en la primera fila.\n[pega aquí la tabla, copiada desde Excel, Sheets o un mensaje]\nDime primero, en dos líneas, qué es esta tabla y qué mide cada columna.\nDame 3 hallazgos con su cifra: qué sobresale, qué va más bajo y qué está cerca del límite.\nDime una cosa rara o que falte en los datos.\nPara cada cifra que calcules, muéstrame la operación que hiciste, con los números de la tabla.\nTermina con la pregunta que tú me harías para seguir analizando."
+      },
+      {
+        "codigo": "AO",
+        "etiqueta": "La fórmula en palabras",
+        "texto": "Tengo una tabla en [Excel / Google Sheets] en español, con punto y coma como separador.\nLas columnas son: [A Materia, B Corte 1, C Corte 2, D Corte 3]. Los datos van de la fila 2 a la [6].\nQuiero una fórmula que calcule: [lo que necesitas, en palabras. Por ejemplo: cuánto necesito en el tercer corte, que pesa 40 %, para que la materia quede en 3,0 si los dos primeros cortes pesan 30 % cada uno].\nDame la fórmula lista para pegar en la celda [E2].\nExplícame qué hace cada parte, en lenguaje sencillo.\nDame un caso de prueba con un resultado que yo pueda comprobar a mano.\nSi la fórmula puede dar un resultado sin sentido (negativo, mayor que 5), dime qué significa."
+      },
+      {
+        "codigo": "AP",
+        "etiqueta": "De la tabla a la gráfica",
+        "texto": "Con esta tabla [pégala o sube el archivo CSV / Excel]:\nDime qué tipo de gráfica es la mejor para [comparar / ver el cambio en el tiempo / ver las partes de un total] y por qué.\nHazla con un título que diga lo que muestra y con el eje vertical desde cero.\nDebajo, escribe la lectura de la gráfica en una sola línea, con las cifras.\nSi subí un archivo, muéstrame el código que usaste para hacerla.\nNo agregues datos que no estén en la tabla."
+      },
+      {
+        "codigo": "AQ",
+        "etiqueta": "Arma mi tabla",
+        "texto": "Quiero llevar en [Google Sheets / Excel] el control de [mis notas del semestre / mis gastos / los turnos del trabajo / el inventario de mi emprendimiento].\nLo que necesito saber al final es: [por ejemplo: cuánto llevo gastado por categoría y cuánto me queda del presupuesto].\nDiseña la tabla: qué columnas tener, en qué orden y de qué tipo (texto, número, fecha).\nAgrega las fórmulas que calculan lo que necesito, en español y con punto y coma, diciendo en qué celda va cada una.\nDame dos filas de ejemplo para probarla.\nEntrégala en un formato que pueda copiar y pegar directo en la hoja."
+      },
+      {
+        "codigo": "AR",
+        "etiqueta": "De la grabación a los apuntes",
+        "texto": "Esta es la transcripción de una clase de [materia] sobre [tema]: [pega la transcripción o úsala como fuente].\nDame los apuntes en este orden: las 5 ideas principales, cada una en máximo 3 líneas; los conceptos que definió, con su definición exacta; los ejemplos que puso; y lo que dijo que iba a evaluar o a preguntar.\nMarca con [?] lo que no se entienda bien en el audio para que yo lo revise.\nNo agregues información que no esté en la transcripción."
+      }
+    ],
+    "caja": {
+      "herramienta": "Google Sheets o Excel",
+      "para_que": "Leer tablas y pedir fórmulas en palabras",
+      "truco": "De todo lo que la IA calcula, una cifra la compruebas con la calculadora del celular"
+    },
+    "estado": "publicada"
+  },
+  {
+    "numero": 13,
+    "slug": "tu-primera-app",
+    "titulo_corto": "Tu primera app",
+    "linea": "Sin saber programar",
+    "titulo": "Crear con IA I: de preguntar a construir",
+    "tipo_reto": null,
+    "fecha": null,
+    "semana": null,
+    "unidad": "Crear con IA",
+    "objetivo": "",
+    "resumen": "",
+    "actividad": "",
+    "herramientas": [
+      "Claude (artefactos y Proyectos)",
+      "Gemini (Canvas y Gems)",
+      "Lovable",
+      "Base44"
+    ],
+    "presentacion": null,
+    "bitacora": null,
+    "video": null,
+    "galeria": [],
+    "prompts": [],
+    "caja": {
+      "herramienta": "[Herramienta de la sesión]",
+      "para_que": "[Para qué sirve]",
+      "truco": "[Truco de una línea]"
+    },
+    "estado": "borrador"
+  },
+  {
+    "numero": 14,
+    "slug": "tu-asistente-propio",
+    "titulo_corto": "Tu asistente propio",
+    "linea": "Y la IA que programa sola",
+    "titulo": "Crear con IA II: tu asistente y tu herramienta",
+    "tipo_reto": null,
+    "fecha": null,
+    "semana": null,
+    "unidad": "Crear con IA",
+    "objetivo": "",
+    "resumen": "",
+    "actividad": "",
+    "herramientas": [
+      "Gemini (Canvas y Gems)",
+      "Claude (artefactos y Proyectos)",
+      "Codex de OpenAI",
+      "Gemini CLI"
+    ],
+    "presentacion": null,
+    "bitacora": null,
+    "video": null,
+    "galeria": [],
+    "prompts": [],
+    "caja": {
+      "herramienta": "[Herramienta de la sesión]",
+      "para_que": "[Para qué sirve]",
+      "truco": "[Truco de una línea]"
+    },
+    "estado": "borrador"
+  },
+  {
+    "numero": 15,
+    "slug": "etica-para-quien-construye",
+    "titulo_corto": "Ética para quien construye",
+    "linea": "Y todo el curso en una página",
+    "titulo": "Ética para quien construye con IA y cierre",
+    "tipo_reto": null,
+    "fecha": null,
+    "semana": null,
+    "unidad": "Crear con IA",
+    "objetivo": "",
+    "resumen": "",
+    "actividad": "",
+    "herramientas": [],
+    "presentacion": null,
+    "bitacora": null,
+    "video": null,
+    "galeria": [],
+    "prompts": [],
+    "caja": {
+      "herramienta": "[Herramienta de la sesión]",
+      "para_que": "[Para qué sirve]",
+      "truco": "[Truco de una línea]"
+    },
+    "estado": "borrador"
+  }
+]

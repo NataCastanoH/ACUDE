@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+import Titulo from '../components/Titulo.astro';
+import { url } from '../lib/url.js';
+import { todasLasSesiones, TIPOS_RETO, dosDigitos, rutaSesion, fechaLarga } from '../lib/datos.js';
+
+const normalizar = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const herramientasUsadas = [...new Set(todasLasSesiones.filter((s) => s.estado === 'publicada').flatMap((s) => s.herramientas))]
+  .sort((a, b) => a.localeCompare(b, 'es'));
+const cuando = (s) => fechaLarga(s.fecha) ?? (s.semana ? `Semana del ${fechaLarga(s.semana)}` : null);
+---
+<Base titulo="Recorrido del curso" actual="recorrido" descripcion="Las 15 sesiones del curso Herramientas de IA para la vida universitaria: objetivo, materiales, prompts y retos.">
+  <section class="seccion contenedor">
+    <div class="cabeza-seccion">
+      <p class="etiqueta">Sesiones</p>
+      <Titulo nivel={1} texto="Recorrido del curso" destacado="del curso" />
+    </div>
+
+    <form class="filtros" role="search" onsubmit="return false">
+      <label class="sr" for="f-texto">Buscar sesiones</label>
+      <input id="f-texto" class="campo" type="search" placeholder="Buscar por palabra clave en títulos, actividades o retos" autocomplete="off" />
+      <label class="sr" for="f-herramienta">Filtrar por herramienta</label>
+      <select id="f-herramienta" class="campo">
+        <option value="">Todas las herramientas</option>
+        {herramientasUsadas.map((h) => <option value={h}>{h}</option>)}
+      </select>
+      <label class="sr" for="f-tipo">Filtrar por tipo de reto</label>
+      <select id="f-tipo" class="campo">
+        <option value="">Todos los tipos de reto</option>
+        {TIPOS_RETO.map((t) => <option value={t}>{t}</option>)}
+      </select>
+    </form>
+
+    <p class="sr" aria-live="polite" id="f-conteo"></p>
+    <ol class="sesiones">
+      {todasLasSesiones.map((s) => {
+        const publicada = s.estado === 'publicada';
+        const Etiqueta = publicada ? 'a' : 'div';
+        const busqueda = normalizar([s.titulo, s.titulo_corto, s.objetivo, s.resumen, s.actividad, ...s.herramientas].join(' '));
+        return (
+          <li class="sesion" data-busqueda={busqueda} data-herramientas={s.herramientas.join('|')} data-tipo={s.tipo_reto ?? ''}>
+            <Etiqueta class:list={['sesion__tarjeta', { 'sesion__tarjeta--lima': s.numero >= 13 }]} {...(publicada ? { href: url(rutaSesion(s)) } : {})}>
+              <span class="numero sesion__numero" aria-hidden="true">{dosDigitos(s.numero)}</span>
+              <span class="sesion__cuerpo">
+                <span class="etiqueta sesion__tipo">{publicada ? s.tipo_reto : 'Próximamente'}</span>
+                <span class="sesion__titulo"><span class="sr">Sesión {s.numero}: </span>{s.titulo}</span>
+                {cuando(s) && <span class="sesion__fecha">{cuando(s)}</span>}
+                {s.objetivo && <span class="sesion__objetivo">{s.objetivo}</span>}
+                {s.herramientas.length > 0 && (
+                  <span class="chips sesion__chips">
+                    {s.herramientas.slice(0, 4).map((h) => <span class="chip">{h}</span>)}
+                    {s.herramientas.length > 4 && <span class="chip chip--mas">+{s.herramientas.length - 4}</span>}
+                  </span>
+                )}
+              </span>
+            </Etiqueta>
+          </li>
+        );
+      })}
+    </ol>
+    <p class="vacio" id="f-vacio" hidden>No hay sesiones que coincidan con la búsqueda.</p>
+  </section>
+</Base>
+
+<script>
+  const texto = document.getElementById('f-texto');
+  const herramienta = document.getElementById('f-herramienta');
+  const tipo = document.getElementById('f-tipo');
+  const vacio = document.getElementById('f-vacio');
+  const conteo = document.getElementById('f-conteo');
+  const sesiones = [...document.querySelectorAll('.sesion')];
+  const normalizar = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+
+  function filtrar() {
+    const q = normalizar(texto.value);
+    const h = herramienta.value;
+    const t = tipo.value;
+    let visibles = 0;
+    for (const s of sesiones) {
+      const ok = (!q || s.dataset.busqueda.includes(q)) && (!h || s.dataset.herramientas.split('|').includes(h)) && (!t || s.dataset.tipo === t);
+      s.hidden = !ok;
+      if (ok) visibles++;
+    }
+    vacio.hidden = visibles > 0;
+    conteo.textContent = `${visibles} ${visibles === 1 ? 'sesión' : 'sesiones'}`;
+  }
+
+  // Permite enlazar un filtro: recorrido/?herramienta=NotebookLM
+  const params = new URLSearchParams(location.search);
+  if (params.get('herramienta')) herramienta.value = params.get('herramienta');
+  if (params.get('q')) texto.value = params.get('q');
+  [texto, herramienta, tipo].forEach((c) => c.addEventListener('input', filtrar));
+  if (params.size) filtrar();
+</script>
+
+<style>
+  .sesiones { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .sesion[hidden] { display: none; }
+  .sesion__tarjeta {
+    display: flex; gap: clamp(20px, 4vw, 48px); align-items: flex-start;
+    padding: clamp(24px, 3vw, 36px); border-radius: var(--radio); background: var(--superficie);
+    color: var(--texto); text-decoration: none; transition: transform .25s ease;
+  }
+  a.sesion__tarjeta:hover { transform: translateY(-4px); color: var(--texto); }
+  .sesion__numero { font-size: clamp(64px, 9vw, 120px); min-width: 1.15em; }
+  .sesion__cuerpo { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .sesion__tipo { font-size: 13px; }
+  .sesion__titulo { font-size: clamp(22px, 2.6vw, 32px); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; }
+  .sesion__fecha { font-size: 15px; color: var(--texto-2); }
+  .sesion__objetivo {
+    color: var(--texto-2); font-size: 17px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .sesion__chips { margin-top: 6px; }
+  .sesion__tarjeta--lima { background: var(--acento); color: var(--sobre-acento); }
+  .sesion__tarjeta--lima .sesion__numero, .sesion__tarjeta--lima .sesion__tipo { color: var(--sobre-acento); }
+  .sesion__tarjeta--lima .chip { border-color: var(--sobre-acento); color: var(--sobre-acento); }
+  @media (max-width: 560px) { .sesion__tarjeta { flex-direction: column; gap: 12px; } }
+</style>

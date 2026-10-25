@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import Titulo from '../components/Titulo.astro';
+import { url } from '../lib/url.js';
+import { herramientas, categorias, usadaEn, anclaHerramienta, dosDigitos, rutaSesion } from '../lib/datos.js';
+
+const normalizar = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const ordenadas = [...herramientas].sort((a, b) => a.categoria.localeCompare(b.categoria, 'es') || 0);
+---
+<Base titulo="Herramientas de IA" actual="herramientas" descripcion="Catálogo de las herramientas de inteligencia artificial que exploramos en el curso, con su descripción y las sesiones donde se usaron.">
+  <section class="seccion contenedor">
+    <div class="cabeza-seccion">
+      <p class="etiqueta">Catálogo</p>
+      <Titulo nivel={1} texto="Herramientas de IA" destacado="de IA" />
+      <p class="intro">Todas las herramientas de inteligencia artificial que exploramos a lo largo del curso, con su descripción y las sesiones donde se utilizaron.</p>
+    </div>
+
+    <form class="buscador" role="search" onsubmit="return false">
+      <label class="sr" for="h-texto">Buscar herramienta</label>
+      <input id="h-texto" class="campo" type="search" placeholder="Buscar herramienta" autocomplete="off" />
+    </form>
+    <div class="categorias" role="group" aria-label="Filtrar por categoría">
+      <button class="cat" type="button" aria-pressed="true" data-categoria="">Todas</button>
+      {categorias.map((c) => <button class="cat" type="button" aria-pressed="false" data-categoria={c}>{c}</button>)}
+    </div>
+
+    <p class="sr" aria-live="polite" id="h-conteo"></p>
+    <ul class="herramientas">
+      {ordenadas.map((h) => {
+        const sesiones = usadaEn(h.nombre);
+        return (
+          <li class="tarjeta herramienta" id={anclaHerramienta(h.nombre)} data-categoria={h.categoria}
+              data-busqueda={normalizar([h.nombre, h.descripcion, h.categoria].join(' '))}>
+            <div class="herramienta__cabeza">
+              <h2 class="herramienta__nombre">{h.nombre}</h2>
+              {h.url && <a class="herramienta__visitar" href={h.url} target="_blank" rel="noopener">Visitar <span aria-hidden="true">↗</span><span class="sr">{h.nombre} (abre en otra pestaña)</span></a>}
+            </div>
+            <p class="etiqueta herramienta__cat">{h.categoria}</p>
+            <p class="herramienta__desc">{h.descripcion}</p>
+            {(h.gratis !== null || h.celular !== null) && (
+              <ul class="chips">
+                {h.gratis === true && <li class="chip">Gratis</li>}
+                {h.celular === true && <li class="chip">Funciona en celular</li>}
+              </ul>
+            )}
+            {sesiones.length > 0 && (
+              <div class="herramienta__usada">
+                <p class="herramienta__usada-titulo">Usada en</p>
+                <ul class="puntos">
+                  {sesiones.map((s) => (
+                    <li>
+                      {s.estado === 'publicada'
+                        ? <a href={url(rutaSesion(s))}>Sesión {dosDigitos(s.numero)} · {s.titulo}</a>
+                        : <span class="texto-2">Sesión {dosDigitos(s.numero)} · {s.titulo} (próximamente)</span>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+    <p class="vacio" id="h-vacio" hidden>No se encontraron herramientas.</p>
+  </section>
+</Base>
+
+<script>
+  const texto = document.getElementById('h-texto');
+  const botones = [...document.querySelectorAll('.cat')];
+  const tarjetas = [...document.querySelectorAll('.herramienta')];
+  const vacio = document.getElementById('h-vacio');
+  const conteo = document.getElementById('h-conteo');
+  const normalizar = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+  let categoria = '';
+
+  function filtrar() {
+    const q = normalizar(texto.value);
+    let visibles = 0;
+    for (const t of tarjetas) {
+      const ok = (!categoria || t.dataset.categoria === categoria) && (!q || t.dataset.busqueda.includes(q));
+      t.hidden = !ok;
+      if (ok) visibles++;
+    }
+    vacio.hidden = visibles > 0;
+    conteo.textContent = `${visibles} ${visibles === 1 ? 'herramienta' : 'herramientas'}`;
+  }
+
+  botones.forEach((b) =>
+    b.addEventListener('click', () => {
+      // Clic de nuevo en la categoría activa quita el filtro
+      categoria = categoria === b.dataset.categoria ? '' : b.dataset.categoria;
+      botones.forEach((o) => o.setAttribute('aria-pressed', String(o.dataset.categoria === categoria)));
+      filtrar();
+    })
+  );
+  texto.addEventListener('input', filtrar);
+</script>
+
+<style>
+  .buscador { max-width: 560px; margin-bottom: 20px; }
+  .categorias { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+  .cat {
+    min-height: 44px; padding: 8px 18px; border-radius: 999px; border: 2px solid var(--linea);
+    background: transparent; color: var(--texto); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+  }
+  .cat:hover { border-color: var(--acento); }
+  .cat[aria-pressed='true'] { background: var(--acento); border-color: var(--acento); color: var(--sobre-acento); }
+  .herramientas { list-style: none; padding: 0; display: grid; gap: 20px; grid-template-columns: 1fr; }
+  @media (min-width: 860px) { .herramientas { grid-template-columns: 1fr 1fr; } }
+  .herramienta { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 96px; }
+  .herramienta[hidden] { display: none; }
+  .herramienta:target { outline: 3px solid var(--acento); }
+  .herramienta__cabeza { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+  .herramienta__nombre { font-size: clamp(26px, 3vw, 34px); font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
+  .herramienta__visitar { display: inline-flex; align-items: center; min-height: 44px; flex-shrink: 0; font-weight: 700; text-decoration: none; }
+  .herramienta__cat { font-size: 12px; }
+  .herramienta__desc { color: var(--texto-2); }
+  .herramienta__usada { margin-top: 8px; padding-top: 16px; border-top: 1px solid var(--linea); display: flex; flex-direction: column; gap: 10px; font-size: 16px; }
+  .herramienta__usada-titulo { font-weight: 700; }
+  .herramienta__usada a { color: var(--texto); text-decoration-color: var(--linea); text-underline-offset: 4px; }
+  .herramienta__usada a:hover { color: var(--acento); }
+</style>

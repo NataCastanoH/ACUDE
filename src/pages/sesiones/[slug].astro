@@ -1,0 +1,204 @@
+---
+import Base from '../../layouts/Base.astro';
+import Galeria from '../../components/Galeria.astro';
+import { url } from '../../lib/url.js';
+import { sesiones, galeria, dosDigitos, fechaLarga, anclaHerramienta, rutaSesion } from '../../lib/datos.js';
+
+export function getStaticPaths() {
+  return sesiones.map((s) => ({ params: { slug: `${dosDigitos(s.numero)}-${s.slug}` }, props: { s } }));
+}
+
+const { s } = Astro.props;
+const i = sesiones.indexOf(s);
+const anterior = sesiones[i - 1];
+const siguiente = sesiones[i + 1];
+const cuando = fechaLarga(s.fecha) ?? (s.semana ? `Semana del ${fechaLarga(s.semana)}` : null);
+const materiales = [
+  s.presentacion && { nombre: 'Presentación', href: url(s.presentacion) },
+  s.bitacora && { nombre: 'Bitácora de herramientas y prompts', href: url(s.bitacora) },
+  s.video && { nombre: 'Video', href: /^https?:\/\//.test(s.video) ? s.video : url(s.video) },
+].filter(Boolean);
+const imagenes = s.galeria.map((g) => (typeof g === 'string' ? { src: g, alt: '' } : g))
+  .map((g) => ({ ...g, src: /^https?:\/\//.test(g.src) ? g.src : url(g.src), alt: g.alt || `Trabajo realizado en clase, sesión ${s.numero}` }));
+const hayPiezas = galeria.some((p) => p.sesion === s.numero);
+---
+<Base titulo={`Sesión ${dosDigitos(s.numero)} · ${s.titulo_corto}`} descripcion={s.objetivo} actual="recorrido">
+  <article class="seccion contenedor detalle">
+    <a class="volver" href={url('recorrido/')}><span aria-hidden="true">←</span> Volver al recorrido</a>
+
+    <header class="detalle__cabeza">
+      <p class="numero detalle__numero" aria-hidden="true">{dosDigitos(s.numero)}</p>
+      <div class="detalle__titulos">
+        <p class="etiqueta">{[s.tipo_reto, cuando].filter(Boolean).join(' · ')}</p>
+        <h1 class="titulo detalle__titulo"><span class="sr">Sesión {s.numero}: </span>{s.titulo}</h1>
+      </div>
+    </header>
+
+    <div class="tarjeta objetivo">
+      <p class="etiqueta">Objetivo</p>
+      <p class="objetivo__texto">{s.objetivo}</p>
+    </div>
+
+    <section class="bloque" aria-labelledby="t-herramientas">
+      <h2 id="t-herramientas" class="bloque__titulo">Herramientas de IA</h2>
+      <ul class="chips">
+        {s.herramientas.map((h) => <li><a class="chip" href={url(`herramientas/#${anclaHerramienta(h)}`)}>{h}</a></li>)}
+      </ul>
+    </section>
+
+    <section class="bloque" aria-labelledby="t-resumen">
+      <h2 id="t-resumen" class="bloque__titulo">Resumen</h2>
+      <p class="bloque__texto">{s.resumen}</p>
+    </section>
+
+    {materiales.length > 0 && (
+      <section class="bloque" aria-labelledby="t-materiales">
+        <h2 id="t-materiales" class="bloque__titulo">Materiales</h2>
+        <ul class="materiales">
+          {materiales.map((m) => (
+            <li>
+              <span class="materiales__nombre">{m.nombre}</span>
+              <a class="boton boton--secundario boton--chico" href={m.href} target="_blank" rel="noopener">Descargar <span aria-hidden="true">↗</span><span class="sr">{m.nombre} (PDF, abre en otra pestaña)</span></a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <section class="bloque" aria-labelledby="t-actividad">
+      <h2 id="t-actividad" class="bloque__titulo">Actividad / Reto</h2>
+      <p class="bloque__texto actividad">{s.actividad}</p>
+    </section>
+
+    {imagenes.length > 0 && (
+      <section class="bloque" aria-labelledby="t-fotos">
+        <h2 id="t-fotos" class="bloque__titulo">Galería · Trabajo realizado en clase</h2>
+        <ul class="fotos">
+          {imagenes.map((img, n) => (
+            <li>
+              <button class="fotos__boton" type="button" data-indice={n} aria-label={`Ampliar imagen ${n + 1} de ${imagenes.length}`}>
+                <img src={img.src} alt={img.alt} loading="lazy" decoding="async" width="400" height="300" />
+              </button>
+            </li>
+          ))}
+        </ul>
+        <dialog class="visor" aria-label="Imagen ampliada">
+          <img class="visor__img" alt="" />
+          <div class="visor__controles">
+            <button class="boton boton--secundario boton--chico" type="button" data-mover="-1">← Anterior</button>
+            <button class="boton boton--primario boton--chico" type="button" data-cerrar>Cerrar</button>
+            <button class="boton boton--secundario boton--chico" type="button" data-mover="1">Siguiente →</button>
+          </div>
+        </dialog>
+        <script type="application/json" id="imagenes" set:html={JSON.stringify(imagenes)} />
+      </section>
+    )}
+
+    {s.prompts.length > 0 && (
+      <section class="bloque" id="prompts" aria-labelledby="t-prompts">
+        <h2 id="t-prompts" class="bloque__titulo">Prompts de la sesión</h2>
+        <ul class="prompts">
+          {s.prompts.map((p) => (
+            <li class="tarjeta tarjeta--borde prompt" id={`prompt-${p.codigo.toLowerCase()}`}>
+              <div class="prompt__cabeza">
+                <p class="etiqueta">{p.codigo === 'Extra' ? 'Plantilla extra' : `Plantilla ${p.codigo}`}</p>
+                <button class="boton boton--secundario boton--chico prompt__copiar" type="button">Copiar<span class="sr"> la plantilla {p.codigo}</span></button>
+              </div>
+              <h3 class="prompt__nombre">{p.etiqueta}</h3>
+              <pre class="prompt__texto">{p.texto}</pre>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <section class="bloque" aria-labelledby="t-construyeron" data-ocultable hidden={!hayPiezas}>
+      <h2 id="t-construyeron" class="bloque__titulo">Lo que construyeron</h2>
+      <Galeria sesion={s.numero} tuya={false} />
+    </section>
+
+    <nav class="vecinas" aria-label="Otras sesiones">
+      {anterior ? <a href={url(rutaSesion(anterior))}><span class="etiqueta">← Sesión {dosDigitos(anterior.numero)}</span>{anterior.titulo_corto}</a> : <span></span>}
+      {siguiente && <a class="vecinas__sig" href={url(rutaSesion(siguiente))}><span class="etiqueta">Sesión {dosDigitos(siguiente.numero)} →</span>{siguiente.titulo_corto}</a>}
+    </nav>
+  </article>
+</Base>
+
+<script>
+  // Copiar una plantilla al portapapeles
+  document.querySelectorAll('.prompt__copiar').forEach((boton) => {
+    boton.addEventListener('click', async () => {
+      const texto = boton.closest('.prompt').querySelector('.prompt__texto').textContent;
+      const original = boton.firstChild.textContent;
+      try {
+        await navigator.clipboard.writeText(texto);
+        boton.firstChild.textContent = 'Copiado';
+      } catch {
+        boton.firstChild.textContent = 'Selecciona y copia';
+      }
+      setTimeout(() => { boton.firstChild.textContent = original; }, 2000);
+    });
+  });
+
+  // Visor de imágenes con teclado
+  const datos = document.getElementById('imagenes');
+  if (datos) {
+    const imagenes = JSON.parse(datos.textContent);
+    const visor = document.querySelector('.visor');
+    const img = visor.querySelector('.visor__img');
+    let actual = 0;
+    const mostrar = (n) => {
+      actual = (n + imagenes.length) % imagenes.length;
+      img.src = imagenes[actual].src;
+      img.alt = imagenes[actual].alt;
+    };
+    document.querySelectorAll('.fotos__boton').forEach((b) =>
+      b.addEventListener('click', () => { mostrar(Number(b.dataset.indice)); visor.showModal(); })
+    );
+    visor.addEventListener('click', (e) => {
+      const mover = e.target.closest('[data-mover]');
+      if (mover) mostrar(actual + Number(mover.dataset.mover));
+      else if (e.target.closest('[data-cerrar]') || e.target === visor) visor.close();
+    });
+    visor.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') mostrar(actual + 1);
+      if (e.key === 'ArrowLeft') mostrar(actual - 1);
+    });
+  }
+</script>
+
+<style>
+  .detalle { max-width: 980px; display: flex; flex-direction: column; gap: 56px; }
+  .volver { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 700; text-decoration: none; align-self: flex-start; }
+  .detalle__cabeza { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: flex-end; margin-top: -24px; }
+  .detalle__numero { font-size: clamp(96px, 16vw, 200px); }
+  .detalle__titulos { display: flex; flex-direction: column; gap: 14px; flex: 1 1 420px; min-width: 0; }
+  .detalle__titulo { font-size: clamp(36px, 5.4vw, 64px); line-height: 0.95; }
+  .objetivo { display: flex; flex-direction: column; gap: 12px; }
+  .objetivo__texto { font-size: clamp(20px, 2.2vw, 24px); line-height: 1.4; }
+  .bloque { display: flex; flex-direction: column; gap: 20px; }
+  .bloque[hidden] { display: none; }
+  .bloque__titulo { font-size: clamp(26px, 3vw, 34px); font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  .bloque__texto { white-space: pre-line; color: var(--texto-2); font-size: 18px; line-height: 1.6; max-width: 820px; }
+  .actividad { border-left: 4px solid var(--acento); padding-left: 24px; color: var(--texto); }
+  .materiales { list-style: none; padding: 0; border-top: 1px solid var(--linea); }
+  .materiales li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--linea); }
+  .materiales__nombre { font-weight: 700; }
+  .fotos { list-style: none; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+  .fotos__boton { display: block; width: 100%; padding: 0; border: 0; border-radius: 20px; overflow: hidden; cursor: zoom-in; background: var(--superficie); }
+  .fotos__boton img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .visor { max-width: min(1100px, 94vw); padding: 16px; border: 0; border-radius: var(--radio); background: var(--superficie); color: var(--texto); }
+  .visor::backdrop { background: rgb(15 28 22 / 0.9); }
+  .visor__img { max-height: 76vh; margin: 0 auto; border-radius: 16px; }
+  .visor__controles { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px; }
+  .prompts { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .prompt { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 96px; }
+  .prompt:target { border-color: var(--acento); }
+  .prompt__cabeza { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .prompt__nombre { font-size: 22px; font-weight: 700; line-height: 1.15; }
+  .prompt__texto { margin: 0; white-space: pre-wrap; font-family: inherit; font-size: 17px; line-height: 1.55; color: var(--texto-2); }
+  .vecinas { display: flex; justify-content: space-between; gap: 16px; padding-top: 32px; border-top: 1px solid var(--linea); }
+  .vecinas a { display: flex; flex-direction: column; gap: 6px; min-height: 44px; color: var(--texto); text-decoration: none; font-weight: 700; font-size: 20px; }
+  .vecinas a:hover { color: var(--acento); }
+  .vecinas__sig { text-align: right; margin-left: auto; }
+</style>

@@ -1,0 +1,54 @@
+---
+// Galería de la muestra. Opción A: lee la hoja publicada como CSV (config.galeria_csv) en el navegador.
+// Opción B (y respaldo sin red): las piezas aprobadas de galeria.json, que ya vienen en el HTML.
+import { htmlPieza } from '../lib/pieza.js';
+import { galeria, config } from '../lib/datos.js';
+
+const { sesion = null, tuya = true } = Astro.props;
+const piezas = galeria.filter((p) => sesion == null || p.sesion === sesion);
+const formulario = /^https?:\/\//.test(config.formulario_galeria) ? config.formulario_galeria : null;
+const Tuya = formulario ? 'a' : 'div';
+---
+<div class="rejilla galeria" data-csv={config.galeria_csv || undefined} data-sesion={sesion ?? undefined}>
+  <Fragment set:html={piezas.map(htmlPieza).join('')} />
+  {tuya && (
+    <Tuya class="pieza pieza--tuya galeria__tuya" {...(formulario ? { href: formulario, target: '_blank', rel: 'noopener' } : {})}>
+      <div class="pieza__cabeza"><span class="pieza__tipo">Tu pieza</span><span class="pieza__sesion">Sesiones 13 y 14</span></div>
+      <p class="pieza__titulo">Aquí va la tuya</p>
+      <p class="pieza__meta">Envía el enlace de lo que construiste con el formulario y, cuando la docente lo revise, entra a la galería</p>
+      <p class="pieza__accion">{formulario ? <>Enviar mi enlace <span aria-hidden="true">↗</span><span class="sr">(abre en otra pestaña)</span></> : '[Enlace del formulario por publicar]'}</p>
+    </Tuya>
+  )}
+</div>
+
+<script>
+  import { htmlPieza } from '../lib/pieza.js';
+  import { piezasDesdeCSV } from '../lib/csv.js';
+
+  const CLAVE = 'acude-galeria-csv';
+
+  function pintar(rejilla, piezas) {
+    const sesion = rejilla.dataset.sesion ? Number(rejilla.dataset.sesion) : null;
+    const lista = piezas.filter((p) => sesion == null || p.sesion === sesion);
+    if (!lista.length) return;
+    rejilla.querySelectorAll('.pieza:not(.galeria__tuya)').forEach((n) => n.remove());
+    rejilla.insertAdjacentHTML('afterbegin', lista.map(htmlPieza).join(''));
+    rejilla.closest('[data-ocultable]')?.removeAttribute('hidden');
+  }
+
+  async function cargar(rejilla) {
+    const csv = rejilla.dataset.csv;
+    let texto = null;
+    try {
+      const res = await fetch(csv, { cache: 'no-cache' });
+      if (!res.ok) throw new Error(String(res.status));
+      texto = await res.text();
+      try { localStorage.setItem(CLAVE, texto); } catch {}
+    } catch {
+      try { texto = localStorage.getItem(CLAVE); } catch {}
+    }
+    if (texto) pintar(rejilla, piezasDesdeCSV(texto));
+  }
+
+  document.querySelectorAll('.galeria[data-csv]').forEach(cargar);
+</script>

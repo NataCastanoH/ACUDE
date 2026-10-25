@@ -1,0 +1,28 @@
+{
+  "base44": "https://media.base44.com/files/public/6ac3214c0f2cc64d07ad7788/",
+  "nota": "Manifiesto de materiales. 'base44' es el nombre del archivo en Base44 (null si nunca se subió o el enlace está roto), 'local' el nombre dentro de DOCUMENTOS ACUDE.zip. Cuando existen las dos copias se publica la local.",
+  "archivos": [
+    { "sesion": 1,  "tipo": "presentacion", "base44": "50a0cc8ad_S1HerramientasdeIAparalavidauniversitaria-Todoslosgrupos.pdf",  "local": "S1 Herramientas de IA para la vida universitaria - Todos los grupos.pdf" },
+    { "sesion": 2,  "tipo": "presentacion", "base44": "ee45aba0b_S2HerramientasdeIAparalavidauniversitaria-Todoslosgrupos.pdf",  "local": "S2 Herramientas de IA para la vida universitaria - Todos los grupos.pdf" },
+    { "sesion": 3,  "tipo": "presentacion", "base44": "29dcb931e_S3HerramientasdeIAparalavidauniversitaria-Todoslosgrupos.pdf",  "local": "S3 Herramientas de IA para la vida universitaria - Todos los grupos.pdf" },
+    { "sesion": 3,  "tipo": "bitacora",     "base44": "be97f0910_PasteldePromptsSesion3.pdf",                                     "local": "Pastel de Prompts Sesión 3.pdf" },
+    { "sesion": 4,  "tipo": "presentacion", "base44": "454f31f62_S4HerramientasdeIAparalavidauniversitaria-Todoslosgrupos.pdf",  "local": "S4 Herramientas de IA para la vida universitaria - Todos los grupos.pdf" },
+    { "sesion": 4,  "tipo": "bitacora",     "base44": "04662c352_BitacoraSesion04Bloque.pdf",                                     "local": "Bitácora Sesión 04 Bloque.pdf" },
+    { "sesion": 5,  "tipo": "presentacion", "base44": "0bb4121af_S5HerramientasdeIAparalavidauniversitaria-Todoslosgrupos.pdf",  "local": "S5 Herramientas de IA para la vida universitaria - Todos los grupos.pdf" },
+    { "sesion": 5,  "tipo": "bitacora",     "base44": "5f24d1c6a_BitacoraSesion05Bloque.pdf",                                     "local": "Bitácora Sesión 05 Bloque.pdf" },
+    { "sesion": 6,  "tipo": "presentacion", "base44": "f22f73bad_S6HerramientasdeIAparalavidauniversitaria-Todoslosgrupos.pdf",  "local": "S6 Herramientas de IA para la vida universitaria - Todos los grupos.pdf" },
+    { "sesion": 6,  "tipo": "bitacora",     "base44": "da5e1ba0c_BitacoraSesion06Bloque.pdf",                                     "local": "Bitácora Sesión 06 Bloque.pdf" },
+    { "sesion": 7,  "tipo": "presentacion", "base44": null,                                                                       "local": "S7 Herramientas de IA para la vida universitaria - Todos los grupos.pdf" },
+    { "sesion": 7,  "tipo": "bitacora",     "base44": "15084bc83_BitacoraSesion07Bloque.pdf",                                     "local": "Bitácora Sesión 07 Bloque.pdf" },
+    { "sesion": 8,  "tipo": "presentacion", "base44": null,                                                                       "local": "S8 Herramientas de IA para la vida universitaria - Todos los grupos.pdf" },
+    { "sesion": 8,  "tipo": "bitacora",     "base44": "70de1dbcd_BitacoraSesion08Bloque.pdf",                                     "local": "Bitácora Sesión 08 Bloque.pdf" },
+    { "sesion": 9,  "tipo": "presentacion", "base44": null,                                                                       "local": "S9 Herramientas de IA para la vida universitaria - Todos los grupos.pdf" },
+    { "sesion": 9,  "tipo": "bitacora",     "base44": "d81d264cf_BitacoraSesion09Bloque.pdf",                                     "local": "Bitácora Sesión 09 Bloque.pdf" },
+    { "sesion": 10, "tipo": "presentacion", "base44": "b62ca9b60_S10HerramientasdeIAparalavidauniversitaria-Todoslosgrupos.pdf", "local": "S10 Herramientas de IA para la vida universitaria - Todos los grupos.pdf" },
+    { "sesion": 10, "tipo": "bitacora",     "base44": "01b585c58_BitacoraSesion10Bloque.pdf",                                     "local": "Bitácora Sesión 10 Bloque.pdf" },
+    { "sesion": 11, "tipo": "presentacion", "base44": "b002075ac_S11HerramientasdeIAparalavidauniversitaria-Todoslosgrupos.pdf", "local": "S11 Herramientas de IA para la vida universitaria - Todos los grupos.pdf" },
+    { "sesion": 11, "tipo": "bitacora",     "base44": "99b26243f_BitacoraSesion11Bloque.pdf",                                     "local": "Bitácora Sesión 11 Bloque.pdf" },
+    { "sesion": 12, "tipo": "presentacion", "base44": null,                                                                       "local": "S12 Herramientas de IA para la vida universitaria - Todos los grupos.pdf" },
+    { "sesion": 12, "tipo": "bitacora",     "base44": "025cfa181_BitacoraSesion12Bloque.pdf",                                     "local": "Bitácora Sesión 12 Bloque.pdf" }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "nombre": "Herramientas de IA para la Vida Universitaria",
+  "descripcion": "Muestra cultural del ACUDE, Tecnológico de Antioquia: quince sesiones, seis grupos y lo que construimos con IA desde el celular y con cuentas gratis.",
+  "hero": {
+    "etiqueta": "Muestra cultural · Herramientas de IA para la vida universitaria · Tecnológico de Antioquia",
+    "titulo": "Esto lo hicimos nosotros",
+    "destacado": "nosotros",
+    "bajada": "Quince sesiones, seis grupos, un celular y cuentas gratis: lo que un curso de Bienestar puede construir cuando la IA deja de dar miedo"
+  },
+  "recorrido": {
+    "etiqueta": "El recorrido",
+    "titulo": "De preguntar a construir, en 15 pasos",
+    "texto": "Empezamos escribiendo un prompt con miedo y terminamos pidiéndole a la IA que programara por nosotros"
+  },
+  "galeria": {
+    "etiqueta": "La galería",
+    "titulo": "Cosas que funcionan, hechas por gente que no programa",
+    "texto": "Cada pieza abre desde un enlace, se hizo desde un celular con una cuenta gratis y es de la materia, el trabajo o el emprendimiento de quien la hizo"
+  },
+  "prompts": {
+    "etiqueta": "El muro de prompts",
+    "titulo": "Lo que le dijimos a la IA para que funcionara",
+    "texto": "Prompts reales del curso, tomados de las bitácoras de cada sesión, con su código para encontrarlos"
+  },
+  "voces": {
+    "etiqueta": "Las voces",
+    "titulo": "Lo que dijimos en el chat"
+  },
+  "decalogo": {
+    "etiqueta": "Nuestro decálogo",
+    "titulo": "Diez reglas que escribimos nosotros",
+    "texto": "Se construye en la última sesión, una regla por persona en el chat, y queda aquí para el próximo semestre"
+  },
+  "asistente": {
+    "etiqueta": "El asistente del curso",
+    "titulo": "Pregúntale al ACUDE",
+    "texto": "Un asistente cargado con las bitácoras de las sesiones: pregúntale por un prompt, una herramienta o una técnica, gratis y desde el celular"
+  },
+  "podcast": {
+    "etiqueta": "El podcast",
+    "titulo": "Escucha el curso en 10 minutos"
+  },
+  "caja": {
+    "etiqueta": "La caja de herramientas",
+    "titulo": "Las 15 sesiones en una sola página",
+    "texto": "Herramienta, para qué sirve y el truco de una línea, para que no se te olvide nada el próximo semestre"
+  },
+  "reto": {
+    "etiqueta": "Reto comunitario",
+    "texto": "personas fuera del curso aprendieron un truco porque alguien de aquí se lo enseñó"
+  },
+  "ficha": [
+    "ACUDE Herramientas de IA para la vida universitaria",
+    "Bienestar Universitario · Tecnológico de Antioquia",
+    "Semestre 2026-2 · 15 sesiones · 6 grupos",
+    "Docente: Natalia Castaño Hoyos"
+  ],
+  "sobre_el_curso": {
+    "etiqueta": "Sobre el curso",
+    "titulo": "Herramientas de IA para la Vida Universitaria",
+    "parrafos": [
+      "¿Y si la IA dejara de ser una curiosidad y se convirtiera en tu mejor aliada para estudiar? Este programa del Tecnológico de Antioquia es un espacio práctico, sin notas ni exámenes, donde semana a semana vas a aprender a usar las herramientas de inteligencia artificial de forma útil, crítica y honesta en tu vida académica: entender mejor lo que lees, organizar tu tiempo, investigar con fuentes confiables, escribir con tu propia voz y crear material de estudio que de verdad te sirva.",
+      "Son 15 sesiones semanales de dos horas, con talleres, retos, juegos y debates que parten de situaciones reales de tu vida universitaria. No necesitas experiencia previa ni conocimientos técnicos, solo ganas de explorar y de pensar por tu cuenta: la IA es tu asistente, no tu reemplazo. Al final del curso tendrás algo que te queda para siempre: tu kit personal de estudio con IA, armado a tu medida y útil en cualquier carrera."
+    ]
+  },
+  "sobre_la_docente": {
+    "etiqueta": "Sobre la docente",
+    "nombre": "Natalia Castaño Hoyos",
+    "texto": "Docente del programa ACUDE en el Tecnológico de Antioquia. Me interesa acompañar a los estudiantes en el uso responsable y crítico de las herramientas de inteligencia artificial, no como atajo, sino como extensión de su pensamiento académico. Este curso reúne las sesiones, materiales y retos que vamos construyendo juntos.",
+    "foto": null
+  },
+  "cinta_final": ["Esto lo hicimos nosotros", "Gratis", "Desde el celular", "Sin saber programar", "Pensar sigue siendo nuestro trabajo"],
+  "pie": {
+    "linea": "Programa ACUDE · Tecnológico de Antioquia",
+    "derecha": "Sesiones, materiales y retos prácticos."
+  }
+}

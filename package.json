@@ -1,0 +1,20 @@
+{
+  "name": "acude",
+  "private": true,
+  "type": "module",
+  "description": "Muestra cultural del ACUDE · Herramientas de IA para la vida universitaria · Tecnológico de Antioquia",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "descargar-materiales": "node scripts/descargar-materiales.mjs",
+    "caja-herramientas": "node scripts/caja-herramientas.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "5.3.0",
+    "astro": "7.4.2"
+  }
+}

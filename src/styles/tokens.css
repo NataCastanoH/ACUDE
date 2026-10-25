@@ -1,0 +1,18 @@
+/* Identidad visual del ACUDE (sección 3 del brief). No cambiar sin revisar contraste. */
+:root {
+  --fondo: #0F1C16;
+  --superficie: #182A22;
+  --acento: #D7F65A;
+  --texto: #F4F7F1;
+  --texto-2: #A9B8AF;
+  --linea: #2A3F35;
+  --sobre-acento: #0F1C16;
+  --verde-apagado: #3D5248;
+  --contorno: #1F352B;
+
+  --fuente: 'Bricolage Grotesque', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --radio: 28px;
+  --ancho: 1240px;
+  --margen: clamp(16px, 4vw, 24px);
+  --aire: clamp(96px, 10vw, 120px);
+}

@@ -1,0 +1,94 @@
+---
+import Simbolo from './Simbolo.astro';
+import { url } from '../lib/url.js';
+import { config } from '../lib/datos.js';
+
+const { actual = '' } = Astro.props;
+const enlaces = [
+  { texto: 'Inicio', href: url(''), id: 'inicio' },
+  { texto: 'Recorrido', href: url('recorrido/'), id: 'recorrido' },
+  { texto: 'Galería', href: url('#galeria'), id: 'galeria' },
+  { texto: 'Herramientas', href: url('herramientas/'), id: 'herramientas' },
+];
+const clase = config.boton_principal === 'clase' && config.enlace_teams;
+const boton = clase
+  ? { texto: 'Entrar a la clase', href: config.enlace_teams, externo: true }
+  : { texto: 'Nuestro decálogo', href: url('#decalogo'), externo: false };
+---
+<header class="encabezado">
+  <div class="contenedor encabezado__fila">
+    <a class="marca" href={url('')} aria-label="ACUDE, ir al inicio">
+      <Simbolo tamano={36} />
+      <span class="marca__palabra" aria-hidden="true">ACUDE<span class="marca__cursor"></span></span>
+    </a>
+    <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu-principal">
+      <span class="sr">Menú</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="menu-boton__abrir" d="M3 7h18M3 12h18M3 17h18"/><path class="menu-boton__cerrar" d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <nav id="menu-principal" class="menu" aria-label="Principal">
+      <ul>
+        {enlaces.map((e) => (
+          <li><a href={e.href} aria-current={actual === e.id ? 'page' : undefined}>{e.texto}</a></li>
+        ))}
+        <li>
+          <a class="boton boton--primario boton--chico" href={boton.href} {...(boton.externo ? { target: '_blank', rel: 'noopener' } : {})}>{boton.texto}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .encabezado {
+    position: sticky; top: 0; z-index: 50;
+    background: rgb(15 28 22 / 0.92); border-bottom: 1px solid var(--linea);
+    backdrop-filter: blur(8px);
+  }
+  .encabezado__fila { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
+  .marca { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: var(--texto); text-decoration: none; }
+  .marca__palabra { display: none; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+  .marca__cursor {
+    display: inline-block; width: 0.16em; height: 0.78em; margin-left: 0.08em; border-radius: 2px;
+    background: var(--acento); vertical-align: -0.04em; animation: parpadeo 1s steps(1) infinite;
+  }
+  @keyframes parpadeo { 50% { opacity: 0; } }
+  @media (min-width: 640px) { .marca__palabra { display: inline-block; } }
+
+  .menu ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 28px; }
+  .menu a:not(.boton) {
+    display: inline-flex; align-items: center; min-height: 44px;
+    color: var(--texto-2); font-size: 16px; font-weight: 600; text-decoration: none;
+  }
+  .menu a:not(.boton):hover, .menu a[aria-current='page'] { color: var(--texto); }
+  .menu a[aria-current='page'] { text-decoration: underline; text-decoration-color: var(--acento); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+
+  .menu-boton {
+    display: none; width: 48px; height: 48px; align-items: center; justify-content: center;
+    border: 2px solid var(--linea); border-radius: 999px; background: transparent; color: var(--texto); cursor: pointer;
+  }
+  .menu-boton__cerrar { display: none; }
+  .menu-boton[aria-expanded='true'] .menu-boton__abrir { display: none; }
+  .menu-boton[aria-expanded='true'] .menu-boton__cerrar { display: inline; }
+
+  @media (max-width: 859px) {
+    .menu-boton { display: inline-flex; }
+    .menu { display: none; position: absolute; inset: 100% 0 auto 0; background: var(--fondo); border-bottom: 1px solid var(--linea); }
+    .menu.abierto { display: block; }
+    .menu ul { flex-direction: column; align-items: stretch; gap: 4px; padding: 12px var(--margen) 24px; }
+    .menu a:not(.boton) { font-size: 20px; min-height: 52px; }
+    .menu .boton { margin-top: 12px; width: 100%; min-height: 52px; }
+  }
+</style>
+
+<script>
+  const boton = document.querySelector('.menu-boton');
+  const menu = document.getElementById('menu-principal');
+  const cerrar = () => { boton.setAttribute('aria-expanded', 'false'); menu.classList.remove('abierto'); };
+  boton.addEventListener('click', () => {
+    const abierto = boton.getAttribute('aria-expanded') === 'true';
+    boton.setAttribute('aria-expanded', String(!abierto));
+    menu.classList.toggle('abierto', !abierto);
+  });
+  menu.addEventListener('click', (e) => { if (e.target.closest('a')) cerrar(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.classList.contains('abierto')) { cerrar(); boton.focus(); } });
+</script>

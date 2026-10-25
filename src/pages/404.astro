@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/url.js';
+---
+<Base titulo="Página no encontrada">
+  <section class="seccion contenedor no-encontrada">
+    <p class="numero" aria-hidden="true">404</p>
+    <h1 class="titulo titulo--2" id="mensaje">Página <span class="destacado">no encontrada</span></h1>
+    <p class="intro">El enlace puede estar mal escrito o la página cambió de lugar.</p>
+    <div class="botones">
+      <a class="boton boton--primario" href={url('')}>Volver al inicio</a>
+      <a class="boton boton--secundario" href={url('recorrido/')}>Ver el recorrido</a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // GitHub Pages sirve esta misma página para cualquier ruta; si era una sesión, se dice así
+  if (/\/sesiones\//.test(location.pathname)) {
+    document.getElementById('mensaje').innerHTML = 'Sesión <span class="destacado">no encontrada</span>';
+    document.title = 'Sesión no encontrada · ACUDE';
+  }
+</script>
+
+<style>
+  .no-encontrada { display: flex; flex-direction: column; gap: 28px; align-items: flex-start; }
+  .numero { font-size: clamp(120px, 24vw, 300px); }
+</style>
