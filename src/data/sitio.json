@@ -67,7 +67,8 @@
     "etiqueta": "Sobre la docente",
     "nombre": "Natalia Castaño Hoyos",
     "texto": "Docente del programa ACUDE en el Tecnológico de Antioquia. Me interesa acompañar a los estudiantes en el uso responsable y crítico de las herramientas de inteligencia artificial, no como atajo, sino como extensión de su pensamiento académico. Este curso reúne las sesiones, materiales y retos que vamos construyendo juntos.",
-    "foto": null
+    "foto": "docente/natalia-castano-hoyos.webp",
+    "foto_alt": "Caricatura de Natalia Castaño Hoyos"
   },
   "cinta_final": ["Esto lo hicimos nosotros", "Gratis", "Desde el celular", "Sin saber programar", "Pensar sigue siendo nuestro trabajo"],
   "pie": {

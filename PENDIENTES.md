@@ -33,7 +33,6 @@ Todo lo que el sitio muestra hoy entre corchetes, o que necesita una decisión t
 
 ## Sobre la docente
 
-- [ ] Foto real (cuadrada, 480 × 480 px o más) en `public/marca/` o `public/galeria/` y la ruta en `sitio.json` → `sobre_la_docente.foto`, o decidir que va sin foto
 - [ ] Decidir sobre la redacción neutra del texto: el brief pide dejarlo tal cual y así quedó, pero dice «acompañar a los estudiantes» y «construyendo juntos»
 
 ## Para revisar (los escribí yo, a partir de fuentes reales)

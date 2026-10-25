@@ -190,7 +190,7 @@ const fuentePrompt = (p) => [p.codigo && `Plantilla ${p.codigo}`, p.sesion && `S
       </div>
       <div class="sobre__docente">
         {sitio.sobre_la_docente.foto
-          ? <img class="sobre__foto" src={url(sitio.sobre_la_docente.foto)} alt={`Retrato de ${sitio.sobre_la_docente.nombre}`} width="480" height="480" loading="lazy" decoding="async" />
+          ? <img class="sobre__foto" src={url(sitio.sobre_la_docente.foto)} alt={sitio.sobre_la_docente.foto_alt ?? `Retrato de ${sitio.sobre_la_docente.nombre}`} width="560" height="560" loading="lazy" decoding="async" />
           : <div class="sobre__foto sobre__foto--vacia"><span>[Foto de la docente, 480 × 480 px]</span></div>}
         <div class="sobre__docente-texto">
           <p class="etiqueta">{sitio.sobre_la_docente.etiqueta}</p>
@@ -304,7 +304,7 @@ const fuentePrompt = (p) => [p.codigo && `Plantilla ${p.codigo}`, p.sesion && `S
     border-block: 1px solid var(--linea); grid-template-columns: 1fr;
   }
   @media (min-width: 760px) { .sobre__docente { grid-template-columns: 280px 1fr; } }
-  .sobre__foto { width: 100%; max-width: 280px; aspect-ratio: 1; border-radius: var(--radio); object-fit: cover; }
+  .sobre__foto { width: 100%; max-width: 280px; height: auto; aspect-ratio: 1; border-radius: var(--radio); object-fit: cover; background: var(--acento); }
   .sobre__foto--vacia {
     display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center;
     background: var(--superficie); border: 2px dashed var(--linea); color: var(--texto-2); font-size: 15px;
