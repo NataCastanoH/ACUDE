@@ -6,6 +6,7 @@
 
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { PDFDocument } from 'pdf-lib';
 import { imprimirPDF, raiz, urlFuente as fuente } from './imprimir-pdf.mjs';
 
 const sesiones = JSON.parse(await readFile(join(raiz, 'src/data/sesiones.json'), 'utf8')).sort((a, b) => a.numero - b.numero);
@@ -30,7 +31,7 @@ const html = `<!doctype html>
   * { box-sizing: border-box; }
   body { margin: 0; font-family: 'Bricolage Grotesque', sans-serif; color: #0F1C16; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .hoja { width: 210mm; height: 297mm; display: flex; flex-direction: column; }
-  header { background: #0F1C16; color: #F4F7F1; padding: 11mm 12mm 9mm; display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; }
+  header { background: #0F1C16; color: #F4F7F1; padding: 10mm 12mm 8mm; display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; }
   .marca { display: flex; align-items: center; gap: 3mm; font-weight: 800; font-size: 13pt; letter-spacing: -0.02em; }
   .marca i { display: inline-block; width: 8mm; height: 8mm; border-radius: 26%; background: #D7F65A; position: relative; }
   .marca i::after { content: ''; position: absolute; left: 42%; top: 22%; width: 16%; height: 56%; border-radius: 1px; background: #0F1C16; }
@@ -41,7 +42,7 @@ const html = `<!doctype html>
   table { width: 100%; border-collapse: collapse; margin: 5mm 0 0; }
   main { flex: 1; padding: 0 12mm; }
   th { text-align: left; font-size: 6.5pt; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #3D5248; padding: 0 2mm 2mm; border-bottom: 1.5pt solid #0F1C16; }
-  td { padding: 2.1mm 2mm; border-bottom: 0.5pt solid #C9D3CC; font-size: 8.4pt; line-height: 1.3; vertical-align: top; }
+  td { padding: 1.6mm 2mm; border-bottom: 0.5pt solid #C9D3CC; font-size: 8.4pt; line-height: 1.3; vertical-align: top; }
   td strong { font-size: 9pt; font-weight: 800; }
   .h { color: #3D5248; }
   .t { font-weight: 600; }
@@ -68,4 +69,9 @@ const html = `<!doctype html>
 </div></body></html>`;
 
 await imprimirPDF(html, salida);
-console.log(`Listo: ${salida}`);
+const paginas = (await PDFDocument.load(await readFile(salida))).getPageCount();
+console.log(`Listo: ${salida} (${paginas} ${paginas === 1 ? 'página' : 'páginas'})`);
+if (paginas > 1) {
+  console.error('Aviso: la caja pasó de una página. Acorta los textos más largos del campo "caja" en sesiones.json.');
+  process.exitCode = 1;
+}
