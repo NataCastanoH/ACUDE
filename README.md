@@ -99,7 +99,7 @@ Un MP3 de 10 minutos a 64 kbps pesa unos 5 MB; no se descarga hasta que alguien 
 
 ## Trabajar en tu computador
 
-Necesitas [Node.js](https://nodejs.org) 22 o más reciente.
+Necesitas [Node.js](https://nodejs.org) 24 (o 22.23.4 en adelante).
 
 ```bash
 npm install          # la primera vez
