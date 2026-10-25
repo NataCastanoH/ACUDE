@@ -4,7 +4,6 @@ Todo lo que el sitio muestra hoy entre corchetes, o que necesita una decisión t
 
 ## Materiales
 
-- [ ] Bitácoras de las sesiones 1 y 2 → `public/materiales/S01-bitacora.pdf`, `S02-bitacora.pdf` y la ruta en `sesiones.json`
 - [ ] Todo lo de las sesiones 13, 14 y 15 (presentación, bitácora, video si hay)
 - [ ] Fotos de clase por sesión (hoy todas las galerías de sesión están vacías y no se muestran)
 - [ ] Opcional: la presentación de la sesión 1 pesa 5,3 MB; si la exportas comprimida, baja más rápido en celular
