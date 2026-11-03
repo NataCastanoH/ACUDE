@@ -177,6 +177,12 @@ const fuentePrompt = (p) => [p.codigo && `Plantilla ${p.codigo}`, p.sesion && `S
           ? <a class="boton boton--primario boton--chico" href={caja} download>Descargar la caja (PDF)</a>
           : <p class="texto-2">[PDF por generar con npm run caja-herramientas]</p>}
       </div>
+      <div class="tarjeta">
+        <p class="etiqueta">Muestra cultural</p>
+        <h3 class="cierre__titulo">El juego que construimos</h3>
+        <p class="texto-2">Lo estamos construyendo entre los seis grupos, juega y comparte</p>
+        <a class="boton boton--primario boton--chico" href={url('juego/')}>Jugar <span aria-hidden="true">→</span></a>
+      </div>
       {bitacora && (
         <div class="tarjeta">
           <p class="etiqueta">La bitácora completa</p>

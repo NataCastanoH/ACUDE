@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Vuelta · ACUDE</title>
+<meta name="description" content="Juego sobre diversidad, género e inclusión en el TdeA, construido clase a clase por estudiantes del ACUDE Herramientas de IA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================
+   CONFIGURACIÓN: lo que cada grupo cambia vive aquí arriba
+   ========================================================== */
+</style>
+<script>
+const CONFIG = {
+  nombre: "La Vuelta",                      // Martes: se vota en el chat
+  personaje: "Parcerx",                     // Sábado 10-12: personaje y tono
+  bienvenida: "No te pregunto lo que sabes\nte pregunto lo que harías",
+  version: "v0",
+  creditos: [],                             // cada grupo agrega su línea, ej: "Martes · nombre y mitos"
+  // Hoja de Google con el contenido (compartida como "cualquier persona con el enlace puede ver")
+  // Pega aquí solo el ID que va entre /d/ y /edit en el enlace de la hoja
+  hojaId: "https://docs.google.com/spreadsheets/d/1j8DROsBWiXomWmSSGZbKG4POEliTFJRNVO8F-CEJ28k/edit?usp=sharing",
+  hojaPestana: "contenido",
+  formularioPregunta: "",                   // enlace del formulario "Deja tu pregunta"
+  funciones: {
+    progreso: false,      // Miércoles: barra de progreso
+    compartir: false,     // Jueves: compartir el perfil por WhatsApp
+    buscador: false,      // Viernes: buscador en Pregúntale
+    accesible: false,     // Sábado 10-12: letra grande y alto contraste
+    dejaPregunta: false   // Sábado 12-2: botón "Deja tu pregunta"
+  }
+};
+
+/* Contenido semilla, todo por validar con Bienestar Universitario
+   Mismas columnas que la hoja de Google:
+   tipo | texto | opciones | correcta | explicacion | ruta | fuente | estado | grupo
+   Separador dentro de una celda: ||  */
+const SEMILLA = [
+  {tipo:"mito", texto:"En el TdeA existe una política de derechos humanos, diversidad y género", correcta:"derecho", explicacion:"Existe y está firmada, es la Resolución Académica 003 de 2023", ruta:"Pluridiversos, Bienestar Universitario", fuente:"Res. Académica 003 de 2023, TdeA", estado:"por validar"},
+  {tipo:"mito", texto:"Una broma no cuenta como acoso si nadie se quejó", correcta:"mito", explicacion:"Que nadie se queje no quiere decir que no duela, muchas personas callan por miedo o por no saber a dónde ir", ruta:"Si te pasó o lo viste, Bienestar te orienta", fuente:"Ley 1257 de 2008", estado:"por validar"},
+  {tipo:"mito", texto:"Si tengo una discapacidad puedo pedir ajustes razonables para presentar un examen", correcta:"derecho", explicacion:"Es un derecho y el TdeA tiene una ruta de ajustes razonables con formulario en línea", ruta:"Ruta de ajustes razonables, Pluridiversos", fuente:"Ley 1618 de 2013 y Res. 11 de 2016, TdeA", estado:"por validar"},
+  {tipo:"mito", texto:"Los temas de género solo le importan a las mujeres", correcta:"mito", explicacion:"La equidad de género es de todas las personas, también de quien hoy no se siente afectado", ruta:"Oferta de Pluridiversos", fuente:"Res. Académica 003 de 2023, TdeA", estado:"por validar"},
+  {tipo:"mito", texto:"Si el acoso fue por Teams o WhatsApp no cuenta porque no fue en la universidad", correcta:"mito", explicacion:"Lo virtual también es la universidad, los lineamientos de educación superior incluyen lo que pasa en entornos digitales", ruta:"Ruta TdeA sin Violencias Basadas en Género", fuente:"Res. 14466 de 2022, MinEducación", estado:"por validar"},
+  {tipo:"mito", texto:"Pluridiversos también atiende a estudiantes de las sedes y regiones", correcta:"derecho", explicacion:"El programa es para toda la comunidad TdeA y sus servicios se solicitan en línea", ruta:"Formularios de Pluridiversos", fuente:"Página de Pluridiversos, TdeA", estado:"por validar"},
+
+  {tipo:"dilema", texto:"En el grupo de WhatsApp de la materia alguien se burla del acento de un compañero de Vegachí\n¿Qué haces?", opciones:"Le escribo por privado al compañero para ver cómo está||Respondo en el grupo: \"parce, ese chiste no da\"||Leo, sigo, pero me quedo pensando", correcta:"Acompaña||Transforma||Observa", explicacion:"Le cambias la noche a alguien, a veces eso basta para que no se sienta solo||El chiste pierde fuerza cuando alguien lo nombra con calma, otros se animan a escribir lo mismo||Notarlo ya es un paso, la próxima vez puede que digas algo", ruta:"Regionalismos y expresiones culturales son parte de la inclusión en el TdeA", fuente:"Res. Académica 002 de 2023, TdeA", estado:"por validar"},
+  {tipo:"dilema", texto:"Un compañero pidió que lo llamen por su nombre identitario y un profe insiste en el nombre de la lista\n¿Qué haces?", opciones:"Lo llamo siempre por su nombre, aunque el profe no lo haga||Le pregunto si quiere apoyo para hablarlo con el profe o con Bienestar||En clase no digo nada, pero después lo saludo por su nombre", correcta:"Transforma||Activa||Acompaña", explicacion:"Cuando el grupo usa su nombre, el nombre se vuelve normal para todos||Preguntar primero respeta su decisión y le abre una ruta real||Un saludo con su nombre le dice que alguien lo ve", ruta:"Pluridiversos, lineamiento de nombre identitario por confirmar", fuente:"Res. Académica 003 de 2023, TdeA", estado:"por validar"},
+  {tipo:"dilema", texto:"En el trabajo en grupo, cada idea que propone una compañera la repite un compañero y a él sí le hacen caso\n¿Qué haces?", opciones:"Digo: \"como propuso ella hace un momento…\"||Hablo con ella después y le pregunto cómo lo vive||Me doy cuenta y lo anoto para estar pendiente", correcta:"Transforma||Acompaña||Observa", explicacion:"Devolver el crédito en voz alta cambia cómo escucha el grupo||Saber que alguien lo notó le quita peso a la situación||Ver el patrón es lo que permite cortarlo después", ruta:"Equidad de género en espacios académicos", fuente:"Res. Académica 003 de 2023, TdeA", estado:"por validar"},
+  {tipo:"dilema", texto:"Alguien te cuenta que un docente le escribe por fuera de clase y la incomoda\n¿Qué es lo primero que haces?", opciones:"Escucho sin juzgar y le pregunto qué necesita||Le cuento que existe la ruta TdeA sin Violencias Basadas en Género y le ofrezco acompañarla||Le pido consejo a alguien de confianza para saber qué hacer", correcta:"Acompaña||Activa||Observa", explicacion:"Escuchar primero es lo que más ayuda, la decisión de qué hacer es de ella||Conocer la ruta y ofrecer compañía hace que activarla sea menos difícil||Pedir consejo está bien, recuerda que la historia es de ella y ella decide con quién se comparte", ruta:"Ruta TdeA sin Violencias Basadas en Género, Activa la ruta", fuente:"Res. 14466 de 2022, MinEducación", estado:"por validar"},
+
+  {tipo:"perfil", texto:"Observa", explicacion:"Empiezas a notar lo que otros dejan pasar, y todo cambio empieza por ahí", opciones:"Mañana fíjate en quién habla menos en tu clase", estado:"por validar"},
+  {tipo:"perfil", texto:"Acompaña", explicacion:"Sabes escuchar, y eso hace que la gente no se sienta sola", opciones:"Mañana escríbele a alguien que no ha vuelto a clase", estado:"por validar"},
+  {tipo:"perfil", texto:"Activa", explicacion:"Conoces la ruta y la usas, contigo nadie se queda sin saber a dónde ir", opciones:"Mañana guarda en tu celular el enlace de Pluridiversos", estado:"por validar"},
+  {tipo:"perfil", texto:"Transforma", explicacion:"Cambias el ambiente a tu alrededor, donde estás, la gente se siente más libre", opciones:"Mañana comparte este juego con tu grupo de la materia", estado:"por validar"},
+
+  {tipo:"pregunta", texto:"¿A dónde voy si me pasó algo?", explicacion:"Empieza por Bienestar Universitario, el programa Pluridiversos tiene un formulario de solicitud de acompañamiento diferencial\nSi es una violencia basada en género existe la ruta TdeA sin VBG\nSi estás en peligro ahora, llama al 123", ruta:"Pluridiversos y ruta TdeA sin VBG", estado:"por validar"},
+  {tipo:"pregunta", texto:"¿Puedo usar mi nombre identitario en clase y en las plataformas?", explicacion:"La política de diversidad y género del TdeA respalda el reconocimiento de la identidad\nEl paso a paso para las plataformas está por confirmar con Bienestar", ruta:"Pluridiversos", estado:"por validar"},
+  {tipo:"pregunta", texto:"¿Qué hago si fue un profe?", explicacion:"También aplica la ruta, no importa quién haya sido\nPuedes buscar orientación en Bienestar sin tener todo resuelto", ruta:"Ruta TdeA sin VBG", estado:"por validar"},
+  {tipo:"pregunta", texto:"¿Qué son los ajustes razonables?", explicacion:"Son cambios en cómo se evalúa o se enseña para que una persona con discapacidad o con una condición particular estudie en igualdad\nSe piden por un formulario en línea de Pluridiversos", ruta:"Ruta de ajustes razonables", estado:"por validar"},
+  {tipo:"pregunta", texto:"¿Pluridiversos es solo para personas LGBTIQ+?", explicacion:"No, trabaja diversidades e identidades, género, discapacidad, personas migrantes, regionalismos, etnias y pueblos originarios", ruta:"Pluridiversos", estado:"por validar"},
+  {tipo:"pregunta", texto:"Estudio en una sede o región, ¿también me atienden?", explicacion:"Los servicios se solicitan en línea, el alcance exacto por sede está por confirmar con Bienestar", ruta:"Formularios de Pluridiversos", estado:"por validar"}
+];
+
+const AYUDA = [
+  {t:"Si estás en peligro ahora", d:"Línea 123, emergencias"},
+  {t:"Violencias contra las mujeres", d:"Línea 155, orientación gratuita en todo el país"},
+  {t:"Bienestar Universitario TdeA", d:"Programa Pluridiversos, solicitudes en línea", url:"https://tdea.edu.co/micrositios/bienestar-universitario/pluridiverso/"},
+  {t:"Ruta TdeA sin Violencias Basadas en Género", d:"Contactos por confirmar con Bienestar"}
+];
+</script>
+<style>
+:root{
+  --fondo:#0F1C16; --sup:#182A22; --sup2:#21382D; --lima:#D7F65A; --texto:#F4F7F1; --suave:#A9B8AE; --borde:#2C4638;
+  --base:17px;
+}
+body.accesible{ --fondo:#000; --sup:#111; --sup2:#1d1d1d; --texto:#fff; --suave:#e6e6e6; --borde:#fff; --base:21px }
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--fondo);color:var(--texto)}
+body{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:var(--base);line-height:1.4;min-height:100vh;-webkit-font-smoothing:antialiased}
+.app{max-width:520px;margin:0 auto;padding:18px 16px 110px;min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+.marca{display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:-.02em;cursor:pointer}
+.cuadro{width:22px;height:22px;background:var(--lima);border-radius:5px;position:relative}
+.cuadro:after{content:"";position:absolute;left:9px;top:5px;width:4px;height:12px;background:var(--fondo);border-radius:1px}
+.ver{font-size:.75em;color:var(--suave);border:1px solid var(--borde);padding:3px 9px;border-radius:99px}
+.btn-acc{background:none;border:1px solid var(--borde);color:var(--texto);border-radius:99px;padding:4px 10px;font:inherit;font-size:.8em;cursor:pointer}
+h1{font-size:clamp(2.6em,13vw,3.6em);line-height:.92;font-weight:800;letter-spacing:-.04em;margin:8px 0 14px}
+h1 .l{color:var(--lima)}
+h2{font-size:1.5em;line-height:1.1;font-weight:800;letter-spacing:-.02em;margin-bottom:14px;white-space:pre-line}
+.lead{font-size:1.15em;color:var(--suave);white-space:pre-line;margin-bottom:24px}
+.btn{display:block;width:100%;text-align:left;font:inherit;font-weight:600;padding:16px 18px;border-radius:16px;border:1px solid var(--borde);background:var(--sup);color:var(--texto);cursor:pointer;margin-bottom:10px;transition:transform .12s, background .2s}
+.btn:active{transform:scale(.98)}
+.btn.prim{background:var(--lima);color:var(--fondo);border-color:var(--lima);font-weight:800;font-size:1.1em}
+.btn small{display:block;font-weight:400;opacity:.75;font-size:.82em;margin-top:2px}
+.tarjeta{background:var(--sup);border:1px solid var(--borde);border-radius:20px;padding:20px;margin-bottom:14px}
+.etq{display:inline-block;font-size:.72em;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--lima);margin-bottom:10px}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dos .btn{text-align:center;font-size:1.1em;font-weight:800}
+.resp{border-radius:16px;padding:16px;margin:6px 0 14px;background:var(--sup2);border-left:4px solid var(--lima);white-space:pre-line;animation:sube .3s ease}
+.resp b{display:block;margin-bottom:4px}
+.ruta{font-size:.85em;color:var(--suave);margin-top:8px}
+.ok{color:var(--lima)}
+@keyframes sube{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.barra{height:6px;background:var(--sup2);border-radius:9px;overflow:hidden;margin-bottom:16px}
+.barra i{display:block;height:100%;background:var(--lima);transition:width .4s}
+.perfil{font-size:3em;font-weight:800;color:var(--lima);letter-spacing:-.03em;line-height:1}
+.creditos{font-size:.8em;color:var(--suave);margin-top:auto;padding-top:24px;border-top:1px solid var(--borde)}
+.creditos li{list-style:none;margin-top:3px}
+.faq summary{cursor:pointer;font-weight:600;padding:14px 0;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq details{border-bottom:1px solid var(--borde)}
+.faq details p{white-space:pre-line;padding:0 0 14px;color:var(--suave)}
+input.buscar{width:100%;font:inherit;padding:14px 16px;border-radius:14px;border:1px solid var(--borde);background:var(--sup2);color:var(--texto);margin-bottom:8px}
+.ayuda{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;width:calc(100% - 32px);max-width:488px;background:var(--texto);color:var(--fondo);border:none;border-radius:99px;padding:14px;font:inherit;font-weight:800;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,.4);z-index:5}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:flex-end;justify-content:center;z-index:9}
+.modal.on{display:flex}
+.hoja{background:var(--sup);width:100%;max-width:520px;border-radius:24px 24px 0 0;padding:22px 18px 30px;animation:sube .25s}
+.hoja a{color:var(--lima)}
+.hoja .it{padding:12px 0;border-bottom:1px solid var(--borde)}
+.nota{font-size:.75em;color:var(--suave);margin-top:14px}
+.volver{background:none;border:none;color:var(--suave);font:inherit;cursor:pointer;margin-bottom:10px;padding:4px 0}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="marca" onclick="inicio()"><span class="cuadro"></span><span id="marcaNombre"></span></div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <button class="btn-acc" id="btnAcc" hidden onclick="alternarAcc()">Aa</button>
+      <span class="ver" id="ver"></span>
+    </div>
+  </header>
+  <main id="vista"></main>
+</div>
+<button class="ayuda" onclick="abrirAyuda()">¿Necesitas ayuda ahora?</button>
+<div class="modal" id="modal" onclick="if(event.target===this)cerrarAyuda()">
+  <div class="hoja" id="hojaAyuda"></div>
+</div>
+
+<script>
+let DATOS = SEMILLA, estado = {};
+const $ = s => document.querySelector(s);
+const partes = t => (t||"").split("||").map(x=>x.trim()).filter(Boolean);
+const esc = t => String(t||"").replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const de = tipo => DATOS.filter(r => (r.tipo||"").toLowerCase().trim()===tipo && (r.estado||"").toLowerCase()!=="descartada");
+
+function csv(texto){
+  const filas=[]; let fila=[], campo="", com=false;
+  for(let i=0;i<texto.length;i++){
+    const c=texto[i];
+    if(com){ if(c==='"'){ if(texto[i+1]==='"'){campo+='"';i++} else com=false } else campo+=c }
+    else if(c==='"') com=true;
+    else if(c===','){ fila.push(campo); campo="" }
+    else if(c==='\n'||c==='\r'){ if(c==='\r'&&texto[i+1]==='\n') i++; fila.push(campo); filas.push(fila); fila=[]; campo="" }
+    else campo+=c;
+  }
+  if(campo||fila.length){ fila.push(campo); filas.push(fila) }
+  const enc = filas.shift().map(h=>h.trim().toLowerCase());
+  return filas.filter(f=>f.some(x=>x.trim())).map(f=>Object.fromEntries(enc.map((h,i)=>[h,(f[i]||"").trim()])));
+}
+
+async function cargarHoja(){
+  if(!CONFIG.hojaId) return;
+  try{
+    const url = `https://docs.google.com/spreadsheets/d/${CONFIG.hojaId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(CONFIG.hojaPestana)}&t=${Date.now()}`;
+    const r = await fetch(url); if(!r.ok) throw 0;
+    const filas = csv(await r.text());
+    if(filas.length>3){ DATOS = filas; $("#ver").textContent = CONFIG.version+" · en vivo" }
+  }catch(e){ /* sin red: se queda el contenido semilla */ }
+}
+
+function cabecera(){
+  $("#marcaNombre").textContent = CONFIG.nombre;
+  document.title = CONFIG.nombre+" · ACUDE";
+  $("#ver").textContent = CONFIG.version;
+  $("#btnAcc").hidden = !CONFIG.funciones.accesible;
+}
+
+function inicio(){
+  const n = CONFIG.nombre.split(" ");
+  const titulo = n.length>1 ? esc(n.slice(0,-1).join(" "))+' <span class="l">'+esc(n.at(-1))+'</span>' : '<span class="l">'+esc(CONFIG.nombre)+'</span>';
+  const cred = CONFIG.creditos.length ? `<ul>${CONFIG.creditos.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>` : `<ul><li>Todavía nadie, ¿lo construimos?</li></ul>`;
+  $("#vista").innerHTML = `
+    <span class="etq">${esc(CONFIG.personaje)} te invita</span>
+    <h1>${titulo}</h1>
+    <p class="lead">${esc(CONFIG.bienvenida)}</p>
+    <button class="btn prim" onclick="jugar()">Jugar<small>${de("mito").length} mitos o derechos y ${de("dilema").length} situaciones del TdeA</small></button>
+    <button class="btn" onclick="preguntale()">Pregúntale<small>Lo que nadie se atreve a preguntar en voz alta</small></button>
+    ${CONFIG.funciones.dejaPregunta && CONFIG.formularioPregunta ? `<a class="btn" style="text-decoration:none" href="${esc(CONFIG.formularioPregunta)}" target="_blank" rel="noopener">Deja tu pregunta<small>Así el juego sigue creciendo</small></a>` : ""}
+    <div class="creditos"><b>Lo han construido</b>${cred}
+      <p class="nota">Estudiantes del ACUDE Herramientas de IA, TdeA 2026-2<br>Contenido por validar con Bienestar Universitario</p></div>`;
+  window.scrollTo(0,0);
+}
+
+function jugar(){
+  const mitos = de("mito"), dil = de("dilema");
+  estado = {pasos:[...mitos.map(r=>({k:"mito",r})), ...dil.map(r=>({k:"dilema",r}))], i:0, aciertos:0, votos:{}};
+  paso();
+}
+
+function barra(){
+  if(!CONFIG.funciones.progreso) return "";
+  const p = Math.round(estado.i/estado.pasos.length*100);
+  return `<div class="barra"><i style="width:${p}%"></i></div>`;
+}
+
+function paso(){
+  if(estado.i>=estado.pasos.length) return final();
+  const {k,r} = estado.pasos[estado.i];
+  if(k==="mito"){
+    $("#vista").innerHTML = `${barra()}<div class="tarjeta"><span class="etq">Mito o derecho · ${estado.i+1}</span><h2>${esc(r.texto)}</h2>
+      <div class="dos" id="ops"><button class="btn" onclick="resMito('mito')">Mito</button><button class="btn" onclick="resMito('derecho')">Derecho</button></div><div id="res"></div></div>`;
+  } else {
+    const ops = partes(r.opciones);
+    $("#vista").innerHTML = `${barra()}<div class="tarjeta"><span class="etq">¿Qué harías? · ${estado.i+1}</span><h2>${esc(r.texto)}</h2>
+      <div id="ops">${ops.map((o,j)=>`<button class="btn" onclick="resDilema(${j})">${esc(o)}</button>`).join("")}</div><div id="res"></div></div>`;
+  }
+  window.scrollTo(0,0);
+}
+
+function siguiente(){ return `<button class="btn prim" onclick="estado.i++;paso()">Seguir</button>` }
+
+function resMito(eleccion){
+  const r = estado.pasos[estado.i].r, bien = eleccion===(r.correcta||"").toLowerCase().trim();
+  if(bien) estado.aciertos++;
+  $("#ops").innerHTML = "";
+  $("#res").innerHTML = `<div class="resp"><b class="${bien?'ok':''}">${bien?'¡Eso!':'Casi'} Es ${esc(r.correcta)}</b>${esc(r.explicacion)}<div class="ruta">${esc(r.ruta||"")}</div></div>${siguiente()}`;
+}
+
+function resDilema(j){
+  const r = estado.pasos[estado.i].r, perf = partes(r.correcta)[j]||"Observa", cons = partes(r.explicacion)[j]||"";
+  estado.votos[perf] = (estado.votos[perf]||0)+1;
+  const elegido = partes(r.opciones)[j];
+  $("#ops").innerHTML = `<div class="btn" style="cursor:default;border-color:var(--lima)">${esc(elegido)}</div>`;
+  $("#res").innerHTML = `<div class="resp"><b>Lo que pasa</b>${esc(cons)}<div class="ruta">Lo que aplicaba: ${esc(r.ruta||"")}</div></div>${siguiente()}`;
+}
+
+function final(){
+  const orden = ["Transforma","Activa","Acompaña","Observa"];
+  const perfiles = de("perfil");
+  let gana = orden.reduce((a,b)=>(estado.votos[b]||0)>(estado.votos[a]||0)?b:a, "Observa");
+  const p = perfiles.find(x=>x.texto===gana) || perfiles[0] || {texto:gana, explicacion:"", opciones:""};
+  const total = de("mito").length;
+  const msg = `En ${CONFIG.nombre} me salió "${p.texto}": ${p.explicacion} ¿Y a ti? ${location.href.split("#")[0]}`;
+  $("#vista").innerHTML = `<div class="tarjeta" style="border-color:var(--lima)"><span class="etq">Tu forma de ser aliado</span>
+    <div class="perfil">${esc(p.texto)}</div><p class="lead" style="margin:12px 0 16px">${esc(p.explicacion)}</p>
+    <div class="resp"><b>Tu primera acción</b>${esc(p.opciones)}</div>
+    <p class="ruta">Acertaste ${estado.aciertos} de ${total} mitos o derechos, todos los perfiles suman</p></div>
+    ${CONFIG.funciones.compartir ? `<a class="btn prim" style="text-decoration:none;text-align:center" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(msg)}">Compartir por WhatsApp</a>` : ""}
+    <button class="btn" onclick="jugar()">Jugar otra vez</button><button class="btn" onclick="preguntale()">Pregúntale</button>`;
+  window.scrollTo(0,0);
+}
+
+function preguntale(){
+  const lista = de("pregunta");
+  $("#vista").innerHTML = `<button class="volver" onclick="inicio()">← Volver</button><h2>Pregúntale a ${esc(CONFIG.personaje)}</h2>
+    <p class="lead" style="margin-bottom:14px">Respuestas cortas que siempre te llevan a la ruta oficial</p>
+    ${CONFIG.funciones.buscador ? `<input class="buscar" id="q" placeholder="Escribe tu duda…" oninput="filtrar()">` : ""}
+    <div class="faq" id="faq">${lista.map(r=>`<details data-t="${esc((r.texto+" "+r.explicacion).toLowerCase())}"><summary>${esc(r.texto)}</summary><p>${esc(r.explicacion)}<br><span class="ruta">→ ${esc(r.ruta||"Bienestar Universitario")}</span></p></details>`).join("")}</div>`;
+  window.scrollTo(0,0);
+}
+
+function filtrar(){
+  const q = $("#q").value.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+  document.querySelectorAll("#faq details").forEach(d=>{
+    const t = d.dataset.t.normalize("NFD").replace(/[̀-ͯ]/g,"");
+    d.hidden = q && !q.split(" ").every(w=>t.includes(w));
+  });
+}
+
+function abrirAyuda(){
+  $("#hojaAyuda").innerHTML = `<h2>Aquí no estás solo</h2>${AYUDA.map(a=>`<div class="it"><b>${esc(a.t)}</b><br>${a.url?`<a href="${a.url}" target="_blank" rel="noopener">${esc(a.d)}</a>`:esc(a.d)}</div>`).join("")}
+    <p class="nota">Este juego orienta, no reemplaza la ruta oficial</p><button class="btn" style="margin-top:14px" onclick="cerrarAyuda()">Cerrar</button>`;
+  $("#modal").classList.add("on");
+}
+function cerrarAyuda(){ $("#modal").classList.remove("on") }
+function alternarAcc(){ document.body.classList.toggle("accesible") }
+
+cabecera(); inicio();
+cargarHoja().then(()=>{ if(!estado.pasos) inicio() });
+</script>
+</body>
+</html>
