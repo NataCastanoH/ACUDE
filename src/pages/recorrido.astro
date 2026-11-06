@@ -38,7 +38,7 @@ const herramientasUsadas = [...new Set(todasLasSesiones.filter((s) => s.estado =
         const busqueda = normalizar([s.titulo, s.titulo_corto, s.objetivo, s.resumen, s.actividad, ...s.herramientas].join(' '));
         return (
           <li class="sesion" data-busqueda={busqueda} data-herramientas={s.herramientas.join('|')} data-tipo={s.tipo_reto ?? ''}>
-            <Etiqueta class:list={['sesion__tarjeta', { 'sesion__tarjeta--lima': s.numero >= 13 }]} {...(publicada ? { href: url(rutaSesion(s)) } : {})}>
+            <Etiqueta class:list={['sesion__tarjeta', { 'sesion__tarjeta--lima': s.numero >= 13 && !publicada }]} {...(publicada ? { href: url(rutaSesion(s)) } : {})}>
               <span class="numero sesion__numero" aria-hidden="true">{dosDigitos(s.numero)}</span>
               <span class="sesion__cuerpo">
                 <span class="etiqueta sesion__tipo">{publicada ? s.tipo_reto : 'Próximamente'}</span>

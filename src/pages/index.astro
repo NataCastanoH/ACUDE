@@ -50,7 +50,7 @@ const fuentePrompt = (p) => [p.codigo && `Plantilla ${p.codigo}`, p.sesion && `S
         const Etiqueta = s.estado === 'publicada' ? 'a' : 'div';
         return (
           <li>
-            <Etiqueta class:list={['ficha', { 'ficha--lima': s.numero >= 13 }]} {...(s.estado === 'publicada' ? { href: url(rutaSesion(s)) } : {})}>
+            <Etiqueta class:list={['ficha', { 'ficha--lima': s.numero >= 13 && s.estado === 'borrador' }]} {...(s.estado === 'publicada' ? { href: url(rutaSesion(s)) } : {})}>
               <span class="numero ficha__numero">{dosDigitos(s.numero)}</span>
               <span class="ficha__titulo">{s.titulo_corto}</span>
               <span class="ficha__linea">{s.linea}</span>
