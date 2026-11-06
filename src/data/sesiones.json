@@ -728,11 +728,37 @@
       "Claude (artefactos y Proyectos)",
       "Gemini (Canvas)"
     ],
-    "presentacion": null,
-    "bitacora": null,
+    "presentacion": "materiales/S13-presentacion.pdf",
+    "bitacora": "materiales/S13-bitacora.pdf",
     "video": null,
     "galeria": [],
-    "prompts": [],
+    "prompts": [
+      {
+        "codigo": "AS",
+        "etiqueta": "Tu primera app",
+        "texto": "Crea una app de una sola página que funcione bien en el celular\nQué es: [qué tipo de app, ej: un juego de Mito o derecho con 3 afirmaciones sobre inclusión en la U]\nPara quién: [quién la va a usar, ej: estudiantes del TdeA desde el celular]\nQué hace: [qué pasa cuando la tocas, ej: muestra una afirmación a la vez, toco Mito o Derecho y me dice si acerté y por qué]\nCómo se ve: [colores o estilo que te gusten], letra grande y botones fáciles de tocar\nQué no hace: no pide datos personales ni cuenta, y no inventa leyes ni teléfonos"
+      },
+      {
+        "codigo": "AT",
+        "etiqueta": "Cámbiala en palabras",
+        "texto": "Cambia solo esto y deja todo lo demás igual: [el cambio, ej: que celebre cuando acierto / agrega una afirmación más / ponle fondo verde casi negro y botones lima]\nDespués explícame en 3 líneas qué parte del código cambiaste, como si yo nunca hubiera visto código"
+      },
+      {
+        "codigo": "AU",
+        "etiqueta": "Del chat a la tabla del juego",
+        "texto": "Eres editor de contenido de un juego sobre diversidad, equidad de género e inclusión para estudiantes del Tecnológico de Antioquia (TdeA)\nTe paso lo que estudiantes pusieron en sus versiones mini del juego y en el chat de clase:\n[pegar aquí, sin nombres]\nJunta las ideas repetidas y quédate con las mejores\nConviértelas en [TIPO DE FILA DEL GRUPO] para una hoja con estas columnas: tipo | texto | opciones | correcta | explicacion | ruta | fuente | estado | grupo\nReglas:\n1. Lenguaje de pasillo, neutro en género, situaciones del TdeA (bloque, Teams, WhatsApp de la materia, sede, trabajo en grupo)\n2. Nadie queda como villano, ninguna opción humilla y las consecuencias se cuentan sin moralizar\n3. Dentro de una celda separa varias partes con ||\n4. No inventes leyes, rutas, teléfonos ni correos, si no conoces la fuente escribe \"por confirmar\"\n5. En estado escribe siempre \"por validar\" y en grupo escribe [GRUPO]\nEntrégamelo como tabla lista para copiar y pegar en Google Sheets, sin texto antes ni después"
+      },
+      {
+        "codigo": "AV",
+        "etiqueta": "Auditoría antes de publicar",
+        "texto": "Revisa las filas que acabas de crear como si fueras alguien de Bienestar Universitario\nDime en una tabla corta: fila, problema y cómo la arreglarías, si encuentras que: alguna opción humilla, moraliza o deja a alguien como villano, el lenguaje no es neutro en género, se afirma algo legal sin fuente, o algo podría doler a quien ya vivió esa situación\nLuego dame la tabla completa corregida"
+      },
+      {
+        "codigo": "AW",
+        "etiqueta": "Agrégale una función al juego",
+        "texto": "Te paso el código completo de nuestro juego (index.html)\nAgrega esta función: [FUNCIÓN DEL GRUPO]\nNo cambies el contenido, los colores ni la fuente\nSi la función ya existe escondida en el código, dime dónde está y qué hay que cambiar para encenderla\nDevuélveme el archivo completo para verlo como artefacto y dime en una sola línea qué cambiaste"
+      }
+    ],
     "caja": {
       "herramienta": "[Herramienta de la sesión]",
       "para_que": "[Para qué sirve]",
