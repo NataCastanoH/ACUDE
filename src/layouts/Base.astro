@@ -19,7 +19,16 @@ const imagen = Astro.site ? new URL(url('marca/acude-logo-horizontal-fondo-oscur
     <title>{tituloCompleto}</title>
     <meta name="description" content={descripcion} />
     <meta name="theme-color" content="#0F1C16" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="color-scheme" content="dark light" />
+    <!-- El modo (oscuro o claro) se pone antes de pintar para que no parpadee -->
+    <script is:inline>
+      try {
+        if (localStorage.getItem('acude-tema') === 'claro') {
+          document.documentElement.dataset.tema = 'claro';
+          document.querySelector('meta[name="theme-color"]').content = '#F3F1E8';
+        }
+      } catch (e) {}
+    </script>
     {canonica && <link rel="canonical" href={canonica} />}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_CO" />

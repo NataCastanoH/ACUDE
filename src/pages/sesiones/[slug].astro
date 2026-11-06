@@ -188,17 +188,17 @@ const hayPiezas = galeria.some((p) => p.sesion === s.numero);
   .fotos__boton { display: block; width: 100%; padding: 0; border: 0; border-radius: 20px; overflow: hidden; cursor: zoom-in; background: var(--superficie); }
   .fotos__boton img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
   .visor { max-width: min(1100px, 94vw); padding: 16px; border: 0; border-radius: var(--radio); background: var(--superficie); color: var(--texto); }
-  .visor::backdrop { background: rgb(15 28 22 / 0.9); }
+  .visor::backdrop { background: var(--velo); }
   .visor__img { max-height: 76vh; margin: 0 auto; border-radius: 16px; }
   .visor__controles { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px; }
   .prompts { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 14px; }
   .prompt { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 96px; }
-  .prompt:target { border-color: var(--acento); }
+  .prompt:target { border-color: var(--acento-texto); }
   .prompt__cabeza { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .prompt__nombre { font-size: 22px; font-weight: 700; line-height: 1.15; }
   .prompt__texto { margin: 0; white-space: pre-wrap; font-family: inherit; font-size: 17px; line-height: 1.55; color: var(--texto-2); }
   .vecinas { display: flex; justify-content: space-between; gap: 16px; padding-top: 32px; border-top: 1px solid var(--linea); }
   .vecinas a { display: flex; flex-direction: column; gap: 6px; min-height: 44px; color: var(--texto); text-decoration: none; font-weight: 700; font-size: 20px; }
-  .vecinas a:hover { color: var(--acento); }
+  .vecinas a:hover { color: var(--acento-texto); }
   .vecinas__sig { text-align: right; margin-left: auto; }
 </style>

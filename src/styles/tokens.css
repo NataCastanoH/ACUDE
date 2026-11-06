@@ -1,18 +1,42 @@
 /* Identidad visual del ACUDE (sección 3 del brief). No cambiar sin revisar contraste. */
 :root {
+  color-scheme: dark;
   --fondo: #0F1C16;
   --superficie: #182A22;
   --acento: #D7F65A;
+  --acento-texto: #D7F65A;  /* el lima cuando es letra, borde o contorno */
   --texto: #F4F7F1;
   --texto-2: #A9B8AF;
   --linea: #2A3F35;
   --sobre-acento: #0F1C16;
   --verde-apagado: #3D5248;
   --contorno: #1F352B;
+  --enlace-hover: #fff;
+  --encabezado: rgb(15 28 22 / 0.92);
+  --velo: rgb(15 28 22 / 0.9);
+  /* Piezas oscuras que se quedan oscuras en los dos modos (píldoras sobre lima) */
+  --sobre-oscuro: #F4F7F1;
+  --oscuro-2: #182A22;
 
   --fuente: 'Bricolage Grotesque', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --radio: 28px;
   --ancho: 1240px;
   --margen: clamp(16px, 4vw, 24px);
   --aire: clamp(96px, 10vw, 120px);
+}
+
+/* Modo claro: papel cálido en vez de blanco puro, el lima se queda en los rellenos
+   y como letra pasa a un oliva oscuro que sí se lee sobre claro */
+:root[data-tema='claro'] {
+  color-scheme: light;
+  --fondo: #F3F1E8;
+  --superficie: #E7E5D9;
+  --acento-texto: #436100;
+  --texto: #17251E;
+  --texto-2: #4D5D54;
+  --linea: #CBC9BB;
+  --contorno: #DAD8CC;
+  --enlace-hover: #17251E;
+  --encabezado: rgb(243 241 232 / 0.92);
+  --velo: rgb(23 37 30 / 0.75);
 }

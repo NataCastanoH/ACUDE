@@ -29,8 +29,8 @@ const enlace = /^https?:\/\//.test(url) ? url : null;
   .pendiente { font-weight: 700; }
   .chat { display: flex; flex-direction: column; gap: 16px; }
   .chat__registro { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; max-height: 360px; overflow-y: auto; }
-  .chat__registro :global(li) { padding: 14px 18px; border-radius: 20px; background: var(--sobre-acento); color: var(--texto); white-space: pre-wrap; }
-  .chat__registro :global(li.usuario) { align-self: flex-end; background: var(--superficie); }
+  .chat__registro :global(li) { padding: 14px 18px; border-radius: 20px; background: var(--sobre-acento); color: var(--sobre-oscuro); white-space: pre-wrap; }
+  .chat__registro :global(li.usuario) { align-self: flex-end; background: var(--oscuro-2); }
   .chat__form { display: flex; flex-wrap: wrap; gap: 10px; }
   .chat__form .campo { flex: 1 1 240px; }
 </style>
