@@ -255,7 +255,7 @@ svg.px { display: block; shape-rendering: crispEdges; flex: none; }
 .shake { animation: shake .3s steps(4); }
 @keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
 
-.brandline { grid-area: brand; display: flex; justify-content: space-between; align-items: baseline; padding: clamp(4px, 1vh, 10px) 6px 0; font-family: var(--pixel); font-size: 9px; font-style: italic; color: var(--lime); letter-spacing: .04em; }
+.brandline { grid-area: brand; display: flex; justify-content: flex-start; gap: 10px; align-items: baseline; padding: clamp(4px, 1vh, 10px) 6px 0; font-family: var(--pixel); font-size: 9px; font-style: italic; color: var(--lime); letter-spacing: .04em; }
 .brandline span:last-child { font-size: 7px; color: var(--ink-shell); font-style: normal; }
 
 .left, .right { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(2px, .8vh, 8px); padding-top: clamp(6px, 1.4vh, 14px); }
@@ -292,7 +292,7 @@ svg.px { display: block; shape-rendering: crispEdges; flex: none; }
 
 .pill { display: grid; justify-items: center; gap: 1px; }
 .pill button { width: 72px; height: clamp(28px, 4.5vh, 40px); border: 0; background: transparent; display: grid; place-items: center; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; -webkit-appearance: none; appearance: none; }
-.pill button::before { content: ""; width: 52px; height: 13px; border-radius: 8px; background: var(--bezel); transform: rotate(-24deg); box-shadow: inset 0 -2px 0 rgba(255,255,255,.08); }
+.pill button::before { content: ""; width: 52px; height: 13px; border-radius: 8px; background: var(--bezel); box-shadow: inset 0 -2px 0 rgba(255,255,255,.08); }
 .pill button:active::before { background: #000; }
 .pill span { font-family: var(--pixel); font-size: 7px; color: var(--ink-shell); letter-spacing: .06em; white-space: nowrap; }
 
@@ -349,7 +349,7 @@ svg.px { display: block; shape-rendering: crispEdges; flex: none; }
         <button type="button" class="r" id="btn-right" aria-label="Derecha"></button>
         <button type="button" class="d" id="btn-down" aria-label="Abajo"></button>
       </div>
-      <div class="pill"><button type="button" id="btn-select" aria-label="Sonido"></button><span id="lbl-select">SONIDO SÍ</span></div>
+      <div class="pill"><button type="button" id="btn-select" aria-label="Efectos de sonido"></button><span id="lbl-select">EFECTOS SÍ</span></div>
     </div>
 
     <div class="right">
@@ -607,7 +607,83 @@ function sfx(kind) {
     else tone(880, t, 0.045, 0.045);
   } catch (e) {}
 }
-function paintSound() { $("lbl-select").textContent = "SONIDO " + (soundOn ? "SÍ" : "NO"); }
+function paintSound() { $("lbl-select").textContent = "EFECTOS " + (soundOn ? "SÍ" : "NO"); }
+
+/* ================= Música de fondo ================= */
+const MUSIC_VOL = 0.22, MUSIC_DUCK = 0.07;
+let musicOn = true, musicReady = false, musicWanted = false, mGain = null;
+try { musicOn = localStorage.getItem("moda-music") !== "off"; } catch (e) {}
+/* Tema principal en menú, nivel 1 y resultados, y otro tema en el nivel 2 */
+const TRACKS = { tema: "tema.mp3", nivel2: "nivel2.mp3", victoria: "victoria.mp3" };
+let nextTrack = null;
+const tracks = {};
+let curTrack = "tema", musicLevel = MUSIC_VOL;
+Object.keys(TRACKS).forEach(k => {
+  const a = new Audio();
+  a.loop = true;
+  a.preload = "auto";
+  tracks[k] = { el: a, gain: null, ready: false };
+  fetch(TRACKS[k])
+    .then(r => r.ok ? r.blob() : Promise.reject())
+    .then(b => { a.src = URL.createObjectURL(b); })
+    .catch(() => { a.src = TRACKS[k]; })
+    .finally(() => { tracks[k].ready = true; if (musicWanted && k === curTrack) playMusic(); });
+});
+function graphFor(t) {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) { t.el.volume = musicLevel; return; }
+    audio = audio || new AC();
+    if (audio.state === "suspended") audio.resume();
+    if (!t.gain) {
+      const src = audio.createMediaElementSource(t.el);
+      t.gain = audio.createGain();
+      t.gain.gain.value = musicLevel;
+      src.connect(t.gain).connect(audio.destination);
+    }
+  } catch (e) { t.el.volume = musicLevel; }
+}
+function musicVol(v) {
+  musicLevel = v;
+  Object.values(tracks).forEach(t => {
+    if (t.gain && audio) t.gain.gain.setTargetAtTime(v, audio.currentTime, 0.15);
+    else { try { t.el.volume = v; } catch (e) {} }
+  });
+}
+function stopAll() { Object.values(tracks).forEach(t => t.el.pause()); }
+function playMusic() {
+  musicWanted = true;
+  const t = tracks[curTrack];
+  if (!musicOn || !t.ready || document.hidden) return;
+  Object.keys(tracks).forEach(k => { if (k !== curTrack) tracks[k].el.pause(); });
+  graphFor(t);
+  const p = t.el.play();
+  if (p && p.catch) p.catch(() => {});
+}
+function setTrack(k) {
+  if (k === curTrack) return;
+  curTrack = k;
+  try { tracks[k].el.currentTime = 0; } catch (e) {}
+  if (musicWanted) playMusic();
+}
+function setMusic(on) {
+  musicOn = on;
+  try { localStorage.setItem("moda-music", on ? "on" : "off"); } catch (e) {}
+  if (on) playMusic(); else stopAll();
+}
+const musicLabel = () => "MÚSICA: " + (musicOn ? "SÍ" : "NO");
+function musicItem(idp, index) {
+  return { label: musicLabel(), act: () => {
+    setMusic(!musicOn);
+    const b = document.getElementById(idp + index);
+    if (b) b.firstChild.firstChild.textContent = musicLabel();
+  } };
+}
+["pointerdown", "keydown"].forEach(ev => document.addEventListener(ev, () => { if (!musicWanted) playMusic(); }, { once: true }));
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) stopAll();
+  else if (musicWanted) playMusic();
+});
 
 /* ================= Controles ================= */
 const PAD = { a: $("btn-a"), b: $("btn-b"), la: $("lbl-a"), lb: $("lbl-b") };
@@ -666,6 +742,7 @@ function pause() {
   saved = { H, ab: lastAB, timer: timerOn, say: document.getElementById("say").textContent };
   if (timerOn) { cancelAnimationFrame(raf); pausedAt = performance.now(); }
   paused = true;
+  musicVol(MUSIC_DUCK);
   H = {};
   screen.hidden = true;
   pb.hidden = false;
@@ -682,6 +759,7 @@ function pauseMenu() {
   menu([
     { label: "SEGUIR JUGANDO", act: resume },
     { label: "CAMBIAR COLORES", act: () => colorsScreen(pb, pauseMenu) },
+    musicItem("pause-", 2),
     { label: "VOLVER AL MENÚ PRINCIPAL", hint: inPlay ? "Se pierde la partida en curso" : null, act: inPlay ? confirmExit : exitToTitle }
   ], pb, "pause-");
   setAB(["B", "SEGUIR"], ["A", "ELEGIR"]);
@@ -700,7 +778,7 @@ function confirmExit() {
   H.b = () => { sfx("tap"); pauseMenu(); };
   H.start = resume;
 }
-function closePause() { paused = false; pb.hidden = true; pb.innerHTML = ""; screen.hidden = false; }
+function closePause() { paused = false; pb.hidden = true; pb.innerHTML = ""; screen.hidden = false; musicVol(MUSIC_VOL); }
 function resume() {
   const s = saved;
   closePause();
@@ -719,6 +797,8 @@ function clear() {
   screen.innerHTML = "";
   screen.scrollTop = 0;
   updateChrome();
+  setTrack(nextTrack || (phase === "scenes" ? "nivel2" : "tema"));
+  nextTrack = null;
 }
 
 function loadRecs() { try { return JSON.parse(localStorage.getItem("moda-records")) || []; } catch (e) { return []; } }
@@ -832,6 +912,7 @@ function title() {
   const items = [1, 2, 3, 4].map(n => ({ label: n === 1 ? "1 JUGADOR" : n + " JUGADORES", act: () => n === 1 ? startGame(1, "solo") : chooseMode(n) }));
   items.push({ label: "VER RÉCORDS", act: records });
   items.push({ label: "COLORES: " + PALETTES[curPal].name, act: () => colorsScreen(screen, title) });
+  items.push(musicItem("menu-", items.length));
   menu(items, screen);
   setAB(null, ["A", "ELEGIR"]);
 }
@@ -1198,6 +1279,7 @@ function results_() {
   const lifeBonus = lives.map(l => l * LIFE_PTS);
   if (mode === "coop") scores[0] += lifeBonus[0];
   else lifeBonus.forEach((b, p) => { scores[p] += b; });
+  nextTrack = "victoria";
   clear(); hud();
   let save = [];
 
@@ -1238,7 +1320,8 @@ function results_() {
   }
 
   allyCard(screen);
-  sfx("win"); burst();
+  if (!musicOn) sfx("win");
+  burst();
   const prof = allyProfile(sceneChoices);
   eco("cheer", "¡PERFIL " + prof.name + "!", 4000);
 
@@ -1293,6 +1376,7 @@ function initials(queue, idx) {
   const q = queue[idx];
   const letters = [0, 0, 0];
   let slot = 0;
+  nextTrack = "victoria";
   clear(); hud();
   screen.appendChild(el("div", "eb", "Nuevo récord"));
   screen.appendChild(el("p", "big", q.label + " · " + q.pts + " PTS"));
