@@ -722,7 +722,7 @@
     "semana": "2026-11-03",
     "unidad": "Crear con IA",
     "objetivo": "Crear tu primera app de una sola página con IA, cambiarla pidiéndolo en palabras y construir entre los seis grupos el juego de la muestra cultural.",
-    "resumen": "Tú no programas: pides, miras y corriges. Pasamos de pedirle respuestas a la IA a pedirle cosas que funcionan, con la receta de cinco partes: qué es, para quién, qué hace, cómo se ve y qué no hace. Con los prompts AS (Tu primera app) y AT (Cámbiala en palabras) creas y mejoras tu app, y con AU (Del chat a la tabla del juego), AV (Auditoría antes de publicar) y AW (Agrégale una función al juego) cada grupo construyó su pieza del juego, que se alimenta de una hoja de Google: si cambia la hoja, cambia el juego.",
+    "resumen": "Tú no programas: pides, miras y corriges. Pasamos de pedirle respuestas a la IA a pedirle cosas que funcionan, con la receta de cinco partes: qué es, para quién, qué hace, cómo se ve y qué no hace. Construimos en vivo una sola app que creció clase a clase, siempre en el mismo chat: martes y miércoles la crearon y la cambiaron en palabras (AS y AT), jueves le agregó las situaciones y el final (AU y AV), viernes Pregúntale y el botón de ayuda (AW y AX), sábado 10-12 la bienvenida y la letra grande (AY y AZ) y sábado 12-2 la revisión de tono y el botón de compartir (BA y BB). Es la base del juego de la muestra cultural.",
     "actividad": "Reto comunitario: comparte el juego con alguien que no esté en el curso y trae a la próxima clase qué perfil le salió y qué le pareció.",
     "herramientas": [
       "Claude (artefactos y Proyectos)",
@@ -737,28 +737,53 @@
     "prompts": [
       {
         "codigo": "AS",
-        "etiqueta": "Tu primera app",
-        "texto": "Crea una app de una sola página que funcione bien en el celular\nQué es: [qué tipo de app, ej: un juego de Mito o derecho con 3 afirmaciones sobre inclusión en la U]\nPara quién: [quién la va a usar, ej: estudiantes del TdeA desde el celular]\nQué hace: [qué pasa cuando la tocas, ej: muestra una afirmación a la vez, toco Mito o Derecho y me dice si acerté y por qué]\nCómo se ve: [colores o estilo que te gusten], letra grande y botones fáciles de tocar\nQué no hace: no pide datos personales ni cuenta, y no inventa leyes ni teléfonos"
+        "etiqueta": "Crea la app",
+        "texto": "Crea una app de una sola página que funcione bien en el celular\nQué es: un juego de Mito o derecho con 3 afirmaciones sobre diversidad e inclusión en la universidad\nPara quién: estudiantes del Tecnológico de Antioquia que la van a abrir desde el celular\nQué hace: muestra una afirmación a la vez con dos botones, Mito y Derecho, al tocar me dice si acerté y por qué en una frase\nCómo se ve: fondo verde casi negro y botones lima, letra grande y botones fáciles de tocar\nQué no hace: no pide datos personales ni cuenta, y no inventa leyes ni teléfonos"
       },
       {
         "codigo": "AT",
         "etiqueta": "Cámbiala en palabras",
-        "texto": "Cambia solo esto y deja todo lo demás igual: [el cambio, ej: que celebre cuando acierto / agrega una afirmación más / ponle fondo verde casi negro y botones lima]\nDespués explícame en 3 líneas qué parte del código cambiaste, como si yo nunca hubiera visto código"
+        "texto": "Cambia solo esto y deja todo lo demás igual: que celebre cuando acierto y que pinte de rojo la rayita del avance cuando me equivoco\nDespués explícame en 3 líneas qué parte del código cambiaste, como si yo nunca hubiera visto código"
       },
       {
         "codigo": "AU",
-        "etiqueta": "Del chat a la tabla del juego",
-        "texto": "Eres editor de contenido de un juego sobre diversidad, equidad de género e inclusión para estudiantes del Tecnológico de Antioquia (TdeA)\nTe paso lo que estudiantes pusieron en sus versiones mini del juego y en el chat de clase:\n[pegar aquí, sin nombres]\nJunta las ideas repetidas y quédate con las mejores\nConviértelas en [TIPO DE FILA DEL GRUPO] para una hoja con estas columnas: tipo | texto | opciones | correcta | explicacion | ruta | fuente | estado | grupo\nReglas:\n1. Lenguaje de pasillo, neutro en género, situaciones del TdeA (bloque, Teams, WhatsApp de la materia, sede, trabajo en grupo)\n2. Nadie queda como villano, ninguna opción humilla y las consecuencias se cuentan sin moralizar\n3. Dentro de una celda separa varias partes con ||\n4. No inventes leyes, rutas, teléfonos ni correos, si no conoces la fuente escribe \"por confirmar\"\n5. En estado escribe siempre \"por validar\" y en grupo escribe [GRUPO]\nEntrégamelo como tabla lista para copiar y pegar en Google Sheets, sin texto antes ni después"
+        "etiqueta": "Agrega las situaciones",
+        "texto": "Agrégale al juego una segunda parte y deja todo lo demás igual: después de las 3 afirmaciones vienen 2 situaciones de \"¿Qué harías?\" que podrían pasar en la U, una en el grupo de WhatsApp de la materia y otra en un trabajo en grupo\nCada situación tiene 3 opciones, al elegir una cuenta qué pasa después sin regañar a nadie y dice que en Bienestar Universitario pueden orientar\nNo inventes leyes ni teléfonos"
       },
       {
         "codigo": "AV",
-        "etiqueta": "Auditoría antes de publicar",
-        "texto": "Revisa las filas que acabas de crear como si fueras alguien de Bienestar Universitario\nDime en una tabla corta: fila, problema y cómo la arreglarías, si encuentras que: alguna opción humilla, moraliza o deja a alguien como villano, el lenguaje no es neutro en género, se afirma algo legal sin fuente, o algo podría doler a quien ya vivió esa situación\nLuego dame la tabla completa corregida"
+        "etiqueta": "Agrega el final",
+        "texto": "Ahora agrega un final y deja todo lo demás igual: según lo que elegí en las situaciones, muestra uno de cuatro perfiles de aliado, todos positivos: Observa, Acompaña, Activa o Transforma, cada uno con una frase corta y una acción pequeña para hacer mañana"
       },
       {
         "codigo": "AW",
-        "etiqueta": "Agrégale una función al juego",
-        "texto": "Te paso el código completo de nuestro juego (index.html)\nAgrega esta función: [FUNCIÓN DEL GRUPO]\nNo cambies el contenido, los colores ni la fuente\nSi la función ya existe escondida en el código, dime dónde está y qué hay que cambiar para encenderla\nDevuélveme el archivo completo para verlo como artefacto y dime en una sola línea qué cambiaste"
+        "etiqueta": "Agrega Pregúntale",
+        "texto": "Agrega en la pantalla de inicio un botón Pregúntale y deja todo lo demás igual: al tocarlo aparecen 5 preguntas frecuentes sobre inclusión en la U, cada una se abre al tocarla con una respuesta corta que siempre manda a Bienestar Universitario\nNo inventes leyes, teléfonos ni correos"
+      },
+      {
+        "codigo": "AX",
+        "etiqueta": "Agrega el botón de ayuda",
+        "texto": "Agrega abajo, fijo en todas las pantallas, un botón que diga \"¿Necesitas ayuda ahora?\" y deja todo lo demás igual: al tocarlo muestra Línea 123 para emergencias, Línea 155 de orientación a mujeres y Bienestar Universitario TdeA"
+      },
+      {
+        "codigo": "AY",
+        "etiqueta": "Agrega la bienvenida",
+        "texto": "Agrega una pantalla de bienvenida antes de empezar y deja todo lo demás igual: con el nombre del juego, una frase corta que invite a jugar sin etiquetar a nadie y un botón Empezar"
+      },
+      {
+        "codigo": "AZ",
+        "etiqueta": "Hazla accesible",
+        "texto": "Agrega arriba un botón \"Aa\" que cambie a letra grande y alto contraste para quien lo necesite, y deja todo lo demás igual"
+      },
+      {
+        "codigo": "BA",
+        "etiqueta": "Revisa antes de publicar",
+        "texto": "Revisa todos los textos del juego como si fueras alguien de Bienestar Universitario: dime en una tabla qué texto podría humillar, regañar o no ser neutro en género, y después corrígelos en el juego sin cambiar nada más"
+      },
+      {
+        "codigo": "BB",
+        "etiqueta": "Compártela",
+        "texto": "Agrega al final un botón para compartir mi perfil por WhatsApp, y en la pantalla de inicio una línea que diga \"Hecho por estudiantes del ACUDE Herramientas de IA, TdeA 2026-2\", y deja todo lo demás igual"
       }
     ],
     "caja": {
