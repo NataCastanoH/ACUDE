@@ -7,6 +7,7 @@ const { actual = '' } = Astro.props;
 const enlaces = [
   { texto: 'Inicio', href: url(''), id: 'inicio' },
   { texto: 'Recorrido', href: url('recorrido/'), id: 'recorrido' },
+  { texto: 'Juego', href: url('juego/'), id: 'juego' },
   { texto: 'Galería', href: url('#galeria'), id: 'galeria' },
   { texto: 'Herramientas', href: url('herramientas/'), id: 'herramientas' },
 ];
@@ -67,6 +68,8 @@ const boton = clase
   @media (min-width: 640px) { .marca__palabra { display: inline-block; } }
 
   .menu ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 28px; }
+  .menu .boton { white-space: nowrap; }
+  @media (min-width: 860px) and (max-width: 1079px) { .menu ul { gap: 18px; } .menu a:not(.boton) { font-size: 15px; } }
   .menu a:not(.boton) {
     display: inline-flex; align-items: center; min-height: 44px;
     color: var(--texto-2); font-size: 16px; font-weight: 600; text-decoration: none;

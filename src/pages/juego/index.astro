@@ -1,0 +1,194 @@
+---
+// Sección del juego de la muestra cultural: un solo juego, dos interfaces.
+// Las dos versiones leen public/juego/contenido.js; de ahí salen también las cifras de esta página.
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { runInNewContext } from 'node:vm';
+import Base from '../../layouts/Base.astro';
+import Titulo from '../../components/Titulo.astro';
+import { url } from '../../lib/url.js';
+import { todasLasSesiones, rutaSesion } from '../../lib/datos.js';
+
+const ventana = {};
+runInNewContext(readFileSync(join(process.cwd(), 'public/juego/contenido.js'), 'utf8'), { window: ventana });
+const J = ventana.JUEGO;
+const cuenta = (tipo) => J.de(tipo).length;
+const R = J.reglas;
+const perfiles = J.de('perfil');
+const sesion13 = todasLasSesiones.find((s) => s.numero === 13 && s.estado === 'publicada');
+
+const versiones = [
+  {
+    id: 'plana',
+    etiqueta: 'Versión plana',
+    titulo: 'Clara y tranquila',
+    texto: 'Letra grande, botones amplios y cinco paletas de color. Parcerx te acompaña y te cuenta cómo vas',
+    puntos: ['Para leer con calma desde el celular', 'Buena para proyectar en clase', 'Se juega tocando la pantalla'],
+    href: url('juego/plana/'),
+    imagen: url('juego/capturas/plana.jpg'),
+    alt: 'Pantalla de inicio de la versión plana de Mito o Derecho',
+  },
+  {
+    id: 'arcade',
+    etiqueta: 'Versión arcade',
+    titulo: 'Consola retro',
+    texto: 'Pantalla de píxeles, cruceta y botones A y B, con música chiptune. Eco, la mascota, celebra contigo',
+    puntos: ['Para jugar en grupo como en una maquinita', 'Se juega tocando la consola o con el teclado', 'Cinco paletas de color y música que se puede apagar'],
+    href: url('juego/arcade/'),
+    imagen: url('juego/capturas/arcade.jpg'),
+    alt: 'Pantalla de inicio de la versión arcade de Mito o Derecho, con forma de consola',
+  },
+];
+
+const comun = [
+  `${cuenta('mito')} mitos o derechos y ${cuenta('dilema')} situaciones de la U`,
+  `En cada partida salen ${J.ronda.mitos} mitos y ${J.ronda.dilemas} situaciones al azar`,
+  `${perfiles.length} perfiles de aliado: ${perfiles.map((p) => p.texto).join(', ')}`,
+  `Pregúntale, con ${cuenta('pregunta')} preguntas que nadie se atreve a hacer en voz alta`,
+  'El botón «¿Necesitas ayuda ahora?» siempre a mano',
+  'De 1 a 4 personas en el mismo celular, en cooperativo o competitivo',
+  'No pide datos personales, los récords se quedan en tu celular',
+];
+
+const pasos = [
+  { n: '1', titulo: '¿Mito o derecho?', texto: `Lee la afirmación y elige. Ganas ${R.acierto} puntos por acierto, más un bono si respondes rápido y otro por racha. Cada error cuesta una vida, y para pasar al nivel 2 hay que acertar al menos el ${Math.round(R.meta * 100)} %` },
+  { n: '2', titulo: '¿Qué harías?', texto: `Situaciones que podrían pasar en el bloque, en Teams o en el WhatsApp de la materia. Aquí no hay respuestas malas ni se pierden vidas: cada decisión suma ${R.aliado} puntos de aliado y te cuenta qué pasa después` },
+  { n: '3', titulo: 'Tu perfil de aliado', texto: 'Según lo que elegiste sale tu perfil, siempre en positivo, con una acción pequeña para hacer mañana. Puedes guardar tu récord con tres letras y compartir el perfil' },
+];
+
+const grupos = [
+  ['Martes y miércoles', 'Los mitos o derechos'],
+  ['Jueves', 'Las situaciones y el perfil de aliado'],
+  ['Viernes', 'Pregúntale y el botón de ayuda'],
+  ['Sábado 10-12', 'La bienvenida y la letra grande'],
+  ['Sábado 12-2', 'La revisión del tono, compartir y los créditos'],
+];
+---
+<Base titulo={J.nombre} actual="juego" descripcion={`${J.nombre}: el juego sobre diversidad, género e inclusión en la U que construimos entre los seis grupos del ACUDE. Un solo juego con dos caras, plana y arcade.`}>
+  <section class="seccion contenedor juego-cabeza">
+    <div class="cabeza-seccion">
+      <p class="etiqueta">Muestra cultural · TdeA 2026-2</p>
+      <Titulo nivel={1} texto={J.nombre} destacado="Derecho" />
+      <p class="intro">El juego sobre diversidad, género e inclusión en la U que construimos entre los seis grupos del curso. Es un solo juego con dos caras: las mismas preguntas y las mismas reglas, elige la que más te guste</p>
+    </div>
+
+    <ul class="versiones">
+      {versiones.map((v) => (
+        <li class="tarjeta version" id={v.id}>
+          <a class="version__imagen" href={v.href} tabindex="-1" aria-hidden="true">
+            <img src={v.imagen} alt="" width="390" height="780" loading="eager" decoding="async" />
+          </a>
+          <div class="version__texto">
+            <p class="etiqueta">{v.etiqueta}</p>
+            <h2 class="version__titulo">{v.titulo}</h2>
+            <p class="texto-2">{v.texto}</p>
+            <ul class="puntos version__puntos">{v.puntos.map((p) => <li>{p}</li>)}</ul>
+            <a class="boton boton--primario" href={v.href}>Jugar la {v.etiqueta.toLowerCase()} <span aria-hidden="true">→</span></a>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="seccion contenedor" aria-labelledby="t-comun">
+    <div class="comun">
+      <div class="cabeza-seccion">
+        <p class="etiqueta">Lo mismo en las dos</p>
+        <Titulo id="t-comun" texto="Cambia la cara, no el juego" destacado="no el juego" />
+        <p class="intro">Las dos versiones leen el mismo archivo de contenido: si un grupo agrega un mito o corrige una situación, cambia en las dos a la vez</p>
+      </div>
+      <ul class="puntos comun__lista">{comun.map((c) => <li>{c}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="seccion contenedor" aria-labelledby="t-como">
+    <div class="cabeza-seccion">
+      <p class="etiqueta">Cómo se juega</p>
+      <Titulo id="t-como" texto="Dos niveles y un perfil" destacado="un perfil" />
+    </div>
+    <ol class="pasos">
+      {pasos.map((p) => (
+        <li class="tarjeta paso">
+          <span class="numero paso__n" aria-hidden="true">{p.n}</span>
+          <h3 class="paso__titulo">{p.titulo}</h3>
+          <p class="texto-2">{p.texto}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="seccion contenedor" aria-labelledby="t-grupos">
+    <div class="quienes">
+      <div class="cabeza-seccion">
+        <p class="etiqueta">Quién lo construyó</p>
+        <Titulo id="t-grupos" texto="Cada grupo le puso una parte" destacado="una parte" />
+        <p class="intro">Lo armamos en la Sesión 13 con la receta de cinco partes y los prompts AS a BB, siempre en el mismo chat. El contenido está en revisión con Bienestar Universitario y Pluridiversos</p>
+        {sesion13 && <p><a class="boton boton--secundario boton--chico" href={url(rutaSesion(sesion13))}>Ver la Sesión 13 <span aria-hidden="true">→</span></a></p>}
+      </div>
+      <ul class="grupos">
+        {grupos.map(([g, parte]) => (
+          <li class="grupos__fila"><span class="grupos__grupo">{g}</span><span>{parte}</span></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion contenedor" aria-labelledby="t-ayuda">
+    <div class="tarjeta tarjeta--lima ayuda">
+      <div class="ayuda__cabeza">
+        <p class="etiqueta">¿Necesitas ayuda ahora?</p>
+        <h2 id="t-ayuda" class="titulo titulo--3">Hay con quién hablar</h2>
+        <p class="texto-2">Si algo de lo que aparece en el juego te pasó o lo estás viviendo, estas son las líneas y rutas que puedes usar</p>
+      </div>
+      <ul class="ayuda__lista">
+        {J.ayuda.map((a) => (
+          <li>
+            <b>{a.t}</b>
+            {a.url ? <a href={a.url} target="_blank" rel="noopener">{a.d}<span class="sr"> (abre en otra pestaña)</span></a> : <span>{a.d}</span>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .juego-cabeza .cabeza-seccion { margin-bottom: 40px; }
+  .versiones { list-style: none; padding: 0; display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); }
+  .version { display: grid; gap: 24px; grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 560px) { .version { grid-template-columns: minmax(150px, 200px) 1fr; } }
+  .version__imagen { display: block; border-radius: 22px; overflow: hidden; background: var(--fondo); max-width: 220px; }
+  .version__imagen img { width: 100%; height: auto; aspect-ratio: 1 / 2; object-fit: cover; object-position: top; transition: transform .25s ease; }
+  .version__imagen:hover img { transform: scale(1.03); }
+  .version__texto { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; min-width: 0; }
+  .version__titulo { font-size: clamp(28px, 3.4vw, 36px); font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
+  .version__puntos { font-size: 16px; color: var(--texto-2); margin-bottom: 6px; }
+
+  .comun { display: grid; gap: 32px; }
+  @media (min-width: 960px) { .comun { grid-template-columns: 1fr 1fr; align-items: start; } .comun .cabeza-seccion { margin-bottom: 0; } }
+  .comun__lista { font-size: 18px; }
+
+  .pasos { list-style: none; padding: 0; display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+  .paso { display: flex; flex-direction: column; gap: 12px; }
+  .paso__n { font-size: 72px; }
+  .paso__titulo { font-size: 26px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+
+  .quienes { display: grid; gap: 32px; }
+  @media (min-width: 960px) { .quienes { grid-template-columns: 1fr 1fr; align-items: start; } .quienes .cabeza-seccion { margin-bottom: 0; } }
+  .grupos { list-style: none; padding: 0; border-top: 1px solid var(--linea); }
+  .grupos__fila { display: grid; gap: 4px 20px; grid-template-columns: 1fr; padding: 16px 0; border-bottom: 1px solid var(--linea); }
+  @media (min-width: 560px) { .grupos__fila { grid-template-columns: 170px 1fr; } }
+  .grupos__grupo { font-weight: 800; color: var(--acento-texto); }
+
+  .ayuda { display: grid; gap: 28px; }
+  @media (min-width: 860px) { .ayuda { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .ayuda__cabeza { display: flex; flex-direction: column; gap: 12px; }
+  .ayuda .etiqueta { color: var(--sobre-acento); }
+  .ayuda__lista { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .ayuda__lista li { display: flex; flex-direction: column; gap: 2px; padding: 14px 20px; border-radius: 20px; background: var(--sobre-acento); color: var(--sobre-oscuro); }
+  .ayuda__lista a { color: var(--acento); font-weight: 600; }
+  .ayuda__lista a:hover { color: #fff; }
+  .ayuda__lista span:not(.sr) { color: #C9D4CC; }
+
+  @media (prefers-reduced-motion: reduce) { .version__imagen:hover img { transform: none; } }
+</style>

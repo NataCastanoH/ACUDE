@@ -362,9 +362,13 @@ svg.px { display: block; shape-rendering: crispEdges; flex: none; }
   </div>
 </div>
 
+<script src="../contenido.js"></script>
 <script>
 /* ================= Contenido ================= */
-const ITEMS = [
+/* En el sitio, la arcade y la plana leen juego/contenido.js: el mismo contenido y las mismas reglas,
+   solo cambia la interfaz. Lo de abajo es de muestra y solo se usa si ese archivo no está */
+const J = window.JUEGO;
+let ITEMS = [
   {
     claim: "Si hablo con acento de otra región o uso mi lengua materna en clase, me veo menos profesional",
     answer: "mito",
@@ -382,7 +386,7 @@ const ITEMS = [
   }
 ];
 
-const SCENES = [
+let SCENES = [
   {
     place: "Grupo de WhatsApp de la materia",
     text: "Alguien comparte un meme que se burla del acento de una compañera y varios reaccionan con risas",
@@ -416,6 +420,12 @@ const PROFILES = {
   transforma: { name: "TRANSFORMA", phrase: "Buscas cambiar la forma de hacer las cosas para que todas las personas quepan", action: "En tu próximo trabajo en grupo, propón repartir las tareas para que cada quien elija" }
 };
 function allyProfile(choices) {
+  if (J) {
+    const votos = {};
+    choices.forEach(c => { votos[c] = (votos[c] || 0) + 1; });
+    const p = J.perfilDe(votos);
+    return { name: p.texto.toUpperCase(), phrase: p.explicacion, action: p.opciones };
+  }
   if (choices.includes("transforma")) return PROFILES.transforma;
   if (choices.includes("activa")) return PROFILES.activa;
   if (choices.includes("acompana")) return PROFILES.acompana;
@@ -423,13 +433,32 @@ function allyProfile(choices) {
 }
 
 /* ================= Reglas ================= */
-const TIME = 10;          // segundos de la barra de bono
-const BASE = 100;         // por acierto
-const SPEED_MAX = 50;     // bono por rapidez
-const STREAK_STEP = 25;   // bono por cada acierto seguido
-const ALLY_PTS = 50;      // por cada situación de la parte 2
-const LIFE_PTS = 50;      // bono final por cada vida que quede
-const GOAL = 0.5;         // porcentaje mínimo de aciertos para pasar al nivel 2
+const RG = J ? J.reglas : { segundos: 10, acierto: 100, rapidez: 50, racha: 25, aliado: 50, vida: 50, meta: 0.5, vidas: 2 };
+const TIME = RG.segundos;        // segundos de la barra de bono
+const BASE = RG.acierto;         // por acierto
+const SPEED_MAX = RG.rapidez;    // bono por rapidez
+const STREAK_STEP = RG.racha;    // bono por cada acierto seguido
+const ALLY_PTS = RG.aliado;      // por cada situación de la parte 2
+const LIFE_PTS = RG.vida;        // bono final por cada vida que quede
+const GOAL = RG.meta;            // porcentaje mínimo de aciertos para pasar al nivel 2
+const livesFor = (m, n) => J ? J.vidasDe(m, n) : m === "coop" ? n + 1 : RG.vidas;
+const goalTxt = "META " + Math.round(GOAL * 100) + "%";
+const HELP = J ? J.ayuda : [
+  { t: "Si estás en peligro ahora", d: "Línea 123, emergencias" },
+  { t: "Violencias contra las mujeres", d: "Línea 155, orientación gratuita en todo el país" },
+  { t: "Bienestar Universitario TdeA", d: "Programa Pluridiversos, solicitudes en línea", url: "https://tdea.edu.co/micrositios/bienestar-universitario/pluridiverso/" }
+];
+
+/* Cada partida saca al azar sus mitos y situaciones del contenido compartido */
+function sharedRound() {
+  const r = J.nuevaRonda();
+  ITEMS = r.mitos.map(m => ({ claim: m.texto, answer: (m.correcta || "").toLowerCase().trim(), why: m.explicacion, route: m.ruta }));
+  SCENES = r.dilemas.map(d => {
+    const perf = J.partes(d.correcta), next = J.partes(d.explicacion);
+    return { place: "", text: (d.texto || "").replace(/\s*\n\s*/g, " "), route: d.ruta,
+      options: J.partes(d.opciones).map((label, k) => ({ profile: perf[k] || "Observa", label, next: next[k] || "" })) };
+  });
+}
 
 const ICONS = {
   star:  ["...#...","..###..","#######",".#####.","..###..",".##.##.","##...##"],
@@ -451,6 +480,7 @@ const BADGES = {
   equipo:   { icon: "team", name: "EQUIPO", desc: "Superaron el nivel 1 juntos" }
 };
 function rankTitle(p) {
+  if (J) return J.rango(p, J.maxPuntos(ITEMS.length, SCENES.length)).toUpperCase();
   if (p >= 550) return "LEYENDA DE LA U";
   if (p >= 380) return "ALIADO EXPERTO";
   if (p >= 220) return "ALIADO EN FORMACIÓN";
@@ -759,7 +789,8 @@ function pauseMenu() {
   menu([
     { label: "SEGUIR JUGANDO", act: resume },
     { label: "CAMBIAR COLORES", act: () => colorsScreen(pb, pauseMenu) },
-    musicItem("pause-", 2),
+    { label: "¿NECESITAS AYUDA AHORA?", act: () => helpScreen(pb, pauseMenu) },
+    musicItem("pause-", 3),
     { label: "VOLVER AL MENÚ PRINCIPAL", hint: inPlay ? "Se pierde la partida en curso" : null, act: inPlay ? confirmExit : exitToTitle }
   ], pb, "pause-");
   setAB(["B", "SEGUIR"], ["A", "ELEGIR"]);
@@ -903,14 +934,17 @@ function title() {
   screen.appendChild(logo);
   eco("idle", "ECO TE ACOMPAÑA");
   const rules = el("div", "rules");
-  rules.appendChild(el("p", "sm", "+100 por acierto, bono si respondes rápido y bono por racha"));
+  rules.appendChild(el("p", "sm", "+" + BASE + " por acierto, bono si respondes rápido y bono por racha"));
   rules.appendChild(el("p", "sm", "Cada error cuesta una vida, si se acaban hay que reintentar"));
-  rules.appendChild(el("p", "sm", "Para pasar al nivel 2 hay que acertar al menos el 50%"));
+  rules.appendChild(el("p", "sm", "Para pasar al nivel 2 hay que acertar al menos el " + Math.round(GOAL * 100) + "%"));
   rules.appendChild(el("p", "sm", "No pedimos datos personales, los récords se guardan solo en este celular"));
   screen.appendChild(rules);
   screen.appendChild(el("div", "eb blinker", "¿Cuántos juegan en este celular?"));
   const items = [1, 2, 3, 4].map(n => ({ label: n === 1 ? "1 JUGADOR" : n + " JUGADORES", act: () => n === 1 ? startGame(1, "solo") : chooseMode(n) }));
   items.push({ label: "VER RÉCORDS", act: records });
+  if (J && J.de("pregunta").length) items.push({ label: "PREGÚNTALE", hint: "Lo que nadie se atreve a preguntar en voz alta", act: () => askScreen(0) });
+  if (J && J.funciones.dejaPregunta && J.formularioPregunta) items.push({ label: "DEJA TU PREGUNTA", hint: "Así el juego sigue creciendo", href: J.formularioPregunta });
+  items.push({ label: "¿NECESITAS AYUDA AHORA?", act: () => { phase = "title"; clear(); hud(); helpScreen(screen, title); } });
   items.push({ label: "COLORES: " + PALETTES[curPal].name, act: () => colorsScreen(screen, title) });
   items.push(musicItem("menu-", items.length));
   menu(items, screen);
@@ -923,8 +957,8 @@ function chooseMode(n) {
   screen.appendChild(el("div", "eb", n + " jugadores"));
   screen.appendChild(el("p", "big", "ELIGE EL MODO"));
   menu([
-    { label: "COOPERATIVO", hint: "Un solo equipo, puntos y " + (n + 1) + " vidas compartidas", act: () => startGame(n, "coop") },
-    { label: "COMPETITIVO", hint: "Cada quien con 2 vidas y su propio puntaje", act: () => startGame(n, "versus") }
+    { label: "COOPERATIVO", hint: "Un solo equipo, puntos y " + livesFor("coop", n) + " vidas compartidas", act: () => startGame(n, "coop") },
+    { label: "COMPETITIVO", hint: "Cada quien con " + livesFor("versus", n) + " vidas y su propio puntaje", act: () => startGame(n, "versus") }
   ], screen);
   setAB(["B", "VOLVER"], ["A", "ELEGIR"]);
   H.b = () => { sfx("tap"); title(); };
@@ -934,7 +968,8 @@ function resetRun() {
   scores = Array(players).fill(0);
   streaks = Array(players).fill(0);
   stats = Array.from({ length: players }, () => ({ correct: 0, miss: 0, fast: false }));
-  maxLives = mode === "coop" ? players + 1 : 2;
+  if (J) sharedRound();
+  maxLives = livesFor(mode, players);
   lives = Array(mode === "coop" ? 1 : players).fill(maxLives);
   i = 0; picks = []; times = []; results = [];
   levelCorrect = 0; levelAnswers = 0;
@@ -1048,7 +1083,7 @@ function chipsFor(r, parent) {
 function goalLine(parent) {
   const m = el("div", "meta");
   const pct = levelAnswers ? Math.round(levelCorrect / levelAnswers * 100) : 0;
-  m.appendChild(el("span", "", "META 50%"));
+  m.appendChild(el("span", "", goalTxt));
   m.appendChild(el("span", "", "VAN " + pct + "%"));
   parent.appendChild(m);
 }
@@ -1061,6 +1096,7 @@ function feedbackSingle(r) {
   chipsFor(r, screen);
   screen.appendChild(el("span", "tag", item.answer === "mito" ? "ES UN MITO" : "ES UN DERECHO"));
   screen.appendChild(el("p", "txt", item.why));
+  if (item.route) screen.appendChild(el("p", "sm", "A dónde ir: " + item.route));
   goalLine(screen);
   if (r.ok) { sfx("ok"); pop("+" + r.total); burst(); eco("happy", "¡BIEN!"); } else { sfx("bad"); shake(); eco("sad", "¡ÁNIMO, SE APRENDE!"); }
   nextFromClaim();
@@ -1091,6 +1127,7 @@ function reveal() {
   screen.appendChild(el("p", "big", count === played.length ? "¡TODOS ACERTARON!" : count === 0 ? "ESTA VEZ NADIE" : "ACERTARON " + count + " DE " + played.length));
   screen.appendChild(el("span", "tag", item.answer === "mito" ? "ES UN MITO" : "ES UN DERECHO"));
   screen.appendChild(el("p", "txt", item.why));
+  if (item.route) screen.appendChild(el("p", "sm", "A dónde ir: " + item.route));
   const rows = el("div", "rows");
   for (let k = 0; k < players; k++) {
     const row = el("div", "row");
@@ -1167,7 +1204,7 @@ function levelCheck() {
   screen.appendChild(bar);
   const m = el("div", "meta");
   m.appendChild(el("span", "", levelCorrect + " DE " + levelAnswers));
-  m.appendChild(el("span", "", "META 50%"));
+  m.appendChild(el("span", "", goalTxt));
   screen.appendChild(m);
   if (ok) {
     screen.appendChild(el("p", "txt", mode === "coop" ? "Lo lograron como equipo, el nivel 2 está desbloqueado" : "El nivel 2 está desbloqueado"));
@@ -1199,7 +1236,7 @@ function scene() {
   const sc = SCENES[j];
   clear(); hud();
   screen.appendChild(el("div", "eb", "Nivel 2 · Situación " + (j + 1) + "/" + SCENES.length + (players > 1 ? " · Decidan juntos" : "")));
-  screen.appendChild(el("span", "tag", sc.place.toUpperCase()));
+  if (sc.place) screen.appendChild(el("span", "tag", sc.place.toUpperCase()));
   screen.appendChild(el("p", "txt", sc.text));
   menu(sc.options.map(op => ({ label: op.label, act: () => choose(op) })), screen);
   setAB(null, ["A", "ELEGIR"]);
@@ -1216,6 +1253,7 @@ function choose(op) {
   c.appendChild(el("span", "chip on", "+" + ALLY_PTS + " ALIADO" + (players > 1 ? " C/U" : "")));
   screen.appendChild(c);
   screen.appendChild(el("p", "txt", op.next));
+  if (SCENES[j].route) screen.appendChild(el("p", "sm", "Lo que aplicaba: " + SCENES[j].route));
   screen.appendChild(el("p", "sm", "Si vives algo parecido, en Bienestar Universitario pueden orientarte"));
   sfx("choice"); pop("+" + ALLY_PTS); eco("happy", "+" + ALLY_PTS + " ALIADO");
   setAB(null, ["A", j < SCENES.length - 1 ? "SIGUE" : "RESULTADO"]);
@@ -1335,8 +1373,10 @@ function results_() {
   ].join("\n");
 
   const items = [];
-  items.push({ label: "COMPARTIR POR WHATSAPP", hint: "Envía el perfil de aliado", href: "https://wa.me/?text=" + encodeURIComponent(msg) });
-  items.push({ label: "COPIAR MENSAJE", act: () => copyMsg(msg) });
+  if (!J || J.funciones.compartir) {
+    items.push({ label: "COMPARTIR POR WHATSAPP", hint: "Envía el perfil de aliado", href: "https://wa.me/?text=" + encodeURIComponent(msg) });
+    items.push({ label: "COPIAR MENSAJE", act: () => copyMsg(msg) });
+  }
   if (save.length) items.push({ label: save.length > 1 ? "GUARDAR RÉCORDS" : "GUARDAR RÉCORD", act: () => initials(save, 0) });
   items.push({ label: "JUGAR OTRA VEZ", act: title });
   items.push({ label: "VER RÉCORDS", act: records });
@@ -1446,6 +1486,45 @@ function records() {
   H.a = H.b = H.start = () => { sfx("tap"); title(); };
 }
 
+/* ================= Pregúntale ================= */
+function askScreen(start) {
+  phase = "title";
+  clear(); hud();
+  screen.appendChild(el("div", "eb", "Pregúntale"));
+  screen.appendChild(el("p", "big", "LO QUE NADIE PREGUNTA EN VOZ ALTA"));
+  menu(J.de("pregunta").map((q, n) => ({ label: q.texto, act: () => answerScreen(n) })), screen, "ask-", { start });
+  setAB(["B", "VOLVER"], ["A", "VER"]);
+  H.b = () => { sfx("tap"); title(); };
+  eco("idle", "PREGÚNTALE");
+}
+function answerScreen(n) {
+  const q = J.de("pregunta")[n];
+  phase = "title";
+  clear(); hud();
+  screen.appendChild(el("div", "eb", "Pregúntale"));
+  screen.appendChild(el("p", "txt", q.texto));
+  screen.appendChild(el("span", "tag", "RESPUESTA"));
+  (q.explicacion || "").split("\n").forEach(l => screen.appendChild(el("p", "sm", l)));
+  if (q.ruta) screen.appendChild(el("p", "sm", "A dónde ir: " + q.ruta));
+  setAB(["B", "VOLVER"], ["A", "OTRA PREGUNTA"]);
+  H.a = H.b = () => { sfx("tap"); askScreen(n); };
+  eco("happy", "AQUÍ ESTÁ");
+}
+
+/* ================= ¿Necesitas ayuda ahora? ================= */
+function helpScreen(box, back) {
+  stopTimer();
+  H = {};
+  box.innerHTML = "";
+  box.scrollTop = 0;
+  box.appendChild(el("div", "eb", "¿Necesitas ayuda ahora?"));
+  box.appendChild(el("p", "big", "AQUÍ NO ESTÁS SOLO"));
+  menu(HELP.map(a => a.url ? { label: a.t, hint: a.d, href: a.url } : { label: a.t, hint: a.d, act: () => {} }), box, "help-");
+  setAB(["B", "VOLVER"], ["A", "ABRIR"]);
+  H.b = () => { sfx("tap"); back(); };
+  eco("idle", "AQUÍ NO ESTÁS SOLO");
+}
+
 /* ================= Paletas de color ================= */
 const PALETTES = {
   musgo: { name: "MUSGO", hint: "Verde salvia suave, recomendada",
@@ -1500,6 +1579,7 @@ try { savedPal = localStorage.getItem("moda-palette") || "musgo"; } catch (e) {}
 applyPalette(savedPal);
 paintSound();
 title();
+if (J) J.cargar();
 </script>
 
 </body></html>
