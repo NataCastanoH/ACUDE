@@ -717,16 +717,18 @@
     "titulo_corto": "Tu primera app",
     "linea": "Sin saber programar",
     "titulo": "Crear con IA I: de preguntar a construir",
-    "tipo_reto": null,
+    "tipo_reto": "Juego o torneo",
     "fecha": null,
     "semana": "2026-11-03",
     "unidad": "Crear con IA",
-    "objetivo": "",
-    "resumen": "",
-    "actividad": "",
+    "objetivo": "Crear tu primera app de una sola página con IA, cambiarla pidiéndolo en palabras y construir entre los seis grupos el juego de la muestra cultural.",
+    "resumen": "Tú no programas: pides, miras y corriges. Pasamos de pedirle respuestas a la IA a pedirle cosas que funcionan, con la receta de cinco partes: qué es, para quién, qué hace, cómo se ve y qué no hace. Con los prompts AS (Tu primera app) y AT (Cámbiala en palabras) creas y mejoras tu app, y con AU (Del chat a la tabla del juego), AV (Auditoría antes de publicar) y AW (Agrégale una función al juego) cada grupo construyó su pieza del juego, que se alimenta de una hoja de Google: si cambia la hoja, cambia el juego.",
+    "actividad": "Reto comunitario: comparte el juego con alguien que no esté en el curso y trae a la próxima clase qué perfil le salió y qué le pareció.",
     "herramientas": [
       "Claude (artefactos y Proyectos)",
-      "Gemini (Canvas)"
+      "Gemini (Canvas)",
+      "ChatGPT",
+      "Google Sheets"
     ],
     "presentacion": "materiales/S13-presentacion.pdf",
     "bitacora": "materiales/S13-bitacora.pdf",
@@ -760,11 +762,11 @@
       }
     ],
     "caja": {
-      "herramienta": "[Herramienta de la sesión]",
-      "para_que": "[Para qué sirve]",
-      "truco": "[Truco de una línea]"
+      "herramienta": "Gemini con Canvas o Claude con artefactos",
+      "para_que": "Crear una app de una sola página y compartirla con un enlace",
+      "truco": "La parte que más se olvida es la última: qué no hace"
     },
-    "estado": "borrador"
+    "estado": "publicada"
   },
   {
     "numero": 14,
