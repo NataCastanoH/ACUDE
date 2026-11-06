@@ -140,7 +140,7 @@
     "semana": "2026-09-01",
     "unidad": "Fundamentos y prompting",
     "objetivo": "Aplicar tres técnicas de prompting avanzado: few-shot (enseñar con ejemplos), razonamiento paso a paso e iteración.",
-    "resumen": "Tres técnicas avanzadas: few-shot (enseñarle a la IA con uno o dos ejemplos del formato que quieres), paso a paso (pedir el razonamiento antes del resultado) e iteración (ajustar la respuesta sin empezar de cero, incluyendo decirle qué NO quieres). Incluye conversación de tres turnos, encuesta relámpago para reconocer una respuesta iterada, plantillas G, H, I y J, y herramientas para guardar plantillas: Proyectos de ChatGPT y Claude, Gems de Gemini, NotebookLM y Perplexity. El Recetario de Prompts del grupo crece cada semana en Drive.",
+    "resumen": "Tres técnicas avanzadas: few-shot (enseñarle a la IA con uno o dos ejemplos del formato que quieres), paso a paso (pedir el razonamiento antes del resultado) e iteración (ajustar la respuesta sin empezar de cero, incluyendo decirle qué NO quieres). Incluye conversación de tres turnos, encuesta relámpago para reconocer una respuesta iterada, plantillas G, H, I y J, y herramientas para guardar plantillas: Proyectos de ChatGPT y Claude, Gems de Gemini, NotebookLM y Perplexity.",
     "actividad": "Actividad \"De antes a después\" en equipos: reciben un prompt \"antes\" por chat privado, iteran 12 a 15 minutos con su propia IA aplicando few-shot, paso a paso o iteración, y comparten el resultado en un minuto. Reto autónomo: elegir un prompt usado en otra sesión o materia, iterarlo y subir la comparativa antes y después al portafolio digital.",
     "herramientas": [
       "ChatGPT",

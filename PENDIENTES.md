@@ -42,5 +42,4 @@ Todo lo que el sitio muestra hoy entre corchetes, o que necesita una decisión t
 
 ## Lo que ya se publica y conviene que sepas
 
-- Las bitácoras PDF tienen notas internas que ya eran públicas en Base44, por ejemplo «Por confirmar» y el enlace al Recetario de Prompts del grupo en Google Docs (sesión 4), que dice «que cualquiera con el enlace pueda editar». Si no quieres esas notas en público, exporta versiones limpias y reemplaza los PDF
 - Las presentaciones de las sesiones 7, 8, 9 y 12 se publican desde el zip local; Base44 no las tenía
