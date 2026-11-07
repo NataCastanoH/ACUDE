@@ -15,6 +15,7 @@ const J = ventana.JUEGO;
 const cuenta = (tipo) => J.de(tipo).length;
 const R = J.reglas;
 const perfiles = J.de('perfil');
+const sinNombre = J.nombre === 'Juego';
 const sesion13 = todasLasSesiones.find((s) => s.numero === 13 && s.estado === 'publicada');
 
 const versiones = [
@@ -22,11 +23,11 @@ const versiones = [
     id: 'plana',
     etiqueta: 'Versión plana',
     titulo: 'Clara y tranquila',
-    texto: 'Letra grande, botones amplios y cinco paletas de color. Parcerx te acompaña y te cuenta cómo vas',
+    texto: 'Letra grande, botones amplios y cinco paletas de color, con un marcador que te cuenta cómo vas',
     puntos: ['Para leer con calma desde el celular', 'Buena para proyectar en clase', 'Se juega tocando la pantalla'],
     href: url('juego/plana/'),
     imagen: url('juego/capturas/plana.jpg'),
-    alt: 'Pantalla de inicio de la versión plana de Mito o Derecho',
+    alt: 'Pantalla de inicio de la versión plana del juego',
   },
   {
     id: 'arcade',
@@ -36,7 +37,7 @@ const versiones = [
     puntos: ['Para jugar en grupo como en una maquinita', 'Se juega tocando la consola o con el teclado', 'Cinco paletas de color y música que se puede apagar'],
     href: url('juego/arcade/'),
     imagen: url('juego/capturas/arcade.jpg'),
-    alt: 'Pantalla de inicio de la versión arcade de Mito o Derecho, con forma de consola',
+    alt: 'Pantalla de inicio de la versión arcade del juego, con forma de consola',
   },
 ];
 
@@ -64,12 +65,12 @@ const grupos = [
   ['Sábado 12-2', 'La revisión del tono, compartir y los créditos'],
 ];
 ---
-<Base titulo={J.nombre} actual="juego" descripcion={`${J.nombre}: el juego sobre diversidad, género e inclusión en la U que construimos entre los seis grupos del ACUDE. Un solo juego con dos caras, plana y arcade.`}>
+<Base titulo={J.nombre} actual="juego" descripcion={`El juego sobre diversidad, género e inclusión en la U que construimos entre los seis grupos del ACUDE. Un solo juego con dos caras, plana y arcade.`}>
   <section class="seccion contenedor juego-cabeza">
     <div class="cabeza-seccion">
       <p class="etiqueta">Muestra cultural · TdeA 2026-2</p>
-      <Titulo nivel={1} texto={J.nombre} destacado="Derecho" />
-      <p class="intro">El juego sobre diversidad, género e inclusión en la U que construimos entre los seis grupos del curso. Es un solo juego con dos caras: las mismas preguntas y las mismas reglas, elige la que más te guste</p>
+      <Titulo nivel={1} texto={J.nombre} destacado={J.nombre.split(' ').at(-1)} />
+      <p class="intro">El juego sobre diversidad, género e inclusión en la U que construimos entre los seis grupos del curso. Es un solo juego con dos caras: las mismas preguntas y las mismas reglas, elige la que más te guste{sinNombre && '. Todavía no tiene nombre: lo están votando los grupos'}</p>
     </div>
 
     <ul class="versiones">

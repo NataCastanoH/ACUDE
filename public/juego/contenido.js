@@ -1,12 +1,12 @@
 /* ==========================================================
-   MITO O DERECHO · lo que comparten las dos versiones del juego
+   JUEGO · lo que comparten las dos versiones del juego
    La versión plana (juego/plana/) y la arcade (juego/arcade/) leen este archivo:
    el contenido, las reglas y las funciones encendidas son las mismas,
    lo único que cambia es la interfaz
    ========================================================== */
 window.JUEGO = (() => {
   const J = {
-    nombre: "Mito o Derecho",               // Martes: se vota en el chat
+    nombre: "Juego",                        // Martes: se vota en el chat; mientras tanto se llama solo Juego
     creditos: [],                           // cada grupo agrega su línea, ej: "Martes · nombre y mitos"
     // Hoja de Google con el contenido (compartida como "cualquier persona con el enlace puede ver")
     // Pega aquí solo el ID que va entre /d/ y /edit en el enlace de la hoja
@@ -50,7 +50,7 @@ window.JUEGO = (() => {
       {"tipo": "mito", "texto": "Burlarse del acento de alguien de otra región es solo recocha", "opciones": "", "correcta": "mito", "explicacion": "Los regionalismos y las expresiones culturales son parte de la inclusión que el TdeA se comprometió a cuidar", "ruta": "Pluridiversos", "fuente": "Res. Académica 002 de 2023, TdeA (Educación Superior Inclusiva e Intercultural)", "estado": "por validar"},
       {"tipo": "mito", "texto": "Si no me pasó a mí, no puedo buscar orientación", "opciones": "", "correcta": "mito", "explicacion": "Si lo viste también puedes buscar orientación en Bienestar", "ruta": "Bienestar Universitario", "fuente": "Por confirmar con Bienestar", "estado": "por validar"},
       {"tipo": "mito", "texto": "Si una persona no parece tener una discapacidad, no puede pedir ajustes", "opciones": "", "correcta": "mito", "explicacion": "Hay discapacidades y condiciones que no se ven, y también tienen derecho a ajustes razonables", "ruta": "Ruta de ajustes razonables, Pluridiversos", "fuente": "Ley 1618 de 2013", "estado": "por validar"},
-      {"tipo": "mito", "texto": "La lengua de señas colombiana está reconocida por la ley", "opciones": "", "correcta": "derecho", "explicacion": "Está reconocida como la lengua de la comunidad sorda en Colombia", "ruta": "Pluridiversos", "fuente": "Ley 982 de 2005", "estado": "por validar"},
+      {"tipo": "mito", "texto": "La lengua de señas colombiana está reconocida por la ley", "opciones": "", "correcta": "derecho", "explicacion": "Está reconocida como la lengua de la comunidad sorda en Colombia", "ruta": "Pluridiversos", "fuente": "Ley 324 de 1996 y Ley 982 de 2005", "estado": "por validar"},
       {"tipo": "mito", "texto": "Colombia se reconoce como un país con diversidad étnica y cultural", "opciones": "", "correcta": "derecho", "explicacion": "Lo dice la Constitución, y el TdeA trabaja con enfoque en etnias y pueblos originarios", "ruta": "Pluridiversos", "fuente": "Constitución Política, art. 7", "estado": "por validar"},
       {"tipo": "mito", "texto": "Todas las personas tienen derecho al libre desarrollo de su personalidad", "opciones": "", "correcta": "derecho", "explicacion": "Cómo te vistes, cómo te ves y cómo vives tu identidad hacen parte de ese derecho", "ruta": "Pluridiversos", "fuente": "Constitución Política, art. 16", "estado": "por validar"},
       {"tipo": "mito", "texto": "Si alguien se viste distinto, es normal que el grupo opine", "opciones": "", "correcta": "mito", "explicacion": "Opinar del cuerpo o la ropa de alguien sin que lo pida puede hacerle daño, el respeto va primero", "ruta": "Pluridiversos", "fuente": "Constitución Política, art. 16", "estado": "por validar"},

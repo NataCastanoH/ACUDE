@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mito o Derecho · ACUDE</title>
+<title>Juego · ACUDE</title>
 <meta name="description" content="Juego sobre diversidad, género e inclusión en el TdeA, construido clase a clase por estudiantes del ACUDE Herramientas de IA">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
    vive en juego/contenido.js; aquí queda solo lo propio de la versión plana */
 const J = window.JUEGO;
 const CONFIG = Object.assign({}, J, {
-  personaje: "Parcerx",                     // Sábado 10-12: personaje y tono
+  personaje: "",                           // Sábado 10-12: personaje y tono, se vota; vacío mientras tanto
   bienvenida: "No te pregunto lo que sabes\nte pregunto lo que harías",
   version: "v0.3",
   // Música de fondo, la misma de la versión arcade
@@ -188,8 +188,8 @@ const partes = t => (t||"").split("||").map(x=>x.trim()).filter(Boolean);
 const esc = t => String(t||"").replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const de = tipo => DATOS.filter(r => (r.tipo||"").toLowerCase().trim()===tipo && (r.estado||"").toLowerCase()!=="descartada");
 const quieto = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const guardar = (k, v) => { try { localStorage.setItem("vuelta-" + k, v); } catch (e) {} };
-const leer = k => { try { return localStorage.getItem("vuelta-" + k); } catch (e) { return null; } };
+const guardar = (k, v) => { try { localStorage.setItem("juego-" + k, v); } catch (e) {} };
+const leer = k => { try { return localStorage.getItem("juego-" + k); } catch (e) { return null; } };
 
 async function cargarHoja(){
   if (await J.cargar()) { DATOS = J.filas; $("#ver").textContent = CONFIG.version + " · en vivo"; }
@@ -457,7 +457,7 @@ function inicio(){
   titulo.append(h("span", { class: "l" }, n.at(-1)));
   const mejor = cargarRecords()[0];
   pantalla(
-    etq(CONFIG.personaje + " te invita"),
+    etq(CONFIG.personaje ? CONFIG.personaje + " te invita" : "Te damos la bienvenida"),
     titulo,
     h("p", { class: "lead" }, CONFIG.bienvenida),
     h("span", { class: "chip-rec" }, mejor ? "Récord de este celular: " + mejor.ini + " · " + mejor.pts : "Todavía no hay récords en este celular"),
@@ -469,7 +469,7 @@ function inicio(){
       h("ul", {}, CONFIG.creditos.length ? CONFIG.creditos.map(c => h("li", {}, c)) : h("li", {}, "Todavía nadie, ¿lo construimos?")),
       h("p", { class: "nota" }, "Estudiantes del ACUDE Herramientas de IA, TdeA 2026-2", h("br"), "Contenido por validar con Bienestar Universitario"))
   );
-  voz("calma", "te acompaña");
+  voz("calma", CONFIG.personaje ? "te acompaña" : "¿jugamos?");
 }
 
 function cuantos(){
@@ -921,7 +921,7 @@ function preguntale(){
   fase = "inicio"; enInicio = false;
   pararReloj();
   const lista = de("pregunta");
-  $("#vista").innerHTML = `<button class="volver" onclick="inicio()">← Volver</button><h2>Pregúntale a ${esc(CONFIG.personaje)}</h2>
+  $("#vista").innerHTML = `<button class="volver" onclick="inicio()">← Volver</button><h2>Pregúntale${CONFIG.personaje ? " a " + esc(CONFIG.personaje) : ""}</h2>
     <p class="lead" style="margin-bottom:14px">Respuestas cortas que siempre te llevan a la ruta oficial</p>
     ${CONFIG.funciones.buscador ? `<input class="buscar" id="q" placeholder="Escribe tu duda…" oninput="filtrar()">` : ""}
     <div class="faq" id="faq">${lista.map(r=>`<details data-t="${esc((r.texto+" "+r.explicacion).toLowerCase())}"><summary>${esc(r.texto)}</summary><p>${esc(r.explicacion)}<br><span class="ruta">→ ${esc(r.ruta||"Bienestar Universitario")}</span></p></details>`).join("")}</div>`;

@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Mito o Derecho Arcade</title>
+<title>Juego · Arcade</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -330,7 +330,7 @@ svg.px { display: block; shape-rendering: crispEdges; flex: none; }
 <div class="wrap">
   <div class="console">
     <div class="bezel">
-      <div class="bezel-top"><canvas class="mascot" id="mascot" width="18" height="12" aria-hidden="true"></canvas><div class="wordmark"><b>MITO O DERECHO</b><span class="say" id="say">ECO TE ACOMPAÑA</span></div><button type="button" class="menu-btn" id="btn-menu" hidden>MENÚ</button><span class="led" aria-hidden="true"></span></div>
+      <div class="bezel-top"><canvas class="mascot" id="mascot" width="18" height="12" aria-hidden="true"></canvas><div class="wordmark"><b>JUEGO</b><span class="say" id="say">ECO TE ACOMPAÑA</span></div><button type="button" class="menu-btn" id="btn-menu" hidden>MENÚ</button><span class="led" aria-hidden="true"></span></div>
       <div class="lcd" id="lcd">
         <div class="hud" id="hud"></div>
         <div class="screen" id="screen" aria-live="polite"></div>
@@ -441,6 +441,7 @@ const STREAK_STEP = RG.racha;    // bono por cada acierto seguido
 const ALLY_PTS = RG.aliado;      // por cada situación de la parte 2
 const LIFE_PTS = RG.vida;        // bono final por cada vida que quede
 const GOAL = RG.meta;            // porcentaje mínimo de aciertos para pasar al nivel 2
+const GAME_NAME = J ? J.nombre : "Juego";
 const livesFor = (m, n) => J ? J.vidasDe(m, n) : m === "coop" ? n + 1 : RG.vidas;
 const goalTxt = "META " + Math.round(GOAL * 100) + "%";
 const HELP = J ? J.ayuda : [
@@ -928,9 +929,9 @@ function title() {
   phase = "title";
   clear(); hud();
   const logo = el("div", "logo");
-  logo.appendChild(el("span", "m", "MITO"));
-  logo.appendChild(el("span", "o", "O"));
-  logo.appendChild(el("span", "d", "DERECHO"));
+  const nm = GAME_NAME.toUpperCase().split(" ");
+  if (nm.length === 3) { logo.appendChild(el("span", "m", nm[0])); logo.appendChild(el("span", "o", nm[1])); logo.appendChild(el("span", "d", nm[2])); }
+  else logo.appendChild(el("span", "m", nm.join(" ")));
   screen.appendChild(logo);
   eco("idle", "ECO TE ACOMPAÑA");
   const rules = el("div", "rules");
@@ -1365,7 +1366,7 @@ function results_() {
 
   const best = mode === "versus" ? Math.max(...scores) : team();
   const msg = [
-    (players === 1 ? "Mi perfil" : mode === "coop" ? "El perfil de nuestro equipo" : "El perfil de nuestro grupo") + " de aliado en Mito o Derecho es " + prof.name,
+    (players === 1 ? "Mi perfil" : mode === "coop" ? "El perfil de nuestro equipo" : "El perfil de nuestro grupo") + " de aliado en " + GAME_NAME + " es " + prof.name,
     prof.phrase,
     "Para mañana: " + prof.action,
     players === 1 ? "Hice " + best + " puntos" : mode === "coop" ? "Hicimos " + best + " puntos en equipo" : "El mejor puntaje fue " + best,
@@ -1579,6 +1580,8 @@ try { savedPal = localStorage.getItem("moda-palette") || "musgo"; } catch (e) {}
 applyPalette(savedPal);
 paintSound();
 title();
+document.querySelector(".wordmark b").textContent = GAME_NAME.toUpperCase();
+document.title = GAME_NAME + " · Arcade";
 if (J) J.cargar();
 </script>
 

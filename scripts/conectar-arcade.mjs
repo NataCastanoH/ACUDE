@@ -146,7 +146,19 @@ function helpScreen(box, back) {
 
 /* ================= Paletas de color ================= */`);
 
+// El nombre del juego sale de contenido.js (mientras se vota, se llama solo "Juego")
+cambia('const livesFor = ', 'const GAME_NAME = J ? J.nombre : "Juego";\nconst livesFor = ');
+t = t.replace(/<title>[^<]*<\/title>/, '<title>Juego · Arcade</title>');
+t = t.replace(/<div class="wordmark"><b>[^<]*<\/b>/, '<div class="wordmark"><b>JUEGO</b>');
+cambia(`  logo.appendChild(el("span", "m", "MITO"));
+  logo.appendChild(el("span", "o", "O"));
+  logo.appendChild(el("span", "d", "DERECHO"));`,
+`  const nm = GAME_NAME.toUpperCase().split(" ");
+  if (nm.length === 3) { logo.appendChild(el("span", "m", nm[0])); logo.appendChild(el("span", "o", nm[1])); logo.appendChild(el("span", "d", nm[2])); }
+  else logo.appendChild(el("span", "m", nm.join(" ")));`);
+cambia('" de aliado en Mito o Derecho es " + prof.name', '" de aliado en " + GAME_NAME + " es " + prof.name');
+
 // Si hay hoja de Google, la lee para la próxima partida
-cambia('paintSound();\ntitle();\n</script>', 'paintSound();\ntitle();\nif (J) J.cargar();\n</script>');
+cambia('paintSound();\ntitle();\n</script>', 'paintSound();\ntitle();\ndocument.querySelector(".wordmark b").textContent = GAME_NAME.toUpperCase();\ndocument.title = GAME_NAME + " · Arcade";\nif (J) J.cargar();\n</script>');
 writeFileSync(ruta, t);
 console.log('Listo: la arcade lee juego/contenido.js');
